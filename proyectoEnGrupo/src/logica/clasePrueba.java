@@ -5,6 +5,7 @@ public class clasePrueba {
 		System.out.println("hola");
 		//comentario prueba
 		//hola
+		//heyquepasa
 	}
 }
 
