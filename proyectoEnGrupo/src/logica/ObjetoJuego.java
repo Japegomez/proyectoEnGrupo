@@ -7,7 +7,7 @@ public class ObjetoJuego {
 	protected int vida;
 	protected double velocidadX;
 	protected double velocidadY;
-	protected double velocidadMovimiento;
+	protected double aceleracion;
 	
 	public void ObjetoJuego() {
 		
@@ -53,9 +53,15 @@ public class ObjetoJuego {
 		this.velocidadY = velocidadY;
 	}
 	
+	public double getAceleracion() {
+		return aceleracion;
+	}
+
+	public void setAceleracion(double aceleracion) {
+		this.aceleracion = aceleracion;
+	}
+
 	public void mover() {
-		this.posX += this.velocidadX * this.velocidadMovimiento;
-		this.posY += this.velocidadY * this.velocidadMovimiento;
-		
+			
 	}
 }
