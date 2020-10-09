@@ -6,6 +6,7 @@ public class NaveJugador extends ObjetoJuego {
 	protected double danyoAtaque;
 	protected double ataqueCargado;
 	
+	
 	public double getVelocidadAtaque() {
 		return velocidadAtaque;
 	}
