@@ -68,7 +68,7 @@ public class Usuario {
 		return partidas;
 	}
 
-	/**Metodo para cambiar el treemap sq
+	/**Metodo para cambiar el treemap que almacena las partidas que ha jugado un usuario
 	 * @param partidas
 	 */
 	public void setPartidas(TreeMap<Integer, String> partidas) {
