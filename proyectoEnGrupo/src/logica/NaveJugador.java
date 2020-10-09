@@ -1,7 +1,7 @@
 package logica;
 
 public class NaveJugador extends ObjetoJuego {
-	
+	// esta es la nave
 	protected double velocidadAtaque;
 	protected double danyoAtaque;
 	protected double ataqueCargado;
