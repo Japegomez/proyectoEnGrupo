@@ -1,5 +1,9 @@
 package logica;
 
+/** Clase de los enemigos que son Meteoritos
+ * @author jonlc
+ *
+ */
 public class MeteoritoEnemigo extends ObjetoJuego{
 
 	protected double danyoAJugador; //Daño que el meteorito hara al jugador en caso de impactar contra el
