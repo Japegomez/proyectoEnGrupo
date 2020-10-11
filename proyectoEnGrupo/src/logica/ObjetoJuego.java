@@ -99,6 +99,27 @@ public class ObjetoJuego {
 		this.aceleracion = aceleracion;
 	}
 
+	
+	public ObjetoJuego(double posX, double posY, int vida, double velocidadX, double velocidadY, double aceleracion) {
+		super();
+		this.posX = posX;
+		this.posY = posY;
+		this.vida = vida;
+		this.velocidadX = velocidadX;
+		this.velocidadY = velocidadY;
+		this.aceleracion = aceleracion;
+	}
+	
+	public ObjetoJuego() {
+		super();
+		this.posX = 0;
+		this.posY = 0;
+		this.vida = 0;
+		this.velocidadX = 0;
+		this.velocidadY = 0;
+		this.aceleracion = 0;
+	}
+
 	public void mover() {
 			
 	}
