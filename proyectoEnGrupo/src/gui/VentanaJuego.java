@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 
+import logica.MeteoritoEnemigo;
 import logica.NaveJugador;
 
 public class VentanaJuego extends JFrame {
@@ -13,7 +14,7 @@ public class VentanaJuego extends JFrame {
 		setLocation(400, 150);
 		setSize(500, 500);
 		setResizable(false);
-		getContentPane().setLayout(null);
+		//getContentPane().setLayout(null);
 		
 		nave = new NaveJugador(5, 5, 5);
 		
@@ -21,7 +22,11 @@ public class VentanaJuego extends JFrame {
 		nave.setPosX(250);
 		nave.setPosY(250);
 		
+		MeteoritoEnemigo me1 = new MeteoritoEnemigo();
 		
+		this.add(me1.getlMeteorito());
+		me1.setPosX(400);
+		me1.setPosY(400);
 
 	}
 

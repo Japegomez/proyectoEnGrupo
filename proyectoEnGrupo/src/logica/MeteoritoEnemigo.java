@@ -1,5 +1,7 @@
 package logica;
 
+import gui.JLabelMeteorito;
+
 /** Clase de los enemigos que son Meteoritos
  * @author jonlc
  *
@@ -7,7 +9,14 @@ package logica;
 public class MeteoritoEnemigo extends ObjetoJuego{
 
 	protected double danyoAJugador; //Daño que el meteorito hara al jugador en caso de impactar contra el
-
+	private JLabelMeteorito lMeteorito;
+	
+	
+	public MeteoritoEnemigo() {
+		lMeteorito = new JLabelMeteorito();
+	}
+	
+	
 	/** Metodo para obtener el atributo danyoAJugador
 	 * @return Valor de danyoAJugador 
 	 */
@@ -21,6 +30,27 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 	public void setDanyoAJugador(double danyoAJugador) {
 		this.danyoAJugador = danyoAJugador;
 	}
+
+	public JLabelMeteorito getlMeteorito() {
+		return lMeteorito;
+	}
+
+	public void setlMeteorito(JLabelMeteorito lMeteorito) {
+		this.lMeteorito = lMeteorito;
+	}
+	
+	@Override
+	public void setPosX(double posX) {
+		this.posX = posX;
+		lMeteorito.setLocation((int) posX, (int) this.getPosY());
+	}
+	@Override
+	public void setPosY(double posY) {
+		this.posY = posY;
+		lMeteorito.setLocation((int)this.getPosX(),(int) posY);
+	}
+	
+	
 	
 	
 }
