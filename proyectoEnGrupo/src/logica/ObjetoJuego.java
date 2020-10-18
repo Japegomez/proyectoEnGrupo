@@ -4,7 +4,7 @@ package logica;
  * @author juxam
  *
  */
-public class ObjetoJuego {
+abstract public class ObjetoJuego {
 	
 	protected double posX;
 	protected double posY;
@@ -12,10 +12,7 @@ public class ObjetoJuego {
 	protected double velocidadX;
 	protected double velocidadY;
 	protected double aceleracion;
-	
-	public void ObjetoJuego() {
-		
-	}
+
 
 	/** Devuelve la coordenada x del centro del objeto de juego, con respecto a la pantalla
 	 * @return	Coordenada x en píxels
@@ -110,15 +107,7 @@ public class ObjetoJuego {
 		this.aceleracion = aceleracion;
 	}
 	
-	public ObjetoJuego() {
-		super();
-		this.posX = 0;
-		this.posY = 0;
-		this.vida = 0;
-		this.velocidadX = 0;
-		this.velocidadY = 0;
-		this.aceleracion = 0;
-	}
+
 
 	public void mover() {
 			

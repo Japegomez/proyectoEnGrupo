@@ -13,6 +13,7 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 	
 	
 	public MeteoritoEnemigo() {
+		super(150.0,150.0,150,150,150.0,150.0);
 		lMeteorito = new JLabelMeteorito();
 	}
 	

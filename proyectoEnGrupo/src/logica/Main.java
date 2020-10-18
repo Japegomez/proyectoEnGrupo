@@ -6,9 +6,9 @@ import gui.*;
 
 public class Main {
 public static void main(String[] args) {
-//	try { 
-//		UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-//	} catch (Exception e) { } 
+	try { 
+		UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+	} catch (Exception e) { } 
 	VentanaLogin vLogin = new VentanaLogin("Login");
 	vLogin.setVisible(true);
 }

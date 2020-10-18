@@ -35,6 +35,8 @@ public class VentanaMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				VentanaMenu.this.setVisible(false);
 				vJuego = new VentanaJuego();
+				vJuego.creaNave();
+				vJuego.creaMeteorito();
 				vJuego.setVisible(true);
 				
 			}

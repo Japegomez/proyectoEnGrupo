@@ -54,12 +54,14 @@ public class NaveJugador extends ObjetoJuego {
 		this.lNave = lNave;
 	}
 
-	public NaveJugador(double velocidadAtaque, double danyoAtaque, double ataqueCargado) {
-		super();
-		this.velocidadAtaque = velocidadAtaque;
-		this.danyoAtaque = danyoAtaque;
-		this.ataqueCargado = ataqueCargado;
+	public NaveJugador() {
+		super(0.0,0.0,150,150,150.0,150.0);
+		this.velocidadAtaque = 5;
+		this.danyoAtaque = 5;
+		this.ataqueCargado = 5;
 		lNave = new JLabelNave();
+		setPosX(this.getPosX());
+		setPosY(this.getPosY());
 	}
 	
 	@Override
