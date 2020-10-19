@@ -109,7 +109,11 @@ abstract public class ObjetoJuego {
 	
 
 
-	public void mover() {
+	public void moverRecto() {
 			
+	}
+	
+	public void moverParabola() {
+
 	}
 }

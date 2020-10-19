@@ -10,6 +10,8 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 
 	protected double danyoAJugador; //Daño que el meteorito hara al jugador en caso de impactar contra el
 	private JLabelMeteorito lMeteorito;
+	protected double tiempo;//tiempo que tarda el meteorito en llegar hasta abajo de la pantalla, ira aumentando junto a la dificultad.
+	
 	
 	
 	public MeteoritoEnemigo() {
@@ -52,6 +54,14 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 	}
 	
 	
+	@Override 
+	public void moverRecto() {
+		
+	}
 	
+	@Override 
+	public void moverParabola() {
+		
+	}
 	
 }
