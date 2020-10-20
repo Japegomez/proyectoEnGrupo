@@ -29,7 +29,7 @@ public class VentanaJuego extends JFrame {
 	public void creaNave() {
 		nave = new NaveJugador();
 		nave.setPosX(this.getWidth()/2-nave.getlNave().getAnchoNave()/2);
-		nave.setPosY(this.getHeight()-nave.getlNave().getHeight());
+		nave.setPosY(pPrincipal.getHeight()-nave.getlNave().getHeight());
 		pPrincipal.add(nave.getlNave());
 	}
 
