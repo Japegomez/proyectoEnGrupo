@@ -7,11 +7,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/japen/Downloads/vlcj-4.6.0-dist/vlcj-4.6.0/vlcj-4.6.0.jar" sourcepath="C:/Users/japen/Downloads/vlcj-4.6.0-dist/vlcj-4.6.0/vlcj-4.6.0-sources.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/japen/Downloads/vlcj-4.6.0-dist/vlcj-4.6.0/vlcj-4.6.0-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
