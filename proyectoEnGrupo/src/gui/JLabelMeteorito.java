@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 
 public class JLabelMeteorito extends JLabel {
 	
-	 //comment de prueba 
 	public JLabelMeteorito() {
 		
 		ImageIcon image = new ImageIcon("./resources/meteorito.jpg");
