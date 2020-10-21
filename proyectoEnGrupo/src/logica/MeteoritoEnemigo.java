@@ -1,5 +1,7 @@
 package logica;
 
+import javax.swing.JFrame;
+
 import gui.JLabelMeteorito;
 
 /** Clase de los enemigos que son Meteoritos
@@ -10,13 +12,14 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 
 	protected double danyoAJugador; //Daño que el meteorito hara al jugador en caso de impactar contra el
 	private JLabelMeteorito lMeteorito;
-	protected double tiempo;//tiempo que tarda el meteorito en llegar hasta abajo de la pantalla, ira aumentando junto a la dificultad.
 	
 	
 	
 	public MeteoritoEnemigo() {
-		super(150.0,150.0,150,150,150.0,150.0);
+		super(150.0,150.0,150,0,10,1);
 		lMeteorito = new JLabelMeteorito();
+		setPosX(this.getPosX());
+		setPosY(this.getPosY());
 	}
 	
 	
@@ -53,15 +56,10 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 		lMeteorito.setLocation((int)this.getPosX(),(int) posY);
 	}
 	
-	
+
 	@Override 
-	public void moverRecto() {
-		
-	}
-	
-	@Override 
-	public void moverParabola() {
-		
+	public void mover(JFrame ventana) {
+		this.posY = posY + (velocidadY * Math.cos(Math.random()*1));
 	}
 	
 }

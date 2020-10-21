@@ -1,5 +1,7 @@
 package logica;
 
+import javax.swing.JFrame;
+
 /**
  * @author juxam
  *
@@ -109,11 +111,7 @@ abstract public class ObjetoJuego {
 	
 
 
-	public void moverRecto() {
-			
+	public void mover(JFrame ventana) {	
 	}
 	
-	public void moverParabola() {
-
-	}
 }
