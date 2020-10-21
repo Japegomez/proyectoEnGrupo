@@ -21,7 +21,7 @@ public class JLabelMeteorito extends JLabel {
 		ImageIcon image = new ImageIcon("./resources/meteorito.jpg");
 		this.setIcon(image);
 		setBounds( 0, 0, ANCHO_METEORITO, ALTO_METEORITO );
-		setBorder( BorderFactory.createLineBorder( Color.yellow, 2 ));
+		setBorder( BorderFactory.createLineBorder( Color.yellow, 1 ));
 		setPreferredSize(new Dimension(ANCHO_METEORITO, ALTO_METEORITO));
 	}
 	

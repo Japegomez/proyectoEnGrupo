@@ -17,7 +17,7 @@ public class JLabelNave extends JLabel{
 		 ImageIcon imageIcon = new ImageIcon("./resources/nave.jpg");
 		 this.setIcon(imageIcon);
 		setBounds( 0, 0, ANCHO_NAVE, ALTO_NAVE );
-		setBorder( BorderFactory.createLineBorder( Color.yellow, 2 ));
+		setBorder( BorderFactory.createLineBorder( Color.yellow, 1 ));
 		setPreferredSize(new Dimension(ANCHO_NAVE, ALTO_NAVE));
 	}
 	public int getAnchoNave() {

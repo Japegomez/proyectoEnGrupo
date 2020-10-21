@@ -36,7 +36,7 @@ public class VentanaJuego extends JFrame {
 	public void creaMeteorito() {
 		MeteoritoEnemigo me1 = new MeteoritoEnemigo();
 		me1.setPosX(Math.random()*(this.getWidth()-me1.getlMeteorito().getWidth())+me1.getlMeteorito().getWidth());
-		me1.setPosY(pPrincipal.getHeight()-me1.getlMeteorito().getHeight());
+		me1.setPosY(me1.getlMeteorito().getHeight());
 		pPrincipal.add(me1.getlMeteorito());
 
 	}
