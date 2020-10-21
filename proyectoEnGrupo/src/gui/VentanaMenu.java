@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class VentanaMenu extends JFrame {
-	
+	//.
 	JButton bJugar;
 	JButton bMejorarNave;
 	JButton bClasificacion;
@@ -43,7 +43,7 @@ public class VentanaMenu extends JFrame {
 				vJuego = new VentanaJuego();
 				vJuego.setVisible(true);
 				vJuego.creaNave();
-				vJuego.creaMeteorito();
+				
 				
 				
 			}

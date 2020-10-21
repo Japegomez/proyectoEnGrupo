@@ -7,7 +7,7 @@ import javax.swing.JFrame;
  *
  */
 abstract public class ObjetoJuego {
-	
+	//.
 	protected double posX;
 	protected double posY;
 	protected int vida;
@@ -111,7 +111,7 @@ abstract public class ObjetoJuego {
 	
 
 
-	public void mover(JFrame ventana) {	
+	public void mover(double tiempo) {	
 	}
 	
 }

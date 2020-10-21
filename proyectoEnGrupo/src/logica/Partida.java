@@ -1,5 +1,7 @@
 package logica;
 
-public class Partida {
+import gui.VentanaJuego;
 
+public class Partida {
+	
 }
