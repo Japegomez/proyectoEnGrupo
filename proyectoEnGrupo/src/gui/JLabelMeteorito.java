@@ -11,7 +11,13 @@ import javax.swing.JLabel;
 
 public class JLabelMeteorito extends JLabel {
 	
+	final private int ANCHO_METEORITO = 50;
+	final private int ALTO_METEORITO = 50;
+	
 	public JLabelMeteorito() {
+		
+		
+		
 		
 		ImageIcon image = new ImageIcon("./resources/meteorito.jpg");
 		this.setIcon(image);
