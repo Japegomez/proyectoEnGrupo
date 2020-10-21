@@ -1,11 +1,14 @@
 package gui;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -15,13 +18,13 @@ public class JLabelMeteorito extends JLabel {
 	final private int ALTO_METEORITO = 50;
 	
 	public JLabelMeteorito() {
-		
-		
-		
-		
 		ImageIcon image = new ImageIcon("./resources/meteorito.jpg");
 		this.setIcon(image);
+		setBounds( 0, 0, ANCHO_METEORITO, ALTO_METEORITO );
+		setBorder( BorderFactory.createLineBorder( Color.yellow, 2 ));
+		setPreferredSize(new Dimension(ANCHO_METEORITO, ALTO_METEORITO));
 	}
+	
 	
 	@Override
 	protected void paintComponent(Graphics g) {
