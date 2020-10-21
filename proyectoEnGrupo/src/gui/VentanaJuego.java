@@ -12,6 +12,7 @@ import logica.NaveJugador;
 import logica.Partida;
 
 public class VentanaJuego extends JFrame {
+	//.S
 	private PanelFondo pPrincipal;
 	NaveJugador nave;
 	public ArrayList<MeteoritoEnemigo> arrayMeteoritos = new ArrayList<MeteoritoEnemigo>();

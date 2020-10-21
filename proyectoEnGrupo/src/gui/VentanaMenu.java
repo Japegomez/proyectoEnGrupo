@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class VentanaMenu extends JFrame {
-	
+	//.
 	JButton bJugar;
 	JButton bMejorarNave;
 	JButton bClasificacion;
