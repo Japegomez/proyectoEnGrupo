@@ -2,6 +2,13 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 
@@ -17,9 +24,26 @@ public class VentanaLogin extends JFrame{
 	private JTextField tfContrasenya;
 	private JButton bLogin;
 	private JButton bRegistro;
+	private static Logger logger = Logger.getLogger( "MiniPracticaBD" );
+	private static Connection con;
+	private static Statement s;
+	private static ResultSet rs;
 	
-	public VentanaLogin(String titulo) {
+	public VentanaLogin(String titulo) {		
 		super(titulo);
+		String com = "";
+	try {
+		Class.forName( "org.sqlite.JDBC" );
+		con = DriverManager.getConnection( "jdbc:sqlite:test.db" );
+		s = con.createStatement();
+		try {
+			com = "create table Usuario( usuario STRING, contrasenya STRING )";
+			logger.log( Level.INFO, "BD: " + com );
+			s.executeUpdate( com );
+		} catch (SQLException e) {} 
+	} catch (SQLException|ClassNotFoundException e) {}
+
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -28,8 +52,8 @@ public class VentanaLogin extends JFrame{
 		JPanel pBotonera = new JPanel();
 		
 		
-		lNombreUsuario = new JLabel("Nombre de Usuario");
-		tfNombreUsuario = new JTextField("Introduce el nombre de Usuario");
+		lNombreUsuario = new JLabel("");
+		tfNombreUsuario = new JTextField("");
 		
 		lContrasenya = new JLabel("Contrasenya");
 		tfContrasenya = new JTextField("Introduce la Contrasenya");
@@ -59,8 +83,6 @@ public class VentanaLogin extends JFrame{
 				VentanaLogin.this.setVisible(false);
 			}
 		});
-		
-		
 		
 		
 	}
