@@ -5,7 +5,7 @@ import javax.swing.UIManager;
 import gui.*;
 
 public class Main {
-public static void main(String[] args) {
+public static void main(String[] argumentos) {
 	try { 
 		UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 		System.out.print("hola");
