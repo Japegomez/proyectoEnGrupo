@@ -16,7 +16,7 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 	
 	
 	public MeteoritoEnemigo() {
-		super(150.0,150.0,150,0,10,1);
+		super(150.0,150.0,150,0,20,1);
 		lMeteorito = new JLabelMeteorito();
 		setPosX(this.getPosX());
 		setPosY(this.getPosY());
@@ -58,8 +58,8 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 	
 
 	@Override 
-	public void mover(JFrame ventana) {
-		this.posY = posY + (velocidadY * Math.cos(Math.random()*1));
+	public void mover(double tiempo) {
+		this.setPosY(posY + (velocidadY *tiempo));
 	}
 	
 }

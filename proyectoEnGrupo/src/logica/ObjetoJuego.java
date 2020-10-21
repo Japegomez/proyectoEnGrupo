@@ -111,7 +111,7 @@ abstract public class ObjetoJuego {
 	
 
 
-	public void mover(JFrame ventana) {	
+	public void mover(double o) {	
 	}
 	
 }

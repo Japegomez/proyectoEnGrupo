@@ -37,7 +37,7 @@ public class VentanaMenu extends JFrame {
 				vJuego = new VentanaJuego();
 				vJuego.setVisible(true);
 				vJuego.creaNave();
-				vJuego.creaMeteorito();
+				
 				
 				
 			}
