@@ -8,6 +8,7 @@ public class Main {
 public static void main(String[] args) {
 	try { 
 		UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		System.out.print("hola");
 	} catch (Exception e) { } 
 	VentanaLogin vLogin = new VentanaLogin("Login");
 	vLogin.setVisible(true);
