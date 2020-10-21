@@ -18,7 +18,7 @@ public class JLabelMeteorito extends JLabel {
 	final private int ALTO_METEORITO = 50;
 	
 	public JLabelMeteorito() {
-		ImageIcon image = new ImageIcon("./resources/meteorito.jpg");
+		ImageIcon image = new ImageIcon("./resources/meteorito.png");
 		this.setIcon(image);
 		setBounds( 0, 0, ANCHO_METEORITO, ALTO_METEORITO );
 		setBorder( BorderFactory.createLineBorder( Color.yellow, 1 ));
@@ -32,7 +32,7 @@ public class JLabelMeteorito extends JLabel {
 		java.awt.Image img = null;
 		try { 
             final BufferedImage dimg = ImageIO
-                    .read(new File("./resources/meteorito.jpg"));
+                    .read(new File("./resources/meteorito.png"));
            img = dimg.getScaledInstance(50, 50, 1);
             
 

@@ -14,7 +14,7 @@ public class JLabelNave extends JLabel{
 	final private int ANCHO_NAVE = 50;
 	final private int ALTO_NAVE = 100;
 	public JLabelNave() {
-		 ImageIcon imageIcon = new ImageIcon("./resources/nave.jpg");
+		 ImageIcon imageIcon = new ImageIcon("./resources/nave.png");
 		 this.setIcon(imageIcon);
 		setBounds( 0, 0, ANCHO_NAVE, ALTO_NAVE );
 		setBorder( BorderFactory.createLineBorder( Color.yellow, 1 ));
@@ -32,7 +32,7 @@ public class JLabelNave extends JLabel{
 		java.awt.Image img = null;
 		try { 
             final BufferedImage dimg = ImageIO
-                    .read(new File("./resources/nave.jpg"));
+                    .read(new File("./resources/nave.png"));
            img = dimg.getScaledInstance(ANCHO_NAVE, ALTO_NAVE, 1);
             
 
