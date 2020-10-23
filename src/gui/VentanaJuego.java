@@ -3,6 +3,8 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -16,6 +18,7 @@ public class VentanaJuego extends JFrame {
 	private PanelFondo pPrincipal;
 	NaveJugador nave;
 	public ArrayList<MeteoritoEnemigo> arrayMeteoritos = new ArrayList<MeteoritoEnemigo>();
+	public double tiempo = Math.random()*(0.15-0.05)-0.05;
 	public VentanaJuego() {
 		super("jugando...");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -36,7 +39,7 @@ public class VentanaJuego extends JFrame {
 				int i = 0;
 				while(true) {
 					for (MeteoritoEnemigo o:arrayMeteoritos) {
-						o.mover(0.040);
+						o.mover(tiempo);
 						System.out.println(o.getPosY());
 						
 						try { Thread.sleep(40); } catch (InterruptedException e) {
@@ -55,7 +58,41 @@ public class VentanaJuego extends JFrame {
 				
 			}
 		}.start();
-	
+		
+		this.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				System.out.println("Presionada");
+				int c = e.getKeyCode();
+				switch (c) {
+				case KeyEvent.VK_UP:
+					if(nave.getPosY()>200)
+						nave.setPosY(nave.getPosY()+nave.getVelocidadY());
+				case KeyEvent.VK_DOWN:
+					if(nave.getPosY()<pPrincipal.getHeight())
+						nave.setPosY(nave.getPosY()-nave.getVelocidadY());
+				case KeyEvent.VK_LEFT:
+					if(nave.getPosX()>0)
+						nave.setPosX(nave.getPosX()-nave.getVelocidadX());
+				case KeyEvent.VK_RIGHT:
+					if(nave.getPosX()>pPrincipal.getWidth())
+						nave.setPosX(nave.getPosX()+nave.getVelocidadX());
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				System.out.println("Dejar de presionar");
+
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				System.out.println("PRESIONADA");
+
+			}
+		 });
 	}
 	
 	public void creaNave() {

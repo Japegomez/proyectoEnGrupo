@@ -55,7 +55,7 @@ public class NaveJugador extends ObjetoJuego {
 	}
 
 	public NaveJugador() {
-		super(0.0,0.0,150,150,150.0,150.0);
+		super(0.0,0.0,10,10,150.0,150.0);
 		this.velocidadAtaque = 5;
 		this.danyoAtaque = 5;
 		this.ataqueCargado = 5;
