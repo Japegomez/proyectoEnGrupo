@@ -66,24 +66,32 @@ public class VentanaJuego extends JFrame {
 				//System.out.println("Presionada");
 				int c = e.getKeyCode();
 				if (c==38) {
-					//if(nave.getPosY()>200)
+					if(nave.getPosY()>200) {
 						nave.setPosY(nave.getPosY()-nave.getVelocidadY());
 						System.out.println("arriba");
+					}
+						
 				}
 				else if (c==40) {
-					//if(nave.getPosY()<pPrincipal.getHeight())
+					if(nave.getPosY()<pPrincipal.getHeight()) {
 						nave.setPosY(nave.getPosY()+nave.getVelocidadY());
 						System.out.println("abajo");
+					}
+						
 				}
 				else if (c==37) {
-					//if(nave.getPosX()>0)
+					if(nave.getPosX()>0) {
 						nave.setPosX(nave.getPosX()-nave.getVelocidadX());
 						System.out.println("izquierda");
+					}
+						
 				}
 				else if(c==39) {
-					//if(nave.getPosX()>pPrincipal.getWidth())
+					if(nave.getPosX()>pPrincipal.getWidth()) {
 						nave.setPosX(nave.getPosX()+nave.getVelocidadX());
 						System.out.println("derecha");
+					}
+						
 				}			
 			}
 
