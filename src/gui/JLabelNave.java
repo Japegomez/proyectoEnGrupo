@@ -33,8 +33,6 @@ public class JLabelNave extends JLabel{
             final BufferedImage dimg = ImageIO
                     .read(new File("./resources/nave.png"));
            img = dimg.getScaledInstance(ANCHO_NAVE, ALTO_NAVE, 1);
-            
-
         } catch (final IOException e) {
             e.printStackTrace();
         }
