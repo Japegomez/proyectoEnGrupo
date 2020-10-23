@@ -65,10 +65,14 @@ public class VentanaJuego extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				//System.out.println("Presionada");
 				int c = e.getKeyCode();
+				System.out.println(nave.getPosX() + ", " + nave.getPosY());
 				if (c==38) {
-					if(nave.getPosY()>200) {
+					if(nave.getPosY()>225) {
 						nave.setPosY(nave.getPosY()-nave.getVelocidadY());
 						System.out.println("arriba");
+					}
+					else {
+						nave.setPosY(nave.getPosY());
 					}
 						
 				}
@@ -77,21 +81,27 @@ public class VentanaJuego extends JFrame {
 						nave.setPosY(nave.getPosY()+nave.getVelocidadY());
 						System.out.println("abajo");
 					}
-						
+					else {
+						nave.setPosY(nave.getPosY());
+					}	
 				}
 				else if (c==37) {
 					if(nave.getPosX()>0) {
 						nave.setPosX(nave.getPosX()-nave.getVelocidadX());
 						System.out.println("izquierda");
 					}
-						
+					else {
+						nave.setPosX(nave.getPosX());
+					}	
 				}
 				else if(c==39) {
-					if(nave.getPosX()>pPrincipal.getWidth()) {
+					if(nave.getPosX()<pPrincipal.getWidth()-(nave.getlNave().getAnchoNave()/2)) {
 						nave.setPosX(nave.getPosX()+nave.getVelocidadX());
 						System.out.println("derecha");
 					}
-						
+					else {
+						nave.setPosX(nave.getPosX());
+					}	
 				}			
 			}
 
