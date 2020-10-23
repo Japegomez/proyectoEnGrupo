@@ -31,6 +31,7 @@ public class VentanaJuego extends JFrame {
 		
 		creaMeteorito();
 		creaMeteorito();
+		creaMeteorito();
 		
 		new Thread(){
 			@Override
