@@ -21,7 +21,8 @@ public class VentanaJuego extends JFrame {
 	//.S
 	private PanelFondo pPrincipal;
 	NaveJugador nave;
-	public ArrayList<MeteoritoEnemigo> arrayMeteoritos = new ArrayList<MeteoritoEnemigo>();
+	public ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>();
+	public ArrayList<MeteoritoEnemigo> arrayMeteoritosEliminados = new ArrayList<>();
 	public VentanaJuego() {
 		super("jugando...");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -40,23 +41,21 @@ public class VentanaJuego extends JFrame {
 		new Thread(){
 			@Override
 			public void run() {
-				int i = 0;
-				while(true) {
-					for (MeteoritoEnemigo o:arrayMeteoritos) {
-						o.mover(0.1);
-						//System.out.println(o.getPosY());
+				boolean funciona = true;
+				while(funciona) {
+					for (MeteoritoEnemigo o:arrayMeteoritosEnPantalla) {
+						if (!arrayMeteoritosEliminados.contains(o)) {
+							o.mover(0.1);
+						}
+						if(o.getPosY()>pPrincipal.getHeight()) {
+							arrayMeteoritosEliminados.add(o);
+						}
 						
-						try { Thread.sleep(40); } catch (InterruptedException e) {
+						try { Thread.sleep(20); } catch (InterruptedException e) {
 							System.err.println(e);
 						}
 
 					}
-//					for (MeteoritoEnemigo a:arrayMeteoritos) {
-//						if ( a.getPosY()>pPrincipal.getHeight()) {
-//							arrayMeteoritos.remove(a);
-//							VentanaJuego.this.remove(a.getlMeteorito());
-//					}
-//					}
 				}
 				
 				
@@ -135,13 +134,31 @@ public class VentanaJuego extends JFrame {
 
 	public void creaMeteorito() {
 			MeteoritoEnemigo me1 = new MeteoritoEnemigo();
-			me1.setPosX(Math.random()*(this.getWidth()-(me1.getlMeteorito().getWidth()*1.5))+me1.getlMeteorito().getWidth());
-			me1.setPosY(me1.getlMeteorito().getHeight());
-			me1.setVelocidadY(3);
+			double x = Math.random()*(((this.getWidth()-me1.getlMeteorito().getWidth())- 0) + 0);
+			checkeaXMeteorito(x, me1.getlMeteorito().getWidth());
+			me1.setPosX(x);
+			me1.setPosY(-(me1.getlMeteorito().getHeight()));
+			me1.setVelocidadY(9);
 			pPrincipal.add(me1.getlMeteorito());
-			arrayMeteoritos.add(me1);
+			arrayMeteoritosEnPantalla.add(me1);
 			
 	}
 	
+	public void checkeaXMeteorito(double x, int AnchoMeteorito) {
+		boolean sigue = true;
+		while(sigue) {
+			int i = 0;
+			for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
+				if(!(x>meteoritoEnemigo.getPosX() && x<meteoritoEnemigo.getPosX()+meteoritoEnemigo.getlMeteorito().getWidth())) {
+				i ++;
+				}
+			}
+			if (i == arrayMeteoritosEnPantalla.size()) sigue= false;
+	
+			else {
+				 x = Math.random()*(((this.getWidth()-AnchoMeteorito)- 0) + 0);
+			}
+		}
+	}
 	
 }

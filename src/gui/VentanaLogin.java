@@ -52,11 +52,11 @@ public class VentanaLogin extends JFrame{
 		JPanel pBotonera = new JPanel();
 		
 		
-		lNombreUsuario = new JLabel("");
-		tfNombreUsuario = new JTextField("");
+		lNombreUsuario = new JLabel("Usuario");
+		tfNombreUsuario = new JTextField(15);
 		
 		lContrasenya = new JLabel("Contrasenya");
-		tfContrasenya = new JTextField("Introduce la Contrasenya");
+		tfContrasenya = new JTextField(15);
 		
 		bLogin = new JButton("Login");
 		bRegistro = new JButton("Registrarse");
