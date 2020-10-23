@@ -2,12 +2,16 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import logica.MeteoritoEnemigo;
 import logica.NaveJugador;
@@ -77,7 +81,7 @@ public class VentanaJuego extends JFrame {
 						
 				}
 				else if (c==40) {
-					if(nave.getPosY()<pPrincipal.getHeight()) {
+					if(nave.getPosY()<pPrincipal.getHeight()-nave.getlNave().getHeight()) {
 						nave.setPosY(nave.getPosY()+nave.getVelocidadY());
 						System.out.println("abajo");
 					}
@@ -86,7 +90,7 @@ public class VentanaJuego extends JFrame {
 					}	
 				}
 				else if (c==37) {
-					if(nave.getPosX()>0) {
+					if(nave.getPosX()> 0) {
 						nave.setPosX(nave.getPosX()-nave.getVelocidadX());
 						System.out.println("izquierda");
 					}
@@ -95,7 +99,7 @@ public class VentanaJuego extends JFrame {
 					}	
 				}
 				else if(c==39) {
-					if(nave.getPosX()<pPrincipal.getWidth()-(nave.getlNave().getAnchoNave()/2)) {
+					if(nave.getPosX()<pPrincipal.getWidth()-(nave.getlNave().getAnchoNave())) {
 						nave.setPosX(nave.getPosX()+nave.getVelocidadX());
 						System.out.println("derecha");
 					}
@@ -121,6 +125,7 @@ public class VentanaJuego extends JFrame {
 	
 	public void creaNave() {
 		nave = new NaveJugador();
+//		nave.getlNave().setBorder(new LineBorder(Color.YELLOW));
 		nave.setPosX(this.getWidth()/2-nave.getlNave().getAnchoNave()/2);
 		nave.setPosY(pPrincipal.getHeight()-nave.getlNave().getHeight());
 		nave.setVelocidadX(2);
