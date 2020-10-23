@@ -18,105 +18,105 @@ public class VentanaJuego extends JFrame {
 	private PanelFondo pPrincipal;
 	NaveJugador nave;
 	public ArrayList<MeteoritoEnemigo> arrayMeteoritos = new ArrayList<MeteoritoEnemigo>();
+	
+	private boolean juegoAcabado = false;
+	
 	public VentanaJuego() {
 		super("jugando...");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setLocation(400, 150);
-		setSize(500, 500);
-		setResizable(false);
-		
-		pPrincipal = new PanelFondo();
-		pPrincipal.setLayout( null );
-		add(pPrincipal);
-		
-		creaMeteorito();
-		creaMeteorito();
-		creaMeteorito();
-		
-		new Thread(){
-			@Override
-			public void run() {
-				int i = 0;
-				while(true) {
-					for (MeteoritoEnemigo o:arrayMeteoritos) {
-						o.mover(0.1);
-						//System.out.println(o.getPosY());
-						
-						try { Thread.sleep(40); } catch (InterruptedException e) {
-							System.err.println(e);
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			setLocation(400, 150);
+			setSize(500, 500);
+			setResizable(false);
+			
+			pPrincipal = new PanelFondo();
+			pPrincipal.setLayout( null );
+			add(pPrincipal);
+			
+			creaMeteorito();
+			creaMeteorito();
+			creaMeteorito();
+			
+			new Thread(){
+				@Override
+				public void run() {
+					int i = 0;
+					while(true) {
+						for (MeteoritoEnemigo o:arrayMeteoritos) {
+							o.mover(0.1);
+							//System.out.println(o.getPosY());
+							
+							try { Thread.sleep(40); } catch (InterruptedException e) {
+								System.err.println(e);
+							}
+
 						}
-
+//						for (MeteoritoEnemigo a:arrayMeteoritos) {
+//							if ( a.getPosY()>pPrincipal.getHeight()) {
+//								arrayMeteoritos.remove(a);
+//								VentanaJuego.this.remove(a.getlMeteorito());
+//						}
+//						}
 					}
-//					for (MeteoritoEnemigo a:arrayMeteoritos) {
-//						if ( a.getPosY()>pPrincipal.getHeight()) {
-//							arrayMeteoritos.remove(a);
-//							VentanaJuego.this.remove(a.getlMeteorito());
-//					}
-//					}
+					
+					
 				}
-				
-				
-			}
-		}.start();
+			}.start();
+			
+			this.addKeyListener(new KeyListener() {
+
+				@Override
+				public void keyPressed(KeyEvent e) {
+					//System.out.println("Presionada");
+					int c = e.getKeyCode();
+					System.out.println(nave.getPosX() + ", " + nave.getPosY());
+					if (c==38) {
+						if(nave.getPosY()>225) {
+							nave.setPosY(nave.getPosY()-nave.getVelocidadY());
+							System.out.println("arriba");
+						}
+						else {
+							nave.setPosY(nave.getPosY());
+						}
+							
+					}
+					else if (c==40) {
+						if(nave.getPosY()<pPrincipal.getHeight()) {
+							nave.setPosY(nave.getPosY()+nave.getVelocidadY());
+							System.out.println("abajo");
+						}
+						else {
+							nave.setPosY(nave.getPosY());
+						}	
+					}
+					else if (c==37) {
+						if(nave.getPosX()>0) {
+							nave.setPosX(nave.getPosX()-nave.getVelocidadX());
+							System.out.println("izquierda");
+						}
+						else {
+							nave.setPosX(nave.getPosX());
+						}	
+					}
+					else if(c==39) {
+						if(nave.getPosX()<pPrincipal.getWidth()-(nave.getlNave().getAnchoNave()/2)) {
+							nave.setPosX(nave.getPosX()+nave.getVelocidadX());
+							System.out.println("derecha");
+						}
+						else {
+							nave.setPosX(nave.getPosX());
+						}	
+					}			
+				}
+				@Override
+				public void keyReleased(KeyEvent e) {
+					//System.out.println("Dejar de presionar");
+				}
+				@Override
+				public void keyTyped(KeyEvent e) {
+					//System.out.println("PRESIONADA");
+				}
+			 });
 		
-		this.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				//System.out.println("Presionada");
-				int c = e.getKeyCode();
-				System.out.println(nave.getPosX() + ", " + nave.getPosY());
-				if (c==38) {
-					if(nave.getPosY()>225) {
-						nave.setPosY(nave.getPosY()-nave.getVelocidadY());
-						System.out.println("arriba");
-					}
-					else {
-						nave.setPosY(nave.getPosY());
-					}
-						
-				}
-				else if (c==40) {
-					if(nave.getPosY()<pPrincipal.getHeight()) {
-						nave.setPosY(nave.getPosY()+nave.getVelocidadY());
-						System.out.println("abajo");
-					}
-					else {
-						nave.setPosY(nave.getPosY());
-					}	
-				}
-				else if (c==37) {
-					if(nave.getPosX()>0) {
-						nave.setPosX(nave.getPosX()-nave.getVelocidadX());
-						System.out.println("izquierda");
-					}
-					else {
-						nave.setPosX(nave.getPosX());
-					}	
-				}
-				else if(c==39) {
-					if(nave.getPosX()<pPrincipal.getWidth()-(nave.getlNave().getAnchoNave()/2)) {
-						nave.setPosX(nave.getPosX()+nave.getVelocidadX());
-						System.out.println("derecha");
-					}
-					else {
-						nave.setPosX(nave.getPosX());
-					}	
-				}			
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				//System.out.println("Dejar de presionar");
-
-			}
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				System.out.println("PRESIONADA");
-
-			}
-		 });
 	}
 	
 	public void creaNave() {
@@ -138,5 +138,7 @@ public class VentanaJuego extends JFrame {
 			
 	}
 	
-	
+	public void gameOver() {
+		juegoAcabado = true;
+	}
 }

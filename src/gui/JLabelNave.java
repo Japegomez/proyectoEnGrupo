@@ -11,8 +11,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class JLabelNave extends JLabel{
-	final private int ANCHO_NAVE = 50;
-	final private int ALTO_NAVE = 100;
+	final private int ANCHO_NAVE = 38;
+	final private int ALTO_NAVE = 75;
 	public JLabelNave() {
 		 ImageIcon imageIcon = new ImageIcon("./resources/nave.png");
 		 this.setIcon(imageIcon);
