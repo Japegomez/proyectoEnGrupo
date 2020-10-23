@@ -7,10 +7,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.*;
+
+import logica.Usuario;
 
 public class VentanaLogin extends JFrame{
 	/**
@@ -28,6 +31,7 @@ public class VentanaLogin extends JFrame{
 	private static Connection con;
 	private static Statement s;
 	private static ResultSet rs;
+	private ArrayList< Usuario> arrayUsuarios= new ArrayList<Usuario>();
 	
 	public VentanaLogin(String titulo) {		
 		super(titulo);
@@ -73,6 +77,11 @@ public class VentanaLogin extends JFrame{
 		
 		this.pack();
 		
+		Usuario usu1 = new Usuario();
+		arrayUsuarios.add(usu1);
+		Usuario usu2 = new Usuario();
+		usu2.setNombreUsuario("Xabi");
+		
 		
 		bLogin.addActionListener(new ActionListener() {
 			
@@ -81,6 +90,35 @@ public class VentanaLogin extends JFrame{
 				VentanaMenu vMenu = new VentanaMenu("menu");
 				vMenu.setVisible(true);
 				VentanaLogin.this.setVisible(false);
+			}
+		});
+		
+		bRegistro.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					for (Usuario usu : arrayUsuarios) {
+						if (!usu.getNombreUsuario().equals(tfNombreUsuario.getText())) {
+			
+							Usuario nuevoUsuario = new Usuario();
+							nuevoUsuario.setNombreUsuario(tfNombreUsuario.getText());
+							nuevoUsuario.setContrasenya(tfContrasenya.getText());
+							arrayUsuarios.add(nuevoUsuario);
+							System.out.println(arrayUsuarios);
+							//TODO
+						}
+						
+						
+					}
+					
+				}catch(NullPointerException exception) {
+					Usuario nuevoUsuario = new Usuario();
+					nuevoUsuario.setNombreUsuario(tfNombreUsuario.getText());
+					nuevoUsuario.setContrasenya(tfContrasenya.getText());
+					arrayUsuarios.add(nuevoUsuario);
+				}
+				
 			}
 		});
 		
