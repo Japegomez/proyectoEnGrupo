@@ -18,7 +18,6 @@ public class VentanaJuego extends JFrame {
 	private PanelFondo pPrincipal;
 	NaveJugador nave;
 	public ArrayList<MeteoritoEnemigo> arrayMeteoritos = new ArrayList<MeteoritoEnemigo>();
-	public double tiempo = Math.random()*(0.15-0.05)-0.05;
 	public VentanaJuego() {
 		super("jugando...");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -39,7 +38,7 @@ public class VentanaJuego extends JFrame {
 				int i = 0;
 				while(true) {
 					for (MeteoritoEnemigo o:arrayMeteoritos) {
-						o.mover(tiempo);
+						o.mover(0.1);
 						//System.out.println(o.getPosY());
 						
 						try { Thread.sleep(40); } catch (InterruptedException e) {
