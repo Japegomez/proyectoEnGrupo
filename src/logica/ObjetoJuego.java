@@ -7,7 +7,7 @@ import javax.swing.JFrame;
  *
  */
 abstract public class ObjetoJuego {
-	//.
+	
 	protected double posX;
 	protected double posY;
 	protected int vida;

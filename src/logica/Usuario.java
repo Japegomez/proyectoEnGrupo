@@ -20,42 +20,42 @@ public class Usuario {
 	}
 
 	/**Metodo para obtener el nombre del usuario
-	 * @return nombtreUsuario el nombre del usuario en forma de String
+	 * @return nombtreUsuario String Nombre del usuario  
 	 */
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
 
 	/**Metodo para cambiar el nombre del usuario por otro
-	 * @param nombreUsuario String que sera el nuevo nombre del usuario 
+	 * @param nombreUsuario String Nuevo nombre del usuario 
 	 */
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
 
 	/**Metodo para obtener la contraseña del usuario
-	 * @return contrasenya la contraseña del ususario en forma de String
+	 * @return contrasenya  String Contraseña del ususario
 	 */
 	public String getContrasenya() {
 		return contrasenya;
 	}
 
 	/**Metodo para cambiar la contraseña del usuario por otra
-	 * @param contrasenya String que introduce el usuario como nueva contraseña
+	 * @param contrasenya String  Nueva contrasenya del usuario
 	 */
 	public void setContrasenya(String contrasenya) {
 		this.contrasenya = contrasenya;
 	}
 
 	/**Metodo para obtener el nivel del usuario
-	 * @return nivel el nivel del usuario
+	 * @return nivel Nivel del usuario
 	 */
 	public double getNivel() {
 		return nivel;
 	}
 
 	/**Metodo para cambiar el nivel del usuario
-	 * @param nivel nuevo nivel del usuario
+	 * @param nivel Nuevo nivel del usuario
 	 */
 	public void setNivel(double nivel) {
 		this.nivel = nivel;

@@ -23,6 +23,7 @@ public class VentanaClasificaciones extends JFrame{
 	private JLabel l2puesto;
 	private JTextField tfNombre2puesto;
 	
+
 	private JPanel pPuntos2puesto;
 	private JLabel l2puntos;
 	private JTextField tfPuntos2puesto;
@@ -34,6 +35,83 @@ public class VentanaClasificaciones extends JFrame{
 	private JPanel pPuntos3puesto;
 	private JLabel l3puntos;
 	private JTextField tfPuntos3puesto;
+
+	
+
+	/**
+	 * @return Nombre del usuario con la mejor puntuacion
+	 */
+	public JTextField getTfNombre1puesto() {
+		return tfNombre1puesto;
+	}
+
+	/**Modifica el textfield con el nombre del usuario con la mejor marca
+	 * @param tfNombre1puesto Nombre del nuevo usuario con la mejor marca
+	 */
+	public void setTfNombre1puesto(JTextField tfNombre1puesto) {
+		this.tfNombre1puesto = tfNombre1puesto;
+	}
+	/**
+	 * @return Puntos del usuario con la mejor puntuacion
+	 */
+	public JTextField getTfPuntos1puesto() {
+		return tfPuntos1puesto;
+	}
+	/**Modifica el textfield con los puntos del usuario con la mejor marca
+	 * @param tfPuntos1puesto Puntos del nuevo usuario con la mejor marca
+	 */
+	public void setTfPuntos1puesto(JTextField tfPuntos1puesto) {
+		this.tfPuntos1puesto = tfPuntos1puesto;
+	}
+	/**
+	 * @return Nombre del usuario con la segunda mejor puntuacion
+	 */
+	public JTextField getTfNombre2puesto() {
+		return tfNombre2puesto;
+	}
+	/**Modifica el textfield con el nombre del usuario con la segunda mejor marca
+	 * @param tfNombre2puesto Nombre del nuevo usuario con la segunda mejor marca
+	 */
+	public void setTfNombre2puesto(JTextField tfNombre2puesto) {
+		this.tfNombre2puesto = tfNombre2puesto;
+	}
+	/**
+	 * @return Puntos del usuario con la segunda mejor puntuacion
+	 */
+	public JTextField getTfPuntos2puesto() {
+		return tfPuntos2puesto;
+	}
+	/**Modifica el textfield con los puntos del usuario con la segunda mejor marca
+	 * @param tfPuntos2puesto Puntos del nuevo usuario con la segunda mejor marca
+	 */
+	public void setTfPuntos2puesto(JTextField tfPuntos2puesto) {
+		this.tfPuntos2puesto = tfPuntos2puesto;
+	}
+	/**
+	 * @return Nombre del usuario con la tercera mejor puntuacion
+	 */
+	public JTextField getTfNombre3puesto() {
+		return tfNombre3puesto;
+	}
+	/**Modifica el textfield con el nombre del usuario con la tercera mejor marca
+	 * @param tfNombre3puesto Nombre del nuevo usuario con la tercera mejor marca
+	 */
+	public void setTfNombre3puesto(JTextField tfNombre3puesto) {
+		this.tfNombre3puesto = tfNombre3puesto;
+	}
+	/**
+	 * @return Puntos del usuario con la tercera mejor  puntuacion
+	 */
+	public JTextField getTfPuntos3puesto() {
+		return tfPuntos3puesto;
+	}
+	/**Modifica el textfield con los puntos del usuario con la tercera mejor marca
+	 * @param tfPuntos3puesto Puntos del nuevo usuario con la tercera mejor marca
+	 */
+	public void setTfPuntos3puesto(JTextField tfPuntos3puesto) {
+		this.tfPuntos3puesto = tfPuntos3puesto;
+	}
+
 	
 	public VentanaClasificaciones(VentanaMenu vMenu){
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
