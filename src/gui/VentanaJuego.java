@@ -45,7 +45,7 @@ public class VentanaJuego extends JFrame {
 				while(funciona) {
 					for (MeteoritoEnemigo o:arrayMeteoritosEnPantalla) {
 						if (!arrayMeteoritosEliminados.contains(o)) {
-							o.mover(0.1);
+							o.mover(0.01);
 						}
 						if(o.getPosY()>pPrincipal.getHeight()) {
 							arrayMeteoritosEliminados.add(o);
@@ -135,7 +135,7 @@ public class VentanaJuego extends JFrame {
 	public void creaMeteorito() {
 			MeteoritoEnemigo me1 = new MeteoritoEnemigo();
 			double x = Math.random()*(((this.getWidth()-me1.getlMeteorito().getWidth())- 0) + 0);
-			checkeaXMeteorito(x, me1.getlMeteorito().getWidth());
+			x = checkeaXMeteorito(x, me1.getlMeteorito().getWidth());
 			me1.setPosX(x);
 			me1.setPosY(-(me1.getlMeteorito().getHeight()));
 			me1.setVelocidadY(9);
@@ -144,21 +144,22 @@ public class VentanaJuego extends JFrame {
 			
 	}
 	
-	public void checkeaXMeteorito(double x, int AnchoMeteorito) {
+	public double checkeaXMeteorito(double x, int AnchoMeteorito) {
 		boolean sigue = true;
 		while(sigue) {
 			int i = 0;
 			for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
-				if(!(x>meteoritoEnemigo.getPosX() && x<meteoritoEnemigo.getPosX()+meteoritoEnemigo.getlMeteorito().getWidth())) {
+				if(!(x>meteoritoEnemigo.getPosX()-meteoritoEnemigo.getlMeteorito().getWidth() && x<meteoritoEnemigo.getPosX()+2*meteoritoEnemigo.getlMeteorito().getWidth())) {
 				i ++;
 				}
 			}
-			if (i == arrayMeteoritosEnPantalla.size()) sigue= false;
+			if (i == arrayMeteoritosEnPantalla.size()) sigue = false;
 	
 			else {
 				 x = Math.random()*(((this.getWidth()-AnchoMeteorito)- 0) + 0);
 			}
 		}
+		return x;
 	}
 	
 }
