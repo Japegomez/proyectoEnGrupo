@@ -9,7 +9,6 @@ public class NaveJugador extends ObjetoJuego {
 	protected double ataqueCargado;
 	private JLabelNave lNave;
 	
-	
 	/**Devuelve la velocidad de ataque de la nave
 	 * @return Velocidad de ataque de la nave
 	 */
