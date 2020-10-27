@@ -17,6 +17,20 @@ public class JLabelMeteorito extends JLabel {
 	final private int ANCHO_METEORITO = 50;
 	final private int ALTO_METEORITO = 50;
 	
+	
+	/**Devuleve el ancho del jlabel del meteorito
+	 * @return int Ancho del jlabel del meteorito
+	 */
+	public int getAnchoMeteorito() {
+		return ANCHO_METEORITO;
+	}
+	/**Devuleve la altura del jlabel de la meteorito
+	 * @return int Altura del jlabel de la meteorito
+	 */
+	public int getAltoMeteorito() {
+		return ALTO_METEORITO;
+	}
+	
 	public JLabelMeteorito() {
 		ImageIcon image = new ImageIcon("./resources/meteorito.png");
 		this.setIcon(image);

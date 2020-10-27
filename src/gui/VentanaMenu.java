@@ -14,6 +14,8 @@ public class VentanaMenu extends JFrame {
 	JTextArea tUsuario;
 	String nombreUsuario;
 	VentanaJuego vJuego;
+	VentanaClasificaciones vClasi;
+	VentanaMejorasNave vMej;
 	
 	public VentanaMenu(String titulo) {
 		super(titulo);
@@ -42,8 +44,27 @@ public class VentanaMenu extends JFrame {
 				vJuego = new VentanaJuego();
 				vJuego.setVisible(true);
 				vJuego.creaNave();
-				// comentario jaajajajajajajajslj1
+			}
+		});
+		
+		bClasificacion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaMenu.this.setVisible(false);
+				vClasi = new VentanaClasificaciones(VentanaMenu.this);
+				vClasi.setVisible(true);
 				
+			}
+		});
+		
+		bMejorarNave.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaMenu.this.setVisible(false);
+				vMej = new VentanaMejorasNave(VentanaMenu.this);
+				vMej.setVisible(true);
 				
 			}
 		});
