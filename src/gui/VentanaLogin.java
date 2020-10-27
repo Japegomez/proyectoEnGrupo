@@ -2,6 +2,9 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,6 +16,7 @@ import java.util.logging.Logger;
 
 import javax.swing.*;
 
+import logica.BaseDatos;
 import logica.Usuario;
 
 public class VentanaLogin extends JFrame{
@@ -27,27 +31,11 @@ public class VentanaLogin extends JFrame{
 	private JTextField tfContrasenya;
 	private JButton bLogin;
 	private JButton bRegistro;
-	private static Logger logger = Logger.getLogger( "MiniPracticaBD" );
-	private static Connection con;
-	private static Statement s;
-	private static ResultSet rs;
 	private ArrayList< Usuario> arrayUsuarios= new ArrayList<Usuario>();
 	
 	public VentanaLogin(String titulo) {		
 		super(titulo);
-		String com = "";
-	try {
-		Class.forName( "org.sqlite.JDBC" );
-		con = DriverManager.getConnection( "jdbc:sqlite:test.db" );
-		s = con.createStatement();
-		try {
-			com = "create table Usuario( usuario STRING, contrasenya STRING )";
-			logger.log( Level.INFO, "BD: " + com );
-			s.executeUpdate( com );
-		} catch (SQLException e) {} 
-	} catch (SQLException|ClassNotFoundException e) {}
 
-		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -87,9 +75,7 @@ public class VentanaLogin extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaMenu vMenu = new VentanaMenu("menu");
-				vMenu.setVisible(true);
-				VentanaLogin.this.setVisible(false);
+				
 			}
 		});
 		
@@ -97,29 +83,27 @@ public class VentanaLogin extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					for (Usuario usu : arrayUsuarios) {
-						if (!usu.getNombreUsuario().equals(tfNombreUsuario.getText())) {
+				BaseDatos.registrarUsuario(tfNombreUsuario.getText(), tfContrasenya.getText());
+			}
+		});
+		
+		addWindowListener(new WindowAdapter() {
 			
-							Usuario nuevoUsuario = new Usuario();
-							nuevoUsuario.setNombreUsuario(tfNombreUsuario.getText());
-							nuevoUsuario.setContrasenya(tfContrasenya.getText());
-							arrayUsuarios.add(nuevoUsuario);
-							System.out.println(arrayUsuarios);
-							//TODO
-						}
-						
-						
-					}
-					
-				}catch(NullPointerException exception) {
-					Usuario nuevoUsuario = new Usuario();
-					nuevoUsuario.setNombreUsuario(tfNombreUsuario.getText());
-					nuevoUsuario.setContrasenya(tfContrasenya.getText());
-					arrayUsuarios.add(nuevoUsuario);
-				}
+			@Override
+			public void windowOpened(WindowEvent e) {
+				BaseDatos.abrirConexion("baseDatos.bd");	
+			}
+		
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				BaseDatos.cerrarConexion();
+				VentanaMenu vMenu = new VentanaMenu("menu");
+				vMenu.setVisible(true);
+				VentanaLogin.this.setVisible(false);
 				
 			}
+
 		});
 		
 		
