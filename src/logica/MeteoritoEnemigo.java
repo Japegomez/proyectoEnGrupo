@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 
-import com.sun.javafx.geom.Rectangle;
+import java.awt.Rectangle;
 
 import gui.JLabelMeteorito;
 
