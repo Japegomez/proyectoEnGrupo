@@ -224,7 +224,7 @@ public class VentanaJuego extends JFrame {
 	}
 	
 	public void crearDisparo() {
-		Disparo dis = new Disparo(nave.getPosX()-nave.getlNave().getAnchoNave()/2,nave.getPosY() - nave.getlNave().getAltoNave()/2,1,0,5,0);
+		Disparo dis = new Disparo(nave.getPosX()-nave.getlNave().getAnchoNave()/2,nave.getPosY() - nave.getlNave().getAltoNave()/2,1,0,5);
 		pPrincipal.add(dis.getlDisparo());
 		arrayDisparo.add(dis);
 	}

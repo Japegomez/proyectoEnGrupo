@@ -19,6 +19,7 @@ public class Disparo extends ObjetoJuego{
 	 * @param vida
 	 * @param velocidadX
 	 * @param velocidadY
+	 * @param  
 	 */
 	public Disparo(double posX, double posY, int vida, double velocidadX, double velocidadY) {
 		super(posX, posY, vida, velocidadX, velocidadY);
