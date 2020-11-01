@@ -78,13 +78,19 @@ public class NaveJugador extends ObjetoJuego {
 		lNave.setLocation((int)this.getPosX(),(int) posY);
 	}
 	
-	public void paint(Graphics2D g) {
-		g.fillOval((int) posX,(int) posY, lNave.getWidth(),lNave.getHeight() );
-	}
 	
+	/**Crea un rectangulo alrededor de la nave
+	 * @return Un rectangulo alredeor de la nave
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle((int) posX,(int) posY, lNave.getWidth(),lNave.getHeight() );
 	}
+//	public void paint(Graphics2D g) {
+//		g.fillRect((int) posX,(int) posY, lNave.getWidth(),lNave.getHeight() );
+//		
+//	}
+	
+	
 
 
 	

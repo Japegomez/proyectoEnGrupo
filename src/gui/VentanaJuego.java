@@ -194,7 +194,6 @@ public class VentanaJuego extends JFrame {
 	
 	public void creaNave() {
 		nave = new NaveJugador();
-//		nave.getlNave().setBorder(new LineBorder(Color.YELLOW));
 		nave.setPosX(this.getWidth()/2-nave.getlNave().getAnchoNave()/2);
 		nave.setPosY(pPrincipal.getHeight()-nave.getlNave().getHeight());
 		nave.setVelocidadX(2);
@@ -215,10 +214,16 @@ public class VentanaJuego extends JFrame {
 			
 	}
 	
+	/**Cuando la vida de la nave es menor o igual que cero, se acaba el juego.
+	 * 
+	 */
 	public void gameOver() {
 		this.dispose();
 		JOptionPane.showMessageDialog(this, "Game Over","Game Over",JOptionPane.YES_NO_OPTION);
+		VentanaMenu v3 = new VentanaMenu("menu");
+		v3.setVisible(true);
 	}
+	
 	public double checkeaXMeteorito(double x, int AnchoMeteorito) {
 		boolean sigue = true;
 		while(sigue) {
@@ -236,18 +241,10 @@ public class VentanaJuego extends JFrame {
 		}
 		return x;
 	}
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-		nave.paint(g2d);
-		for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
-			meteoritoEnemigo.paint(g2d);
-		}
-		
-	}
+
+	/**Comprueba si la nave y un meteorito han chocado.
+	 * 
+	 */
 	public void choqueConMeterorito() {
 		if (nave == null) return;
 		ArrayList<MeteoritoEnemigo> aEliminar = new ArrayList<MeteoritoEnemigo>();
@@ -270,12 +267,27 @@ public class VentanaJuego extends JFrame {
 		}
 
 	}
+	/**Devuelve true si la vida de la nave es menor o igual que cero.
+	 * @return  
+	 */
 	private boolean estaMuerto() {
 		if (nave == null) return false;
 		if(nave.getVida()<=0) {
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+		//nave.paint(g2d);
+		for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
+		//	meteoritoEnemigo.paint(g2d);
+		}
+		
 	}
 	
 }

@@ -88,12 +88,16 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 		this.setPosY(posY + (velocidadY *tiempo));
 	}
 	
+	/**Crea un rectangulo alrededor del meteorito
+	 * @return Un rectangulo alrededor del meteorito
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle((int)posX,(int)posY,(int)lMeteorito.getHeight(),(int)lMeteorito.getWidth());
 		
 	}
-	public void paint(Graphics2D g) {
-		g.fillRect((int)posX,(int)posY,(int)lMeteorito.getHeight(),(int)lMeteorito.getWidth());
-	}
+	
+//	public void paint(Graphics2D g) {
+//		g.fillRect((int)posX,(int)posY,(int)lMeteorito.getHeight(),(int)lMeteorito.getWidth());
+//	}
 	
 }
