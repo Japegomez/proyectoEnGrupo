@@ -6,28 +6,37 @@ import java.util.ArrayList;
 
 import gui.JLabelNave;
 
+/**
+ * @author japen
+ *
+ */
+/**
+ * @author japen
+ *
+ */
 public class NaveJugador extends ObjetoJuego {
 	
-	protected double velocidadAtaque;
-	protected double danyoAtaque;
-	protected double ataqueCargado;
-	private JLabelNave lNave;
+	private double velocidadAtaque;//tiempo que tarda la nave en atacar (en milisegundos)
+	private double danyoAtaque;//danyo que hace cada disparo de la nave
+	private double ataqueCargado;//tiempo que tarda la nave en recuperar su ataque cargado
+	private int vidaNave; //vida de la nave
+	private JLabelNave lNave;//JLabel de la nave
 	
-	/**Devuelve la velocidad de ataque de la nave
+	/**
 	 * @return Velocidad de ataque de la nave
 	 */
 	public double getVelocidadAtaque() {
 		return velocidadAtaque;
 	}
 	
-	/**Modifica la velocidad de ataque de la nave
-	 * @param velocidadAtaque Nueva velocidad de ataque de la nave
+	/**Modifica el tiempo que tarda la nave en atacar
+	 * @param velocidadAtaque (en milisegundos)
 	 */
 	public void setVelocidadAtaque(double velocidadAtaque) {
 		this.velocidadAtaque = velocidadAtaque;
 	}
 	
-	/**Devuelve el danyo del ataque de la nave
+	/**
 	 * @return Danyo de ataque de la nave
 	 */
 	public double getDanyoAtaque() {
@@ -41,24 +50,70 @@ public class NaveJugador extends ObjetoJuego {
 		this.danyoAtaque = danyoAtaque;
 	}
 
+	/**
+	 * @return devuelve el tiempo que tarda en cargarse el ataque cargado (en milisegundos)
+	 */
 	public double getAtaqueCargado() {
 		return ataqueCargado;
 	}
 
+	/**Modifica el tiempo que tarda en cargarse el ataque cargado
+	 * @param ataqueCargado nuevo tiempo
+	 */
 	public void setAtaqueCargado(double ataqueCargado) {
 		this.ataqueCargado = ataqueCargado;
 	}
 
+	/**
+	 * @return Vida de la nave
+	 */
+	public int getVidaNave() {
+		return vidaNave;
+	}
+
+	/**Modifica la vida de la nave
+	 * @param vidaNave
+	 */
+	public void setVidaNave(int vidaNave) {
+		this.vidaNave = vidaNave;
+	}
+
+	/**
+	 * @return JLabelNave
+	 */
 	public JLabelNave getlNave() {
 		return lNave;
 	}
 
+	/**Modifica el JLabel de la nave
+	 * @param lNave
+	 */
 	public void setlNave(JLabelNave lNave) {
 		this.lNave = lNave;
 	}
 
+	/**Modifica la posicion en el eje x de la nave y del jLabelNave
+	 *
+	 */
+	@Override
+	public void setPosX(double posX) {
+		this.posX = posX;
+		lNave.setLocation((int) posX, (int) this.getPosY());
+	}
+	/**Modifica la posicion en el eje y de la nave y del JLabelNave 
+	 *
+	 */
+	@Override
+	public void setPosY(double posY) {
+		this.posY = posY;
+		lNave.setLocation((int)this.getPosX(),(int) posY);
+	}
+	
+	/**Crea una nave
+	 * 
+	 */
 	public NaveJugador() {
-		super(0.0,0.0,10,10,150.0,150.0);
+		super(0.0,0.0,10,10,150.0);
 		this.velocidadAtaque = 5;
 		this.danyoAtaque = 5;
 		this.ataqueCargado = 5;
@@ -67,17 +122,7 @@ public class NaveJugador extends ObjetoJuego {
 		setPosY(this.getPosY());
 	}
 	
-	@Override
-	public void setPosX(double posX) {
-		this.posX = posX;
-		lNave.setLocation((int) posX, (int) this.getPosY());
-	}
-	@Override
-	public void setPosY(double posY) {
-		this.posY = posY;
-		lNave.setLocation((int)this.getPosX(),(int) posY);
-	}
-	
+
 	
 	/**Crea un rectangulo alrededor de la nave
 	 * @return Un rectangulo alredeor de la nave

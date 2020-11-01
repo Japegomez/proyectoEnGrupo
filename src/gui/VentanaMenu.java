@@ -23,6 +23,10 @@ public class VentanaMenu extends JFrame {
 	VentanaClasificaciones vClasi;
 	VentanaMejorasNave vMej;
 	
+	/**Crea una ventana que muestra el menu
+	 * @param titulo titulo de la ventana
+	 * @param usu usuario que ha iniciado sesion
+	 */
 	public VentanaMenu(String titulo, Usuario usu) {
 		super(titulo);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

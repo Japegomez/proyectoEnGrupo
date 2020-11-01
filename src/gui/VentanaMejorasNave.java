@@ -25,6 +25,9 @@ public class VentanaMejorasNave extends JFrame {
 	private JTextField tfCreditosDisponibles;
 	private JPanel pCreditos;
 	
+	/**Crea una ventana para poder mejorar la nave del usuario
+	 * @param vMenu VentanaMenu de la que precede
+	 */
 	public VentanaMejorasNave(VentanaMenu vMenu) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);

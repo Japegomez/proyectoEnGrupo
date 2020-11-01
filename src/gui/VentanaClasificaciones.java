@@ -10,6 +10,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * @author japen
+ *
+ */
+/**
+ * @author japen
+ *
+ */
+/**
+ * @author japen
+ *
+ */
 public class VentanaClasificaciones extends JFrame{
 	private JPanel pNombre1puesto;
 	private JLabel l1puesto;
@@ -113,6 +125,9 @@ public class VentanaClasificaciones extends JFrame{
 	}
 
 	
+	/**Crea una ventana que muestra la clasificacion
+	 * @param vMenu VentaMenu de la que precede
+	 */
 	public VentanaClasificaciones(VentanaMenu vMenu){
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);

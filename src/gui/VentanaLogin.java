@@ -34,6 +34,9 @@ public class VentanaLogin extends JFrame{
 	private String nombreAsegurado;
 	private String contraAsegurada;
 	
+	/**Crea una ventana de login
+	 * @param titulo titulo de la ventana
+	 */
 	public VentanaLogin(String titulo) {		
 		super(titulo);
 

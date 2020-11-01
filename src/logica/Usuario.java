@@ -7,10 +7,12 @@ public class Usuario {
 	public String nombreUsuario;//nombre que es usuario decida ponerse
 	public String contrasenya;//contraseña del usuario
 	
-	public double nivel;//nivel del jugador que ira aumentando en caso de jugar
-	public ArrayList<Partida> part;
-	/**Metodo constructor para crear un usuario
-	 * 
+	public double nivel;//nivel del jugador
+	public ArrayList<Partida> part;//Lista de partidas del jugador
+
+	/**Crea un usuario
+	 * @param usuario String del nombre del usuario
+	 * @param contrasenya String de la contrasenya del usuario
 	 */
 	public Usuario(String usuario, String contrasenya) {
 		this.nombreUsuario = usuario;
@@ -19,42 +21,42 @@ public class Usuario {
 		this.part = new ArrayList<Partida>();
 	}
 
-	/**Metodo para obtener el nombre del usuario
+	/**
 	 * @return nombtreUsuario String Nombre del usuario  
 	 */
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
 
-	/**Metodo para cambiar el nombre del usuario por otro
+	/**Modifica el nombre del usuario
 	 * @param nombreUsuario String Nuevo nombre del usuario 
 	 */
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
 
-	/**Metodo para obtener la contraseña del usuario
-	 * @return contrasenya  String Contraseña del ususario
+	/**
+	 * @return contrasenya  String Contrasenya del usuario
 	 */
 	public String getContrasenya() {
 		return contrasenya;
 	}
 
-	/**Metodo para cambiar la contraseña del usuario por otra
+	/**Modifica la contrasenya del usuario
 	 * @param contrasenya String  Nueva contrasenya del usuario
 	 */
 	public void setContrasenya(String contrasenya) {
 		this.contrasenya = contrasenya;
 	}
 
-	/**Metodo para obtener el nivel del usuario
+	/**
 	 * @return nivel Nivel del usuario
 	 */
 	public double getNivel() {
 		return nivel;
 	}
 
-	/**Metodo para cambiar el nivel del usuario
+	/**Modifica el nivel del usuario
 	 * @param nivel Nuevo nivel del usuario
 	 */
 	public void setNivel(double nivel) {
