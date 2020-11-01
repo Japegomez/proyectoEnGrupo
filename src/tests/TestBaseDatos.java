@@ -2,19 +2,31 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import logica.BaseDatos;
 
 class TestBaseDatos {
 
-	BaseDatos base = new BaseDatos();
-	@SuppressWarnings("static-access")
+	
+	@Before
+	void abrirConexion() {
+	//
+	}
+	
 	@Test
-	void compruebaUsuariotest() {
-		boolean result = base.compruebaUsuario("jonlopez");
-		assertEquals(false, result);
-		fail("Not yet implemented");
+	void compruebaUsuarioTest() {
+		BaseDatos.abrirConexion("baseDatos.bd");
+		boolean result = BaseDatos.compruebaUsuario("joni");
+		assertEquals(true, result);
 	}
 
+	@Test
+	void compruebaContrasenyaTest() {
+		BaseDatos.abrirConexion("baseDatos.bd");
+		boolean result = BaseDatos.compruebaContrasenya("joni", "1234");
+		assertEquals(true,result);
+	}
+	
 }
