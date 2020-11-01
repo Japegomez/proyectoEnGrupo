@@ -36,13 +36,8 @@ public class BaseDatos {
 	}
 	public static void registrarUsuario(String usuario, String contrasenya) {
 		try {
-			s = conexion.createStatement();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		String com = "";
-		com = "insert into usuario ( nombre, contrasenya, nivel ) values ('" + usuario +"','" + contrasenya + "','0')";
-		try {
+		s = conexion.createStatement();
+		String com = "insert into usuario ( nombre, contrasenya, nivel ) values ('" + usuario +"','" + contrasenya + "','0')";
 			s.executeUpdate( com );
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,5 +77,27 @@ public class BaseDatos {
 		}
 		return false;
 		
+	}
+	
+	public static String obtenerIdUsuario(String nombreUsuario) {
+		String id= "";
+		String com = "select * from usuario where nombre ='" + nombreUsuario + "'";
+		try {
+			rs = s.executeQuery(com);
+			if(rs.next()) id = rs.getString("idusuario");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return id;
+	}
+	public static void aniadirPartida(int puntuacion, String nombreUsuario) {
+		try {
+			s = conexion.createStatement();
+			String com = "insert into partida ( idusuario, puntuacion ) values ('" +obtenerIdUsuario(nombreUsuario)+"','" + puntuacion + "')";
+				s.executeUpdate( com );
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 	}
 }

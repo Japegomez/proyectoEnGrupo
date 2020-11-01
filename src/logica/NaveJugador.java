@@ -85,11 +85,6 @@ public class NaveJugador extends ObjetoJuego {
 	public Rectangle getBounds() {
 		return new Rectangle((int) posX,(int) posY, lNave.getWidth(),lNave.getHeight() );
 	}
-//	public void paint(Graphics2D g) {
-//		g.fillRect((int) posX,(int) posY, lNave.getWidth(),lNave.getHeight() );
-//		
-//	}
-	
 	
 
 

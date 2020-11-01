@@ -49,7 +49,7 @@ public class VentanaMenu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaMenu.this.setVisible(false);
-				vJuego = new VentanaJuego();
+				vJuego = new VentanaJuego(usu,VentanaMenu.this);
 				vJuego.setVisible(true);
 				vJuego.creaNave();
 			}

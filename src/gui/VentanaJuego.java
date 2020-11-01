@@ -9,29 +9,40 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import logica.BaseDatos;
 import logica.MeteoritoEnemigo;
 import logica.NaveJugador;
 import logica.ObjetoJuego;
 import logica.Partida;
+import logica.Usuario;
 
 public class VentanaJuego extends JFrame {
-	//.S
+	
 	private PanelFondo pPrincipal;
-	NaveJugador nave;
-	public ArrayList<MeteoritoEnemigo> arrayMeteoritos = new ArrayList<MeteoritoEnemigo>();
+	private Usuario us;
+	private NaveJugador nave;
+	private Partida part;
+	private ArrayList<MeteoritoEnemigo> arrayMeteoritos = new ArrayList<MeteoritoEnemigo>();
 	
 	private boolean juegoAcabado = false;
 	
-	public ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>();
-	public ArrayList<MeteoritoEnemigo> arrayMeteoritosEliminados = new ArrayList<>();
-	public VentanaJuego() {
+	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>();
+	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEliminados = new ArrayList<>();
+	
+
+	public VentanaJuego(Usuario usuario, VentanaMenu v1) {
 		super("jugando...");
+		us = usuario;
+		part = new Partida();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocation(400, 150);
 		setSize(500, 500);
@@ -76,7 +87,20 @@ public class VentanaJuego extends JFrame {
 				
 			}}.start();
 			
-
+			addWindowListener(new WindowAdapter() {
+			
+				@Override
+				public void windowOpened(WindowEvent e) {
+					BaseDatos.abrirConexion("baseDatos.bd");
+					
+				}
+				@Override
+				public void windowClosed(WindowEvent e) {
+					BaseDatos.aniadirPartida(VentanaJuego.this.part.getPuntuacion(), usuario.getNombreUsuario());
+					v1.setVisible(true);
+					BaseDatos.cerrarConexion();
+				}
+			});
 			this.addKeyListener(new KeyListener() {
 
 				@Override
@@ -220,8 +244,6 @@ public class VentanaJuego extends JFrame {
 	public void gameOver() {
 		this.dispose();
 		JOptionPane.showMessageDialog(this, "Game Over","Game Over",JOptionPane.YES_NO_OPTION);
-		VentanaMenu v3 = new VentanaMenu("menu");
-		v3.setVisible(true);
 	}
 	
 	public double checkeaXMeteorito(double x, int AnchoMeteorito) {
@@ -267,16 +289,18 @@ public class VentanaJuego extends JFrame {
 		}
 
 	}
+
 	/**Devuelve true si la vida de la nave es menor o igual que cero.
 	 * @return  
 	 */
-	private boolean estaMuerto() {
-		if (nave == null) return false;
+	public boolean estaMuerto() {
+		if(nave == null) return false;
 		if(nave.getVida()<=0) {
 			return true;
 		}
 		return false;
 	}
+	
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);

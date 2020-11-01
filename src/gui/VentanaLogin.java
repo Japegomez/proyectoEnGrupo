@@ -79,7 +79,12 @@ public class VentanaLogin extends JFrame{
 						JOptionPane.showMessageDialog(VentanaLogin.this, "El usuario " + tfNombreUsuario.getText() + " no existe en la base de datos, primero debe registrarse.");
 					}
 					else {
-						if(BaseDatos.compruebaContrasenya(nombreAsegurado, contraAsegurada)) VentanaLogin.this.dispose();
+						if(BaseDatos.compruebaContrasenya(nombreAsegurado, contraAsegurada)) {
+							Usuario usu = new Usuario(nombreAsegurado, contraAsegurada);
+							VentanaMenu vMenu = new VentanaMenu("menu", usu);
+							vMenu.setVisible(true);
+							VentanaLogin.this.dispose();
+						}
 						else {
 							JOptionPane.showMessageDialog(VentanaLogin.this, "contraseña incorrecta");
 						}
@@ -103,6 +108,9 @@ public class VentanaLogin extends JFrame{
 					if(BaseDatos.compruebaUsuario(nombreAsegurado)) {
 						BaseDatos.registrarUsuario(nombreAsegurado, contraAsegurada);
 						VentanaLogin.this.dispose();
+						Usuario usu = new Usuario(nombreAsegurado, contraAsegurada);
+						VentanaMenu vMenu = new VentanaMenu("menu", usu);
+						vMenu.setVisible(true);
 					}
 					else {
 						JOptionPane.showMessageDialog(VentanaLogin.this, "el usuario " + tfNombreUsuario.getText() + " ya esta registrado.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -127,9 +135,6 @@ public class VentanaLogin extends JFrame{
 			public void windowClosed(WindowEvent e) {
 				
 				BaseDatos.cerrarConexion();
-				Usuario usu = new Usuario(nombreAsegurado, contraAsegurada);
-				VentanaMenu vMenu = new VentanaMenu("menu", usu);
-				vMenu.setVisible(true);
 				
 			}
 
