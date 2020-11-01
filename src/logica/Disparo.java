@@ -7,19 +7,26 @@ import gui.JLabelMeteorito;
 
 public class Disparo extends ObjetoJuego{
 	
-	private int danyo;
-	private int velocidad;
-	private JLabelDisparo lDisparo;
+	private int danyo; //danyo del disparo
+	private int velocidad; //velocidad del disparo
+	private JLabelDisparo lDisparo; //JLabel del disparo
 	
 
 
-	public Disparo(double posX, double posY, int vida, double velocidadX, double velocidadY, double aceleracion) {
-		super(posX, posY, vida, velocidadX, velocidadY, aceleracion);
+	/**Crea un disparo
+	 * @param posX 
+	 * @param posY
+	 * @param vida
+	 * @param velocidadX
+	 * @param velocidadY
+	 */
+	public Disparo(double posX, double posY, int vida, double velocidadX, double velocidadY) {
+		super(posX, posY, vida, velocidadX, velocidadY);
 		this.danyo = 5;
 		this.velocidad = 5;
 	}
 
-	/**Devuelve el danyo que hace un disparo cuando da con un meteorito.
+	/**Devuelve el danyo que hace un disparo.
 	 * @return Danyo del disparo
 	 */
 	public int getDanyo() {
@@ -47,7 +54,7 @@ public class Disparo extends ObjetoJuego{
 		this.velocidad = velocidad;
 	}
 	/**
-	 *Modifica la posicion en el eje x del disparo y del jlabeldisparo
+	 *Modifica la posicion en el eje x del disparo y de su JLabel
 	 */
 	@Override
 	public void setPosX(double posX) {
@@ -57,7 +64,7 @@ public class Disparo extends ObjetoJuego{
 	
 	 
 	/**
-	 *Modifica la posicion en el eje y del disparo y del jlabeldisparo
+	 *Modifica la posicion en el eje y del disparo y de su JLabel
 	 */
 	@Override
 	public void setPosY(double posY) {

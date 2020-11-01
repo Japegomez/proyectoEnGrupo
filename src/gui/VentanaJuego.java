@@ -7,7 +7,7 @@ import javax.swing.*;
 import logica.*;
 
 public class VentanaJuego extends JFrame {
-	
+
 	private PanelFondo pPrincipal; //Panel de juego
 	private Usuario us; //usuario de la partida
 	private NaveJugador nave; //nave del usuario

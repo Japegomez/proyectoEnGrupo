@@ -8,15 +8,14 @@ import javax.swing.JFrame;
  */
 abstract public class ObjetoJuego {
 	
-	protected double posX;
-	protected double posY;
-	protected int vida;
-	protected double velocidadX;
-	protected double velocidadY;
-	protected double aceleracion;
+	protected double posX;//posicion del objeto respecto al eje x (en pixels)
+	protected double posY;//posicion del objeto respecto al eje y (en pixels)
+	protected int vida;//vida del objeto
+	protected double velocidadX;//velocidad en el eje x 
+	protected double velocidadY;//velocidad en el eje y
 
 
-	/** Devuelve la coordenada x del centro del objeto de juego, con respecto a la pantalla
+	/**
 	 * @return	Coordenada x en píxels
 	 */
 	public double getPosX() {
@@ -29,7 +28,7 @@ abstract public class ObjetoJuego {
 	public void setPosX(double posX) {
 		this.posX = posX;
 	}
-	/** Devuelve la coordenada y del centro del objeto de juego, con respecto a la pantalla
+	/**
 	 * @return	Coordenada y en píxels
 	 */
 	public double getPosY() {
@@ -42,7 +41,7 @@ abstract public class ObjetoJuego {
 		this.posY = posY;
 	}
 
-	/**Devuelve la vida del objeto juego
+	/**
 	 * @return Vida del objeto
 	 */
 	public int getVida() {
@@ -56,7 +55,7 @@ abstract public class ObjetoJuego {
 		this.vida = vida;
 	}
 
-	/**Devuelve la velocidad del objeto juego respecto al eje x
+	/**
 	 * @return Velocidad respecto al eje x
 	 */
 	public double getVelocidadX() {
@@ -70,8 +69,8 @@ abstract public class ObjetoJuego {
 		this.velocidadX = velocidadX;
 	}
 	
-	/**Devuelve la velocidad del objeto juego respecto al eje y
-	 * @return Velocidad respecto al eje x
+	/**
+	 * @return Velocidad respecto al eje y
 	 */
 	public double getVelocidadY() {
 		return velocidadY;
@@ -83,30 +82,22 @@ abstract public class ObjetoJuego {
 	public void setVelocidadY(double velocidadY) {
 		this.velocidadY = velocidadY;
 	}
-	
-	/**Devuelve la aceleracion del objeto juego
-	 * @return Aceleracion en double
-	 */
-	public double getAceleracion() {
-		return aceleracion;
-	}
-
-	/**Modifica la aceleracion del objeto juego
-	 * @param aceleracion nueva aceleracion 
-	 */
-	public void setAceleracion(double aceleracion) {
-		this.aceleracion = aceleracion;
-	}
 
 	
-	public ObjetoJuego(double posX, double posY, int vida, double velocidadX, double velocidadY, double aceleracion) {
+	/**Crea un objeto de juego
+	 * @param posX 
+	 * @param posY
+	 * @param vida
+	 * @param velocidadX
+	 * @param velocidadY
+	 */
+	public ObjetoJuego(double posX, double posY, int vida, double velocidadX, double velocidadY) {
 		super();
 		this.posX = posX;
 		this.posY = posY;
 		this.vida = vida;
 		this.velocidadX = velocidadX;
 		this.velocidadY = velocidadY;
-		this.aceleracion = aceleracion;
 	}
 	
 

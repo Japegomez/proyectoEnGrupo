@@ -11,6 +11,9 @@ import javax.swing.*;
 
 public class PanelFondo extends JPanel{
 	
+	/**Configura un fondo de una imagen de una galaxia
+	 *
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

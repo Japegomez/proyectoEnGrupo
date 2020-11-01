@@ -15,6 +15,10 @@ public class BaseDatos {
 	private static Statement s;
 	private static ResultSet rs;
 	
+	/**Abre la conexion con la base de datos
+	 * @param nombre nombre de la base de datos con la que se desea conectar
+	 * @return true si se ha conectado, false si ha habido un error.
+	 */
 	public static boolean abrirConexion( String nombre ) {
 		try {
 			System.out.println( "Conexión abierta" );
@@ -26,6 +30,9 @@ public class BaseDatos {
 			return false;
 		}
 	}
+	/**Cierra la conexion con la base de datos
+	 * 
+	 */
 	public static void cerrarConexion() {
 		try {
 			conexion.close();
@@ -34,6 +41,10 @@ public class BaseDatos {
 			e.printStackTrace();
 		}
 	}
+	/**Registra un nuevo usuario en la base de datos
+	 * @param usuario nombre del usuario
+	 * @param contrasenya contrasenya del usuario
+	 */
 	public static void registrarUsuario(String usuario, String contrasenya) {
 		try {
 		s = conexion.createStatement();
@@ -79,6 +90,10 @@ public class BaseDatos {
 		
 	}
 	
+	/**Devuelve la Id del usuario
+	 * @param nombreUsuario Nombre del usuario cuyo Id se desea obtener
+	 * @return
+	 */
 	public static String obtenerIdUsuario(String nombreUsuario) {
 		String id= "";
 		String com = "select * from usuario where nombre ='" + nombreUsuario + "'";
@@ -91,6 +106,10 @@ public class BaseDatos {
 		
 		return id;
 	}
+	/**Aniade una partida a la base de datos
+	 * @param puntuacion puntuacion de la partida
+	 * @param nombreUsuario nombre del usuario que ha jugado la partida
+	 */
 	public static void aniadirPartida(int puntuacion, String nombreUsuario) {
 		try {
 			s = conexion.createStatement();

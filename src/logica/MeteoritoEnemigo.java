@@ -19,19 +19,22 @@ import gui.JLabelMeteorito;
 public class MeteoritoEnemigo extends ObjetoJuego{
 
 	protected double danyoAJugador; //Daño que el meteorito hara al jugador en caso de impactar contra el
-	private JLabelMeteorito lMeteorito;
+	private JLabelMeteorito lMeteorito; //JLabel del meteorito
 	
 	
 	
+	/**Crea un meteorito y lo posiciona fuera de la pantalla
+	 * 
+	 */
 	public MeteoritoEnemigo() {
-		super(150.0,150.0,150,0,20,1);
+		super(150.0,150.0,150,0,20);
 		lMeteorito = new JLabelMeteorito();
 		setPosX(this.getPosX());
 		setPosY(this.getPosY());
 	}
 	
 	
-	/** Metodo para obtener el atributo danyoAJugador
+	/**
 	 * @return Valor de danyoAJugador 
 	 */
 	public double getDanyoAJugador() {
@@ -65,7 +68,7 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 	}
 	
 	/**
-	 * @return El jlabel del meteorito
+	 * @return jlabel del meteorito
 	 */
 	public JLabelMeteorito getlMeteorito() {
 		return lMeteorito;
@@ -96,8 +99,6 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 		
 	}
 	
-//	public void paint(Graphics2D g) {
-//		g.fillRect((int)posX,(int)posY,(int)lMeteorito.getHeight(),(int)lMeteorito.getWidth());
-//	}
+
 	
 }

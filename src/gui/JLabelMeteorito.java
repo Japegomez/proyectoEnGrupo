@@ -14,23 +14,26 @@ import javax.swing.JLabel;
 
 public class JLabelMeteorito extends JLabel {
 	
-	final private int ANCHO_METEORITO = 50;
-	final private int ALTO_METEORITO = 50;
+	final private int ANCHO_METEORITO = 50; //Ancho del meteorito (en pixels)
+	final private int ALTO_METEORITO = 50;//Alto del meteorito (en pixels)
 	
 	
-	/**Devuleve el ancho del jlabel del meteorito
-	 * @return int Ancho del jlabel del meteorito
+	/**
+	 * @return int Ancho del jlabel del meteorito(en pixels)
 	 */
 	public int getAnchoMeteorito() {
 		return ANCHO_METEORITO;
 	}
-	/**Devuleve la altura del jlabel de la meteorito
-	 * @return int Altura del jlabel de la meteorito
+	/**
+	 * @return int Altura del jlabel de la meteorito(en pixels)
 	 */
 	public int getAltoMeteorito() {
 		return ALTO_METEORITO;
 	}
 	
+	/**Crea el JLabel y le asocia una imagen de un meteorito
+	 * 
+	 */
 	public JLabelMeteorito() {
 		ImageIcon image = new ImageIcon("./resources/meteorito.png");
 		this.setIcon(image);
@@ -39,6 +42,9 @@ public class JLabelMeteorito extends JLabel {
 	}
 	
 	
+	/**Ajusta la escala del JLabel
+	 *
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

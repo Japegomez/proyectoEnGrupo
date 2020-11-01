@@ -12,22 +12,25 @@ import javax.swing.*;
 
 public class JLabelNave extends JLabel{
 
-	final private int ANCHO_NAVE = 50;
-	final private int ALTO_NAVE = 100;
+	final private int ANCHO_NAVE = 50;//Ancho de la nave(en pixels)
+	final private int ALTO_NAVE = 100;//Alto de la nave(en pixels)
 	
-	/**Devuleve el ancho del jlabel de la nave
-	 * @return int Ancho del jlabel de la nave
+	/**
+	 * @return int Ancho del jlabel de la nave(en pixels)
 	 */
 	public int getAnchoNave() {
 		return ANCHO_NAVE;
 	}
-	/**Devuleve la altura del jlabel de la nave
-	 * @return int Altura del jlabel de la nave
+	/**
+	 * @return int Altura del jlabel de la nave(en pixels)
 	 */
 	public int getAltoNave() {
 		return ALTO_NAVE;
 	}
 	
+	/**Crea el JLabel y le asocia una imagen de una nave
+	 * 
+	 */
 	public JLabelNave() {
 		 ImageIcon imageIcon = new ImageIcon("./resources/nave.png");
 		 this.setIcon(imageIcon);
@@ -35,6 +38,9 @@ public class JLabelNave extends JLabel{
 		setPreferredSize(new Dimension(ANCHO_NAVE, ALTO_NAVE));
 	}
 
+	/**Ajusta la escala del JLabel
+	 *
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
