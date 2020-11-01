@@ -52,14 +52,20 @@ public class BaseDatos {
 	 * @return devuelve true si no existe, false si si existe.
 	 */
 	public static boolean compruebaUsuario(String nombreUsuario) {
+		int j = 0;
 		try  {
 			s = conexion.createStatement();
-			String com = "select * from usuario where nombre=" + nombreUsuario + ";";
-			rs = s.executeQuery( com ); //si la query se ejecuta es porque existe ya un usuario registrado de nombre NombreUsuario
+			String com = "select * from usuario where nombre='" + nombreUsuario + "';";
+			rs = s.executeQuery( com );
+			while(rs.next()) {
+				j++;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return true;
 		}
-		return false;
+		if(j==0)return true;
+		else {
+			return false;
+		}
 	}
 }
