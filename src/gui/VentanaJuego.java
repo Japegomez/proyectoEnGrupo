@@ -64,11 +64,14 @@ public class VentanaJuego extends JFrame {
 							System.err.println(e);
 						}
 					}
+					choqueConMeterorito();
+					if (estaMuerto()) {
+						funciona = false;
+						gameOver();
+					}
 				}
-				choqueConMeterorito();
-				if(nave.getVida()<=0) {
-					gameOver();
-				}
+
+				
 				repaint();
 				
 			}}.start();
@@ -205,15 +208,16 @@ public class VentanaJuego extends JFrame {
 			x = checkeaXMeteorito(x, me1.getlMeteorito().getWidth());
 			me1.setPosX(x);
 			me1.setPosY(-(me1.getlMeteorito().getHeight()));
-			me1.setVelocidadY(9);
+			me1.setDanyoAJugador(10);
+			// me1.setVelocidadY(me1.getVelocidadY());
 			pPrincipal.add(me1.getlMeteorito());
 			arrayMeteoritosEnPantalla.add(me1);
 			
 	}
 	
 	public void gameOver() {
+		this.dispose();
 		JOptionPane.showMessageDialog(this, "Game Over","Game Over",JOptionPane.YES_NO_OPTION);
-		juegoAcabado = true;
 	}
 	public double checkeaXMeteorito(double x, int AnchoMeteorito) {
 		boolean sigue = true;
@@ -245,20 +249,33 @@ public class VentanaJuego extends JFrame {
 		
 	}
 	public void choqueConMeterorito() {
+		if (nave == null) return;
+		ArrayList<MeteoritoEnemigo> aEliminar = new ArrayList<MeteoritoEnemigo>();
 		for (MeteoritoEnemigo me : arrayMeteoritosEnPantalla) {
-			if(!arrayMeteoritosEliminados.contains(me)) {
+			if(!arrayMeteoritosEliminados.contains(me)) { // sobra si esta bien programado
 				if (me.getBounds().intersects(nave.getBounds())) {
+					
+					aEliminar.add(me);
 					nave.setVida(nave.getVida()- (int)me.getDanyoAJugador());
 					System.out.println("Han chocado!!");
 					System.out.println(nave.getVida());
 				}
 			}
-			
-				
-		}
-		
-		
-	}
 
+		}
+		for (MeteoritoEnemigo me : aEliminar) {
+			arrayMeteoritosEliminados.add(me);
+			arrayMeteoritosEnPantalla.remove(me);
+			pPrincipal.remove(me.getlMeteorito());
+		}
+
+	}
+	private boolean estaMuerto() {
+		if (nave == null) return false;
+		if(nave.getVida()<=0) {
+			return true;
+		}
+		return false;
+	}
 	
 }

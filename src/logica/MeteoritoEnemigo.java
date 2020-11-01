@@ -24,7 +24,7 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 	
 	
 	public MeteoritoEnemigo() {
-		super(150.0,150.0,150,0,200,1);
+		super(150.0,150.0,150,0,20,1);
 		lMeteorito = new JLabelMeteorito();
 		setPosX(this.getPosX());
 		setPosY(this.getPosY());
