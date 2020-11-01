@@ -1,44 +1,28 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.RenderingHints;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
-
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-
-import logica.BaseDatos;
-import logica.MeteoritoEnemigo;
-import logica.NaveJugador;
-import logica.ObjetoJuego;
-import logica.Partida;
-import logica.Usuario;
+import logica.*;
 
 public class VentanaJuego extends JFrame {
 	
-	private PanelFondo pPrincipal;
-	private Usuario us;
-	private NaveJugador nave;
-	private Partida part;
-	private ArrayList<MeteoritoEnemigo> arrayMeteoritos = new ArrayList<MeteoritoEnemigo>();
+	private PanelFondo pPrincipal; //Panel de juego
+	private Usuario us; //usuario de la partida
+	private NaveJugador nave; //nave del usuario
+	private Partida part; //partida
 	
 	private boolean juegoAcabado = false;
 	
-	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>();
-	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEliminados = new ArrayList<>();
+	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>(); //lista de meteoritos añadidos a la pantalla
+	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEliminados = new ArrayList<>(); //lista de meteoritos eliminados de la pantalla
 	
 
+	/**Constructor de la ventanaJuego
+	 * @param usuario usuario de la partida
+	 * @param v1 VentanaMenu de la que precede VentanaJuego
+	 */
 	public VentanaJuego(Usuario usuario, VentanaMenu v1) {
 		super("jugando...");
 		us = usuario;
@@ -101,11 +85,10 @@ public class VentanaJuego extends JFrame {
 					BaseDatos.cerrarConexion();
 				}
 			});
-			this.addKeyListener(new KeyListener() {
+			this.addKeyListener(new KeyAdapter() {
 
 				@Override
 				public void keyPressed(KeyEvent e) {
-					//System.out.println("Presionada");
 					int c = e.getKeyCode();
 					System.out.println(nave.getPosX() + ", " + nave.getPosY());
 					if (c==38) {
@@ -146,21 +129,12 @@ public class VentanaJuego extends JFrame {
 						}	
 					}			
 				}
-				@Override
-				public void keyReleased(KeyEvent e) {
-					//System.out.println("Dejar de presionar");
-				}
-				@Override
-				public void keyTyped(KeyEvent e) {
-					//System.out.println("PRESIONADA");
-				}
 			 });
 		
-		this.addKeyListener(new KeyListener() {
-
+		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				//System.out.println("Presionada");
+
 				int c = e.getKeyCode();
 				System.out.println(nave.getPosX() + ", " + nave.getPosY());
 				if (c==38) {
@@ -201,21 +175,12 @@ public class VentanaJuego extends JFrame {
 					}	
 				}			
 			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				//System.out.println("Dejar de presionar");
-
-			}
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				System.out.println("PRESIONADA");
-
-			}
 		 });
 	}
 	
+	/**Crea una nave  y la posiciona en relacion al panel de juego
+	 * 
+	 */
 	public void creaNave() {
 		nave = new NaveJugador();
 		nave.setPosX(this.getWidth()/2-nave.getlNave().getAnchoNave()/2);
@@ -225,6 +190,9 @@ public class VentanaJuego extends JFrame {
 		pPrincipal.add(nave.getlNave());
 	}
 
+	/**Crea un meteorito y lo posiciona en relacion al panel de juego
+	 * 
+	 */
 	public void creaMeteorito() {
 			MeteoritoEnemigo me1 = new MeteoritoEnemigo();
 			double x = Math.random()*(((this.getWidth()-me1.getlMeteorito().getWidth())- 0) + 0);
@@ -232,13 +200,12 @@ public class VentanaJuego extends JFrame {
 			me1.setPosX(x);
 			me1.setPosY(-(me1.getlMeteorito().getHeight()));
 			me1.setDanyoAJugador(10);
-			// me1.setVelocidadY(me1.getVelocidadY());
 			pPrincipal.add(me1.getlMeteorito());
 			arrayMeteoritosEnPantalla.add(me1);
 			
 	}
 	
-	/**Cuando la vida de la nave es menor o igual que cero, se acaba el juego.
+	/**Cierra la ventana e informa al usuario  del game over
 	 * 
 	 */
 	public void gameOver() {
@@ -246,13 +213,20 @@ public class VentanaJuego extends JFrame {
 		JOptionPane.showMessageDialog(this, "Game Over","Game Over",JOptionPane.YES_NO_OPTION);
 	}
 	
+	/**Comprueba que el meteorito no se superpone sobre otro meteorito en pantalla
+	 * @param x posicionamiento en el eje x del meteorito (en pixels)
+	 * @param AnchoMeteorito ancho del JLabel de meteorito (en pixels)
+	 * @return
+	 */
 	public double checkeaXMeteorito(double x, int AnchoMeteorito) {
 		boolean sigue = true;
 		while(sigue) {
 			int i = 0;
 			for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
-				if(!(x>meteoritoEnemigo.getPosX()-meteoritoEnemigo.getlMeteorito().getWidth() && x<meteoritoEnemigo.getPosX()+2*meteoritoEnemigo.getlMeteorito().getWidth())) {
-				i ++;
+				if(!arrayMeteoritosEliminados.contains(meteoritoEnemigo)) {
+					if(!(x>meteoritoEnemigo.getPosX()-meteoritoEnemigo.getlMeteorito().getWidth() && x<meteoritoEnemigo.getPosX()+2*meteoritoEnemigo.getlMeteorito().getWidth())) {
+						i ++;
+					}
 				}
 			}
 			if (i == arrayMeteoritosEnPantalla.size()) sigue = false;
@@ -271,9 +245,8 @@ public class VentanaJuego extends JFrame {
 		if (nave == null) return;
 		ArrayList<MeteoritoEnemigo> aEliminar = new ArrayList<MeteoritoEnemigo>();
 		for (MeteoritoEnemigo me : arrayMeteoritosEnPantalla) {
-			if(!arrayMeteoritosEliminados.contains(me)) { // sobra si esta bien programado
+			if(!arrayMeteoritosEliminados.contains(me)) { 
 				if (me.getBounds().intersects(nave.getBounds())) {
-					
 					aEliminar.add(me);
 					nave.setVida(nave.getVida()- (int)me.getDanyoAJugador());
 					System.out.println("Han chocado!!");
@@ -290,8 +263,8 @@ public class VentanaJuego extends JFrame {
 
 	}
 
-	/**Devuelve true si la vida de la nave es menor o igual que cero.
-	 * @return  
+	/**Comprueba si la nave tiene vida
+	 * @return  true si no tiene vida, false si tiene.
 	 */
 	public boolean estaMuerto() {
 		if(nave == null) return false;
