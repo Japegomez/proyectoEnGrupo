@@ -108,7 +108,7 @@ public class VentanaLogin extends JFrame{
 				nombreAsegurado =  tfNombreUsuario.getText().replaceAll( "'", "''" );
 				contraAsegurada = tfContrasenya.getText().replaceAll( "'", "''");
 				if(!nombreAsegurado.isEmpty() && !contraAsegurada.isEmpty()) {
-					if(BaseDatos.compruebaUsuario(nombreAsegurado)) {
+					if(!BaseDatos.compruebaUsuario(nombreAsegurado)) {
 						BaseDatos.registrarUsuario(nombreAsegurado, contraAsegurada);
 						VentanaLogin.this.dispose();
 						Usuario usu = new Usuario(nombreAsegurado, contraAsegurada);
