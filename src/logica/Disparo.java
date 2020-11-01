@@ -1,5 +1,7 @@
 package logica;
 
+import java.awt.Rectangle;
+
 import gui.JLabelDisparo;
 import gui.JLabelMeteorito;
 
@@ -75,5 +77,12 @@ public class Disparo extends ObjetoJuego{
 	@Override 
 	public void mover(double tiempo) {
 		this.setPosY((posY + (velocidadY *tiempo))*(-1));
+	}
+	/**Crea un rectangulo alrededor del meteorito
+	 * @return Un rectangulo alrededor del meteorito
+	 */
+	public Rectangle getBounds() {
+		return new Rectangle((int)posX,(int)posY,(int)lDisparo.getHeight(),(int)lDisparo.getWidth());
+		
 	}
 }
