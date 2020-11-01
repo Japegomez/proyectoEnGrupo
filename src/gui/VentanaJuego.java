@@ -54,24 +54,25 @@ public class VentanaJuego extends JFrame {
 					for (MeteoritoEnemigo o:arrayMeteoritosEnPantalla) {
 						
 						if (!arrayMeteoritosEliminados.contains(o)) {
-							o.mover(0.1);
-							
+							o.mover(0.1);	
 							
 						}
 						if(o.getPosY()>pPrincipal.getHeight()) {
 							arrayMeteoritosEliminados.add(o);
 						}
-						
-						//nave.choqueConMeterorito(arrayMeteoritos);
-						repaint();
 						try { Thread.sleep(20); } catch (InterruptedException e) {
 							System.err.println(e);
 						}
 					}
 				}
-				
+				choqueConMeterorito();
+				if(nave.getVida()<=0) {
+					gameOver();
+				}
+				repaint();
 				
 			}}.start();
+			
 
 			this.addKeyListener(new KeyListener() {
 
@@ -241,6 +242,21 @@ public class VentanaJuego extends JFrame {
 		for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
 			meteoritoEnemigo.paint(g2d);
 		}
+		
+	}
+	public void choqueConMeterorito() {
+		for (MeteoritoEnemigo me : arrayMeteoritosEnPantalla) {
+			if(!arrayMeteoritosEliminados.contains(me)) {
+				if (me.getBounds().intersects(nave.getBounds())) {
+					nave.setVida(nave.getVida()- (int)me.getDanyoAJugador());
+					System.out.println("Han chocado!!");
+					System.out.println(nave.getVida());
+				}
+			}
+			
+				
+		}
+		
 		
 	}
 

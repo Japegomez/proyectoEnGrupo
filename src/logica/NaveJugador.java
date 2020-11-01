@@ -85,12 +85,7 @@ public class NaveJugador extends ObjetoJuego {
 	public Rectangle getBounds() {
 		return new Rectangle((int) posX,(int) posY, lNave.getHeight(), lNave.getWidth());
 	}
-//	public boolean choqueConMeterorito(ArrayList<MeteoritoEnemigo> arrayMeteoritos) {
-//		for (MeteoritoEnemigo me : arrayMeteoritos) {
-//			return me.getBounds().intersects(getBounds());	
-//		}
-//		
-//	}
+
 
 	
 	
