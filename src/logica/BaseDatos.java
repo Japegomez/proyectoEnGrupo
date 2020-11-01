@@ -60,23 +60,16 @@ public class BaseDatos {
 	 * @return devuelve true si no existe, false si ya existe.
 	 */
 	public static boolean compruebaUsuario(String nombreUsuario) {
-		boolean exists = false;
 		try  {
 			s = conexion.createStatement();
 			String com = "SELECT * FROM usuario where nombre = '" + nombreUsuario + "'";
 			rs = s.executeQuery( com );
 			
-			while(rs.next()) {
-				String user = rs.getString("nombre");
-				if (user != null) {
-					exists = true;
-					return exists;
-				}
-			}
+			if(rs.next()) return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return exists;
+		return true;
 	}
 	
 	

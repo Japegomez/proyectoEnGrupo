@@ -4,15 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.*;
 
@@ -108,7 +99,7 @@ public class VentanaLogin extends JFrame{
 				nombreAsegurado =  tfNombreUsuario.getText().replaceAll( "'", "''" );
 				contraAsegurada = tfContrasenya.getText().replaceAll( "'", "''");
 				if(!nombreAsegurado.isEmpty() && !contraAsegurada.isEmpty()) {
-					if(!BaseDatos.compruebaUsuario(nombreAsegurado)) {
+					if(BaseDatos.compruebaUsuario(nombreAsegurado)) {
 						BaseDatos.registrarUsuario(nombreAsegurado, contraAsegurada);
 						VentanaLogin.this.dispose();
 						Usuario usu = new Usuario(nombreAsegurado, contraAsegurada);
