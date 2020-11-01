@@ -1,5 +1,9 @@
 package logica;
 
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+
 import gui.JLabelNave;
 
 public class NaveJugador extends ObjetoJuego {
@@ -73,6 +77,21 @@ public class NaveJugador extends ObjetoJuego {
 		this.posY = posY;
 		lNave.setLocation((int)this.getPosX(),(int) posY);
 	}
+	
+	public void paint(Graphics2D g) {
+		g.fillOval((int) posX,(int) posY, lNave.getHeight(), lNave.getWidth());
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle((int) posX,(int) posY, lNave.getHeight(), lNave.getWidth());
+	}
+//	public boolean choqueConMeterorito(ArrayList<MeteoritoEnemigo> arrayMeteoritos) {
+//		for (MeteoritoEnemigo me : arrayMeteoritos) {
+//			return me.getBounds().intersects(getBounds());	
+//		}
+//		
+//	}
+
 	
 	
 }

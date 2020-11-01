@@ -1,6 +1,10 @@
 package logica;
 
+import java.awt.Graphics2D;
+
 import javax.swing.JFrame;
+
+import com.sun.javafx.geom.Rectangle;
 
 import gui.JLabelMeteorito;
 
@@ -20,7 +24,7 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 	
 	
 	public MeteoritoEnemigo() {
-		super(150.0,150.0,150,0,20,1);
+		super(150.0,150.0,150,0,200,1);
 		lMeteorito = new JLabelMeteorito();
 		setPosX(this.getPosX());
 		setPosY(this.getPosY());
@@ -82,6 +86,14 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 	@Override 
 	public void mover(double tiempo) {
 		this.setPosY(posY + (velocidadY *tiempo));
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle((int)posX,(int)posY,(int)lMeteorito.getHeight(),(int)lMeteorito.getWidth());
+		
+	}
+	public void paint(Graphics2D g) {
+		g.fillRect((int)posX,(int)posY,(int)lMeteorito.getHeight(),(int)lMeteorito.getWidth());
 	}
 	
 }

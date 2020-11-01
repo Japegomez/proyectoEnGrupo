@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import javax.swing.border.LineBorder;
 
 import logica.MeteoritoEnemigo;
 import logica.NaveJugador;
+import logica.ObjetoJuego;
 import logica.Partida;
 
 public class VentanaJuego extends JFrame {
@@ -41,6 +44,7 @@ public class VentanaJuego extends JFrame {
 		creaMeteorito();
 		creaMeteorito();
 		creaMeteorito();
+	
 		
 		new Thread(){
 			@Override
@@ -48,18 +52,26 @@ public class VentanaJuego extends JFrame {
 				boolean funciona = true;
 				while(funciona) {
 					for (MeteoritoEnemigo o:arrayMeteoritosEnPantalla) {
+						
 						if (!arrayMeteoritosEliminados.contains(o)) {
-							o.mover(0.01);
+							o.mover(0.1);
+							
+							
 						}
 						if(o.getPosY()>pPrincipal.getHeight()) {
 							arrayMeteoritosEliminados.add(o);
 						}
-
+						
+						//nave.choqueConMeterorito(arrayMeteoritos);
+						repaint();
 						try { Thread.sleep(20); } catch (InterruptedException e) {
 							System.err.println(e);
 						}
 					}
-				}}}.start();
+				}
+				
+				
+			}}.start();
 
 			this.addKeyListener(new KeyListener() {
 
@@ -199,6 +211,7 @@ public class VentanaJuego extends JFrame {
 	}
 	
 	public void gameOver() {
+		JOptionPane.showMessageDialog(this, "Game Over","Game Over",JOptionPane.YES_NO_OPTION);
 		juegoAcabado = true;
 	}
 	public double checkeaXMeteorito(double x, int AnchoMeteorito) {
@@ -218,5 +231,18 @@ public class VentanaJuego extends JFrame {
 		}
 		return x;
 	}
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+		nave.paint(g2d);
+		for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
+			meteoritoEnemigo.paint(g2d);
+		}
+		
+	}
+
 	
 }
