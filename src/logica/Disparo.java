@@ -7,19 +7,21 @@ import gui.JLabelMeteorito;
 
 public class Disparo extends ObjetoJuego{
 	
-	private int danyo;
-	private int velocidad;
-	private JLabelDisparo lDisparo;
+	private int danyo; //Danyo del disparo de la nave
+	private int velocidad; // Velocidad del disparo
+	private JLabelDisparo lDisparo; // JLabel del disparo
 	
 
 
 	public Disparo(double posX, double posY, int vida, double velocidadX, double velocidadY, double aceleracion) {
 		super(posX, posY, vida, velocidadX, velocidadY, aceleracion);
 		this.danyo = 5;
-		this.velocidad = 5;
+		lDisparo = new JLabelDisparo();
+		setPosX(this.getPosX());
+		setPosY(this.getPosY());
 	}
 
-	/**Devuelve el danyo que hace un disparo cuando da con un meteorito.
+	/**Devuelve el danyo que hace un disparo cuando da con un meteorito (int)
 	 * @return Danyo del disparo
 	 */
 	public int getDanyo() {
@@ -31,20 +33,6 @@ public class Disparo extends ObjetoJuego{
 	 */
 	public void setDanyo(int danyo) {
 		this.danyo = danyo;
-	}
-
-	/**Devuelve la velocidad a la que va el disparo.
-	 * @return La velocidad del disparo.
-	 */
-	public int getVelocidad() {
-		return velocidad;
-	}
-
-	/**Modifica la velocidad del disparo.
-	 * @param velocidad Nuevo entero de la velocidad del disparo.
-	 */
-	public void setVelocidad(int velocidad) {
-		this.velocidad = velocidad;
 	}
 	/**
 	 *Modifica la posicion en el eje x del disparo y del jlabeldisparo
@@ -76,7 +64,7 @@ public class Disparo extends ObjetoJuego{
 	 */
 	@Override 
 	public void mover(double tiempo) {
-		this.setPosY((posY + (velocidadY *tiempo))*(-1));
+		this.setPosY((posY - (velocidadY *tiempo)));
 	}
 	/**Crea un rectangulo alrededor del meteorito
 	 * @return Un rectangulo alrededor del meteorito
