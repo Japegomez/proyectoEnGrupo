@@ -31,7 +31,8 @@ public class VentanaLogin extends JFrame{
 	private JTextField tfContrasenya;
 	private JButton bLogin;
 	private JButton bRegistro;
-	private ArrayList< Usuario> arrayUsuarios= new ArrayList<Usuario>();
+	private String nombreAsegurado;
+	private String contraAsegurada;
 	
 	public VentanaLogin(String titulo) {		
 		super(titulo);
@@ -65,24 +66,29 @@ public class VentanaLogin extends JFrame{
 		
 		this.pack();
 		
-		Usuario usu1 = new Usuario();
-		arrayUsuarios.add(usu1);
-		Usuario usu2 = new Usuario();
-		usu2.setNombreUsuario("Xabi");
-		
+
 		
 		bLogin.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!tfNombreUsuario.getText().isEmpty() && !tfContrasenya.getText().isEmpty()) {
-					if(BaseDatos.compruebaUsuario(tfNombreUsuario.getText()) == true) {
-						JOptionPane.showMessageDialog(VentanaLogin.this, "El usuario no existe en la base de datos, primero debe registrarse.");
+				nombreAsegurado =  tfNombreUsuario.getText().replaceAll( "'", "''" );
+				contraAsegurada = tfContrasenya.getText().replaceAll( "'", "''");
+				if(!nombreAsegurado.isEmpty() && !contraAsegurada.isEmpty()) {
+					if(BaseDatos.compruebaUsuario(nombreAsegurado)) {
+						JOptionPane.showMessageDialog(VentanaLogin.this, "El usuario " + tfNombreUsuario.getText() + " no existe en la base de datos, primero debe registrarse.");
+					}
+					else {
+						if(BaseDatos.compruebaContrasenya(nombreAsegurado, contraAsegurada)) VentanaLogin.this.dispose();
+						else {
+							JOptionPane.showMessageDialog(VentanaLogin.this, "contraseña incorrecta");
+						}
+						
 					}
 				
 				}
 				else {
-					JOptionPane.showMessageDialog(VentanaLogin.this, "Rellene ambos cambos", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(VentanaLogin.this, "Rellene ambos campos", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -91,10 +97,20 @@ public class VentanaLogin extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BaseDatos.registrarUsuario(tfNombreUsuario.getText(), tfContrasenya.getText());
-				VentanaMenu vMenu = new VentanaMenu("menu");
-				vMenu.setVisible(true);
-				VentanaLogin.this.setVisible(false);
+				nombreAsegurado =  tfNombreUsuario.getText().replaceAll( "'", "''" );
+				contraAsegurada = tfContrasenya.getText().replaceAll( "'", "''");
+				if(!nombreAsegurado.isEmpty() && !contraAsegurada.isEmpty()) {
+					if(BaseDatos.compruebaUsuario(nombreAsegurado)) {
+						BaseDatos.registrarUsuario(nombreAsegurado, contraAsegurada);
+						VentanaLogin.this.dispose();
+					}
+					else {
+						JOptionPane.showMessageDialog(VentanaLogin.this, "el usuario " + tfNombreUsuario.getText() + " ya esta registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(VentanaLogin.this, "Rellene ambos campos", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
@@ -109,7 +125,12 @@ public class VentanaLogin extends JFrame{
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
+				
 				BaseDatos.cerrarConexion();
+				Usuario usu = new Usuario(nombreAsegurado, contraAsegurada);
+				VentanaMenu vMenu = new VentanaMenu("menu", usu);
+				System.out.println("nombre" + usu.getNombreUsuario());
+				vMenu.setVisible(true);
 				
 			}
 

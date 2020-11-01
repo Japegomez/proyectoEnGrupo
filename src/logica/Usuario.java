@@ -8,15 +8,15 @@ public class Usuario {
 	public String contrasenya;//contraseña del usuario
 	
 	public double nivel;//nivel del jugador que ira aumentando en caso de jugar
-	public TreeMap<Integer,String > partidas;// treemap de las partidas que el usuario ira jugando esta ordenado por la puntuacion que obtenga en esa partida
-	
-	/**Metodo constructor para crear un usuario por defecto
+	public ArrayList<Partida> part;
+	/**Metodo constructor para crear un usuario
+	 * 
 	 */
-	public Usuario() {
-		this.nombreUsuario = "";
-		this.contrasenya = "";
+	public Usuario(String usuario, String contrasenya) {
+		this.nombreUsuario = usuario;
+		this.contrasenya = contrasenya;
 		this.nivel= 0;
-		this.partidas = new TreeMap <Integer,String>();
+		this.part = new ArrayList<Partida>();
 	}
 
 	/**Metodo para obtener el nombre del usuario
@@ -60,22 +60,4 @@ public class Usuario {
 	public void setNivel(double nivel) {
 		this.nivel = nivel;
 	}
-
-	/**Metodo para obtener el treemap de las partidas del usuario
-	 * @return
-	 */
-	public TreeMap<Integer, String> getPartidas() {
-		return partidas;
-	}
-
-	/**Metodo para cambiar el treemap que almacena las partidas que ha jugado un usuario
-	 * @param partidas
-	 */
-	public void setPartidas(TreeMap<Integer, String> partidas) {
-		this.partidas = partidas;
-	}
-	
-	
-	
-	
 }

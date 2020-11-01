@@ -11,6 +11,7 @@ import java.awt.event.WindowListener;
 import javax.swing.*;
 
 import logica.BaseDatos;
+import logica.Usuario;
 
 public class VentanaMenu extends JFrame {
 	JButton bJugar;
@@ -22,7 +23,7 @@ public class VentanaMenu extends JFrame {
 	VentanaClasificaciones vClasi;
 	VentanaMejorasNave vMej;
 	
-	public VentanaMenu(String titulo) {
+	public VentanaMenu(String titulo, Usuario usu) {
 		super(titulo);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -30,7 +31,7 @@ public class VentanaMenu extends JFrame {
 		setSize(200, 200);
 		
 		
-		tUsuario = new JTextArea("Hola");
+		tUsuario = new JTextArea("Has iniciado sesion como: " + usu.getNombreUsuario());
 		tUsuario.setEditable(false);
 		bJugar = new JButton("Jugar");
 		bMejorarNave = new JButton("Mejorar Nave");
@@ -40,6 +41,8 @@ public class VentanaMenu extends JFrame {
 		this.add(bJugar);
 		this.add(bMejorarNave);
 		this.add(bClasificacion);
+		
+		this.pack();
 		
 		bJugar.addActionListener(new ActionListener() {
 			
