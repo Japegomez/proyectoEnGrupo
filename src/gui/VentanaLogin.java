@@ -75,7 +75,15 @@ public class VentanaLogin extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(!tfNombreUsuario.getText().isEmpty() && !tfContrasenya.getText().isEmpty()) {
+					if(BaseDatos.compruebaUsuario(tfNombreUsuario.getText()) == true) {
+						JOptionPane.showMessageDialog(VentanaLogin.this, "El usuario no existe en la base de datos, primero debe registrarse.");
+					}
 				
+				}
+				else {
+					JOptionPane.showMessageDialog(VentanaLogin.this, "Rellene ambos cambos", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
@@ -84,6 +92,9 @@ public class VentanaLogin extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				BaseDatos.registrarUsuario(tfNombreUsuario.getText(), tfContrasenya.getText());
+				VentanaMenu vMenu = new VentanaMenu("menu");
+				vMenu.setVisible(true);
+				VentanaLogin.this.setVisible(false);
 			}
 		});
 		
@@ -91,20 +102,19 @@ public class VentanaLogin extends JFrame{
 			
 			@Override
 			public void windowOpened(WindowEvent e) {
-				BaseDatos.abrirConexion("baseDatos.bd");	
+				BaseDatos.abrirConexion("baseDatos.bd");
+				
 			}
 		
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
 				BaseDatos.cerrarConexion();
-				VentanaMenu vMenu = new VentanaMenu("menu");
-				vMenu.setVisible(true);
-				VentanaLogin.this.setVisible(false);
 				
 			}
 
 		});
+		
 		
 		
 	}

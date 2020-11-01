@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class BaseDatos {
@@ -38,12 +39,27 @@ public class BaseDatos {
 			e1.printStackTrace();
 		}
 		String com = "";
-		com = "insert into usuario ( nombre, contrasenya, nivel ) values ('" + usuario +" ', '" + contrasenya + "', 0 )";
+		com = "insert into usuario ( nombre, contrasenya, nivel ) values (" + usuario +"," + contrasenya + ",0)";
 		try {
 			s.executeUpdate( com );
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
+	}
+	/**Comprueba si el usuario existe en la base de datos
+	 * @param nombreUsuario nombre del Usuario que se desea comprobar
+	 * @return devuelve true si no existe, false si si existe.
+	 */
+	public static boolean compruebaUsuario(String nombreUsuario) {
+		try  {
+			s = conexion.createStatement();
+			String com = "select * from usuario where nombre=" + nombreUsuario + ";";
+			rs = s.executeQuery( com ); //si la query se ejecuta es porque existe ya un usuario registrado de nombre NombreUsuario
+		} catch (Exception e) {
+			e.printStackTrace();
+			return true;
+		}
+		return false;
 	}
 }
