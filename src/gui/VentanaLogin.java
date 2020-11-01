@@ -129,7 +129,6 @@ public class VentanaLogin extends JFrame{
 				BaseDatos.cerrarConexion();
 				Usuario usu = new Usuario(nombreAsegurado, contraAsegurada);
 				VentanaMenu vMenu = new VentanaMenu("menu", usu);
-				System.out.println("nombre" + usu.getNombreUsuario());
 				vMenu.setVisible(true);
 				
 			}
