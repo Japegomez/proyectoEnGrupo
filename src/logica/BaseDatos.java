@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
@@ -64,7 +65,6 @@ public class BaseDatos {
 			s = conexion.createStatement();
 			String com = "SELECT * FROM usuario where nombre = '" + nombreUsuario + "'";
 			rs = s.executeQuery( com );
-			
 			if(rs.next()) return false;
 		} catch (Exception e) {
 			e.printStackTrace();
