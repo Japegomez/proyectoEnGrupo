@@ -14,6 +14,7 @@ import logica.NaveJugador;
 import logica.ObjetoJuego;
 import logica.Partida;
 import logica.Usuario;
+import logica.Cronometro;
 import logica.*;
 
 public class VentanaJuego extends JFrame {
@@ -28,6 +29,7 @@ public class VentanaJuego extends JFrame {
 	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>();
 	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEliminados = new ArrayList<>();
 	private ArrayList<Disparo> arrayDisparo = new ArrayList<>();
+	Cronometro cro;
 	
 
 	/**Constructor de la ventanaJuego
@@ -44,6 +46,7 @@ public class VentanaJuego extends JFrame {
 		setSize(500, 500);
 		setResizable(false);
 		
+		
 		pPrincipal = new PanelFondo();
 		pPrincipal.setLayout( null );
 		add(pPrincipal);
@@ -56,6 +59,13 @@ public class VentanaJuego extends JFrame {
 		creaMeteorito();
 		creaMeteorito();
 		creaMeteorito();
+		
+		cro = new Cronometro();
+		//this.add(cro);
+		
+		
+		
+		
 	
 		
 		new Thread(){
