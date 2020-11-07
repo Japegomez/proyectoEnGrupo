@@ -60,13 +60,6 @@ public class VentanaJuego extends JFrame {
 		creaMeteorito();
 		creaMeteorito();
 		
-		cro = new Cronometro();
-		//this.add(cro);
-		
-		
-		
-		
-	
 		
 		new Thread(){
 			@Override
