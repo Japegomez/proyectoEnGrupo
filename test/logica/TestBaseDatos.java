@@ -1,4 +1,5 @@
-package tests;
+package logica;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,20 +13,19 @@ class TestBaseDatos {
 	
 	@Before
 	void abrirConexion() {
-	//
+		BaseDatos.abrirConexion("baseDatos.bd");
+		BaseDatos.registrarUsuario("jon", "hola");
 	}
 	
 	@Test
 	void compruebaUsuarioTest() {
-		BaseDatos.abrirConexion("baseDatos.bd");
-		boolean result = BaseDatos.compruebaUsuario("joni");
+		boolean result = BaseDatos.compruebaUsuario("jon");
 		assertEquals(true, result);
 	}
 
 	@Test
 	void compruebaContrasenyaTest() {
-		BaseDatos.abrirConexion("baseDatos.bd");
-		boolean result = BaseDatos.compruebaContrasenya("joni", "1234");
+		boolean result = BaseDatos.compruebaContrasenya("jon", "hola");
 		assertEquals(true,result);
 	}
 	
