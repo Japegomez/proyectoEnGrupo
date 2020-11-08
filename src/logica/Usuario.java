@@ -3,7 +3,7 @@ package logica;
 import java.util.*;
 
 public class Usuario {
-
+	public NaveJugador nave;
 	public String nombreUsuario;//nombre que es usuario decida ponerse
 	public String contrasenya;//contraseña del usuario
 	
@@ -15,6 +15,7 @@ public class Usuario {
 	 * @param contrasenya String de la contrasenya del usuario
 	 */
 	public Usuario(String usuario, String contrasenya) {
+		this.nave = new NaveJugador();
 		this.nombreUsuario = usuario;
 		this.contrasenya = contrasenya;
 		this.nivel= 0;
@@ -22,7 +23,26 @@ public class Usuario {
 	}
 
 	/**
-	 * @return nombtreUsuario String Nombre del usuario  
+	 * @return NaveJugador
+	 */
+	public NaveJugador getNave() {
+		return nave;
+	}
+
+	public void setNave(NaveJugador nave) {
+		this.nave = nave;
+	}
+
+	public ArrayList<Partida> getPart() {
+		return part;
+	}
+
+	public void setPart(ArrayList<Partida> part) {
+		this.part = part;
+	}
+
+	/**
+	 * @return nombreUsuario String Nombre del usuario  
 	 */
 	public String getNombreUsuario() {
 		return nombreUsuario;

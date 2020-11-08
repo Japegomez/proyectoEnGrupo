@@ -24,13 +24,11 @@ public class VentanaJuego extends JFrame {
 	private NaveJugador nave; //nave del usuario
 	private Partida part; //partida
 	
-	private boolean juegoAcabado = false;
-	
-	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>();
+	public ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>();
 	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEliminados = new ArrayList<>();
 	private ArrayList<Disparo> arrayDisparo = new ArrayList<>();
-	Cronometro cro;
-	
+	private Cronometro cro;
+
 
 	/**Constructor de la ventanaJuego
 	 * @param usuario usuario de la partida
@@ -40,6 +38,7 @@ public class VentanaJuego extends JFrame {
 
 		super("jugando...");
 		us = usuario;
+		nave = us.getNave();
 		part = new Partida();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocation(400, 150);
@@ -88,7 +87,7 @@ public class VentanaJuego extends JFrame {
 						e.printStackTrace();
 					}
 					
-					choqueConMeterorito();
+					choqueConMeteorito();
 					DisparoChoqueMeteorito();
 					if (estaMuerto()) {
 						funciona = false;
@@ -214,11 +213,35 @@ public class VentanaJuego extends JFrame {
 		 });
 	}
 	
+	public Usuario getUs() {
+		return us;
+	}
+
+	public void setUs(Usuario us) {
+		this.us = us;
+	}
+
+	public NaveJugador getNave() {
+		return nave;
+	}
+
+	public void setNave(NaveJugador nave) {
+		this.nave = nave;
+	}
+
+	public Cronometro getCro() {
+		return cro;
+	}
+
+	public void setCro(Cronometro cro) {
+		this.cro = cro;
+	}
+
 	/**Crea una nave  y la posiciona en relacion al panel de juego
 	 * 
 	 */
 	public void creaNave() {
-		nave = new NaveJugador();
+		nave = us.getNave(); 
 		nave.setPosX(this.getWidth()/2-nave.getlNave().getAnchoNave()/2);
 		nave.setPosY(pPrincipal.getHeight()-nave.getlNave().getHeight());
 		nave.setVelocidadX(2);
@@ -232,13 +255,15 @@ public class VentanaJuego extends JFrame {
 		arrayDisparo.add(dis);
 	}
 
-	/**Crea un meteorito y lo posiciona en relacion al panel de juego
+	/**Crea un meteorito y lo posiciona en relacion al panel de juego(fuera de la pantalla)
 	 * 
 	 */
 	public void creaMeteorito() {
 			MeteoritoEnemigo me1 = new MeteoritoEnemigo();
 			double x = Math.random()*(((this.getWidth()-me1.getlMeteorito().getWidth())- 0) + 0);
-			x = checkeaXMeteorito(x, me1.getlMeteorito().getWidth());
+			while(!checkeaXMeteorito(x)) {
+				x = Math.random()*(((this.getWidth()-me1.getlMeteorito().getWidth())- 0) + 0);
+			}
 			me1.setPosX(x);
 			me1.setPosY(-(me1.getlMeteorito().getHeight()));
 			me1.setDanyoAJugador(10);
@@ -257,12 +282,9 @@ public class VentanaJuego extends JFrame {
 	
 	/**Comprueba que el meteorito no se superpone sobre otro meteorito en pantalla
 	 * @param x posicionamiento en el eje x del meteorito (en pixels)
-	 * @param AnchoMeteorito ancho del JLabel de meteorito (en pixels)
-	 * @return
+	 * @return true si x correcta y no se sobrepone, false si se sobrepone
 	 */
-	public double checkeaXMeteorito(double x, int AnchoMeteorito) {
-		boolean sigue = true;
-		while(sigue) {
+	public boolean checkeaXMeteorito(double x) {
 			int i = 0;
 			for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
 				if(!arrayMeteoritosEliminados.contains(meteoritoEnemigo)) {
@@ -271,19 +293,17 @@ public class VentanaJuego extends JFrame {
 					}
 				}
 			}
-			if (i == arrayMeteoritosEnPantalla.size()) sigue = false;
+			if (i == arrayMeteoritosEnPantalla.size()) return true;
 	
 			else {
-				 x = Math.random()*(((this.getWidth()-AnchoMeteorito)- 0) + 0);
+				return false;
 			}
-		}
-		return x;
 	}
 
 	/**Comprueba si la nave y un meteorito han chocado.
 	 * 
 	 */
-	public void choqueConMeterorito() {
+	public void choqueConMeteorito() {
 		if (nave == null) return;
 		ArrayList<MeteoritoEnemigo> aEliminar = new ArrayList<MeteoritoEnemigo>();
 		for (MeteoritoEnemigo me : arrayMeteoritosEnPantalla) {
@@ -305,6 +325,9 @@ public class VentanaJuego extends JFrame {
 	
 
 	
+	/**Comprueba si un disparo y la nave han chocado
+	 * 
+	 */
 	public void DisparoChoqueMeteorito() {
 		ArrayList<MeteoritoEnemigo> aEliminarMeteortitos = new ArrayList<MeteoritoEnemigo>();
 		ArrayList<Disparo> aEliminarDisparo = new ArrayList<Disparo>();

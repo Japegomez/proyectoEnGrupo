@@ -4,15 +4,15 @@ package logica;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import logica.BaseDatos;
 
 class TestBaseDatos {
 
-	
-	@Before
-	void abrirConexion() {
+	@BeforeEach
+	void setUp() throws Exception {
 		BaseDatos.abrirConexion("baseDatos.bd");
 		BaseDatos.registrarUsuario("jon", "hola");
 	}

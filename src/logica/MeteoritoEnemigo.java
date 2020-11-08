@@ -23,7 +23,7 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 	
 	
 	
-	/**Crea un meteorito y lo posiciona fuera de la pantalla
+	/**Crea un meteorito
 	 * 
 	 */
 	public MeteoritoEnemigo() {
