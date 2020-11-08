@@ -44,10 +44,9 @@ public class JLabelDisparo extends JLabel{
 		try { 
             final BufferedImage dimg = ImageIO
                     .read(new File("./resources/disparo.png"));
+           ((Graphics2D) g).rotate(Math.toRadians(180), dimg.getWidth() / 2, dimg.getHeight() / 2);
            img = dimg.getScaledInstance(ANCHO_NAVE, ALTO_NAVE, 1);
-//           Graphics2D gx = (Graphics2D) g;
-//           gx.rotate(7, getX() + getWidth()/2, getY() + getHeight()/2);
-          
+         //super.paintComponent(g);
         } catch (final IOException e) {
             e.printStackTrace();
         }
