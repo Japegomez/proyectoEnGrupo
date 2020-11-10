@@ -7,10 +7,12 @@ public class Cronometro extends JLabel{
 	private int minutos;
 	private int segundos;
 	private int milesimas;
+	private boolean cronometroActivo;
 	
 	public Cronometro() {
 		JLabel tiempo = new JLabel( "00:00:000" );
 		this.add(tiempo);
+		
 		
 		new Thread() {
 			public void run() {
@@ -39,6 +41,15 @@ public class Cronometro extends JLabel{
 		};
 		
 		
+	}
+	public void pausarCrono() {
+		setCronometroActivo(false);
+	}
+	public boolean isCronometroActivo() {
+		return cronometroActivo;
+	}
+	public void setCronometroActivo(boolean cronometroActivo) {
+		this.cronometroActivo = cronometroActivo;
 	}
 
 }
