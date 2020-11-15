@@ -9,6 +9,7 @@ public class Usuario {
 	
 	public double nivel;//nivel del jugador
 	public ArrayList<Partida> part;//Lista de partidas del jugador
+	public int creditos; //creditos del jugador 
 
 	/**Crea un usuario
 	 * @param usuario String del nombre del usuario
@@ -19,7 +20,16 @@ public class Usuario {
 		this.nombreUsuario = usuario;
 		this.contrasenya = contrasenya;
 		this.nivel= 0;
+		this.creditos=0;
 		this.part = new ArrayList<Partida>();
+	}
+
+	public int getCreditos() {
+		return creditos;
+	}
+
+	public void setCreditos(int creditos) {
+		this.creditos = creditos;
 	}
 
 	/**
@@ -82,4 +92,6 @@ public class Usuario {
 	public void setNivel(double nivel) {
 		this.nivel = nivel;
 	}
+
+
 }

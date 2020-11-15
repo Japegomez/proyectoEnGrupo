@@ -276,8 +276,9 @@ public class VentanaJuego extends JFrame {
 	 * 
 	 */
 	public void gameOver() {
+		this.puntosPartida();
 		this.dispose();
-		JOptionPane.showMessageDialog(this, "Game Over","Game Over",JOptionPane.YES_NO_OPTION);
+		JOptionPane.showMessageDialog(this, "Game Over" + "\n" + "Puntuacion: "+part.getPuntuacion() ,"Game Over" ,JOptionPane.YES_NO_OPTION);
 	}
 	
 	/**Comprueba que el meteorito no se superpone sobre otro meteorito en pantalla
@@ -342,6 +343,7 @@ public class VentanaJuego extends JFrame {
 							aEliminarMeteortitos.add(me);
 							aEliminarDisparo.add(dis);
 							System.out.println("Han chocado !!");
+							
 						}
 					}
 				}
@@ -387,7 +389,28 @@ public class VentanaJuego extends JFrame {
 		//for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
 		//	meteoritoEnemigo.paint(g2d);
 		}
-		
+	public void puntosPartida() {
+		double puntuacion = 0;
+		for (MeteoritoEnemigo meteorito: arrayMeteoritosEliminados) {
+			puntuacion += meteorito.getVALOR_PUNTUACION();
+		}
+		part.setPuntuacion(puntuacion);
+		//faltaria anyadir la puntuacion por el tiempo
 	}
+	
+	public void creditosPartida() {
+		int creditos = 0;
+		for (MeteoritoEnemigo meteorito: arrayMeteoritosEliminados) {
+			creditos+=10;
+		}
+		part.setCreditos(creditos);
+		us.setCreditos(us.getCreditos()+part.getCreditos());
+		
+	//faltaria anyadir los creditos obtenidos por el tiempo
+	}
+	
+	
+}
+	
 	
 

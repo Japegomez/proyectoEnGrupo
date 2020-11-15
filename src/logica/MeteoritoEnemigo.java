@@ -20,9 +20,13 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 
 	protected double danyoAJugador; //Daño que el meteorito hara al jugador en caso de impactar contra el
 	private JLabelMeteorito lMeteorito; //JLabel del meteorito
+	final public int VALOR_PUNTUACION = 100;
+	final public int VALOR_CREDITOS = 10;
 	
 	
 	
+
+
 	/**Crea un meteorito
 	 * 
 	 */
@@ -99,6 +103,13 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 		
 	}
 	
+	public int getVALOR_PUNTUACION() {
+		return VALOR_PUNTUACION;
+	}
+	
+	public int getVALOR_CREDITOS() {
+		return VALOR_CREDITOS;
+	}
 
 	
 }

@@ -16,8 +16,7 @@ public class JLabelMeteorito extends JLabel {
 	
 	final private int ANCHO_METEORITO = 50; //Ancho del meteorito (en pixels)
 	final private int ALTO_METEORITO = 50;//Alto del meteorito (en pixels)
-	
-	
+
 	/**
 	 * @return int Ancho del jlabel del meteorito(en pixels)
 	 */
