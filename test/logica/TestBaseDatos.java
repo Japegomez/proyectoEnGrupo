@@ -14,7 +14,7 @@ class TestBaseDatos {
 	@BeforeEach
 	void setUp() throws Exception {
 		BaseDatos.abrirConexion("baseDatos.bd");
-		BaseDatos.registrarUsuario("jon", "hola");
+		BaseDatos.registrarUsuario(new Usuario("jon","hola"));
 	}
 	
 	@Test

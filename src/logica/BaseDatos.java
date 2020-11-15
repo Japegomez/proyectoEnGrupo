@@ -48,7 +48,6 @@ public class BaseDatos {
 	 * @param contrasenya contrasenya del usuario
 	 */
 	public static void registrarUsuario(Usuario usu) {
-//		String com = "insert into usuario ( nombre, contrasenya, nivel ) values ('" + usu.getNombreUsuario() +"','" + usu.getContrasenya() + "','" + usu.getNivel() + "')";
 		try {
 			s = conexion.prepareStatement("insert into usuario ( nombre, contrasenya, nivel ) values (?, ?, ?)");
 			s.setString(1, usu.getNombreUsuario());

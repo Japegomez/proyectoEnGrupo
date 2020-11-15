@@ -387,7 +387,24 @@ public class VentanaJuego extends JFrame {
 		//for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
 		//	meteoritoEnemigo.paint(g2d);
 		}
-		
+	public void puntosPartida() {
+		double puntuacion = 0;
+		for (MeteoritoEnemigo meteorito: arrayMeteoritosEliminados) {
+			puntuacion += meteorito.getVALOR_PUNTUACION();
+		}
+		part.setPuntuacion(puntuacion);
+		//faltaria anyadir la puntuacion por el tiempo
+	}
+
+	public void creditosPartida() {
+		int creditos = 0;
+		for (MeteoritoEnemigo meteorito: arrayMeteoritosEliminados) {
+			creditos+=10;
+		}
+		us.setCreditos(us.getCreditos()+ creditos);
+
+	//faltaria anyadir los creditos obtenidos por el tiempo
+	}
 	}
 	
 
