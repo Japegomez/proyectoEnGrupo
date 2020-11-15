@@ -24,10 +24,16 @@ public class Usuario {
 		this.part = new ArrayList<Partida>();
 	}
 
+	/**Metodo para obtener los creditos del usuario
+	 * @return creditos disponibles para el usuario
+	 */
 	public int getCreditos() {
 		return creditos;
 	}
 
+	/**Metodo para alterar los creditos que tiene el usuario
+	 * @param creditos valor de creditos que se obtiene
+	 */
 	public void setCreditos(int creditos) {
 		this.creditos = creditos;
 	}

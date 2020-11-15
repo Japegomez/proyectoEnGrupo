@@ -3,7 +3,6 @@ import gui.VentanaJuego;
 
 public class Partida {
 	private double puntuacion; //puntuacion que se obtiene al finalizar la partida
-	private int creditos;
 
 	/**Crea una partida
 	 * 
@@ -27,13 +26,4 @@ public class Partida {
 		this.puntuacion = puntuacion;
 	}
 	
-	public int getCreditos() {
-		return creditos;
-	}
-
-	public void setCreditos(int creditos) {
-		this.creditos = creditos;
-	}
-
-
 }

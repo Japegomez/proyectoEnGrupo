@@ -403,8 +403,7 @@ public class VentanaJuego extends JFrame {
 		for (MeteoritoEnemigo meteorito: arrayMeteoritosEliminados) {
 			creditos+=10;
 		}
-		part.setCreditos(creditos);
-		us.setCreditos(us.getCreditos()+part.getCreditos());
+		us.setCreditos(us.getCreditos()+creditos);
 		
 	//faltaria anyadir los creditos obtenidos por el tiempo
 	}
