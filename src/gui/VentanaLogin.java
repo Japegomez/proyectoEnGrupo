@@ -57,7 +57,6 @@ public class VentanaLogin extends JFrame{
 		this.add(pNombre);
 		this.add(pContrasenia);
 		this.add(pBotonera);
-		
 		this.pack();
 		
 
