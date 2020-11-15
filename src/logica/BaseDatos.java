@@ -14,8 +14,6 @@ import javax.swing.JOptionPane;
 
 public class BaseDatos {
 	private static Connection conexion;
-	private static PreparedStatement s;
-	private static ResultSet rs;
 	
 	/**Abre la conexion con la base de datos
 	 * @param nombre nombre de la base de datos con la que se desea conectar
@@ -49,7 +47,7 @@ public class BaseDatos {
 	 */
 	public static void registrarUsuario(Usuario usu) {
 		try {
-			s = conexion.prepareStatement("insert into usuario ( nombre, contrasenya, nivel ) values (?, ?, ?)");
+			PreparedStatement s = conexion.prepareStatement("insert into usuario ( nombre, contrasenya, nivel ) values (?, ?, ?)");
 			s.setString(1, usu.getNombreUsuario());
 			s.setString(2, usu.getContrasenya());
 			s.setInt(3, usu.getNivel());
@@ -61,7 +59,7 @@ public class BaseDatos {
 	
 	public static void registrarNave(Usuario usu) {
 		try {
-			s = conexion.prepareStatement("insert into nave ( idusuario, velocidadAtaque, danyoAtaque, ataqueCargado, vida, velocidadX, velocidadY) values (?, ?, ?, ?, ?, ?, ?)");
+			PreparedStatement s = conexion.prepareStatement("insert into nave ( idusuario, velocidadAtaque, danyoAtaque, ataqueCargado, vida, velocidadX, velocidadY) values (?, ?, ?, ?, ?, ?, ?)");
 			s.setInt(1, obtenerIdUsuario(usu.getNombreUsuario()));
 			s.setDouble(2, usu.getNave().getVelocidadAtaque());
 			s.setDouble(3, usu.getNave().getDanyoAtaque());
@@ -80,9 +78,9 @@ public class BaseDatos {
 	 */
 	public static boolean compruebaUsuario(String nombreUsuario) {
 		try  {
-			s = conexion.prepareStatement("SELECT * FROM usuario where nombre = ?");
+			PreparedStatement s = conexion.prepareStatement("SELECT * FROM usuario where nombre = ?");
 			s.setString(1, nombreUsuario);
-			rs = s.executeQuery();
+			ResultSet rs = s.executeQuery();
 			if(rs.next()) return false;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,10 +96,10 @@ public class BaseDatos {
 	 */
 	public static boolean compruebaContrasenya(String nombreUsuario, String contrasenya) {
 		try  {
-			s = conexion.prepareStatement("select * from usuario where nombre = ? and contrasenya = ?");
+			PreparedStatement s = conexion.prepareStatement("select * from usuario where nombre = ? and contrasenya = ?");
 			s.setString(1, nombreUsuario);
 			s.setString(2, contrasenya);
-			rs = s.executeQuery();
+			ResultSet rs = s.executeQuery();
 
 			if(rs.next()) return true;
 		} catch (Exception e) {
@@ -118,9 +116,9 @@ public class BaseDatos {
 	public static int obtenerIdUsuario(String nombreUsuario) {
 		int id = -1;
 		try {
-			s = conexion.prepareStatement("select * from usuario where nombre = ?");
+			PreparedStatement s = conexion.prepareStatement("select * from usuario where nombre = ?");
 			s.setString(1, nombreUsuario);
-			rs = s.executeQuery();
+			ResultSet rs = s.executeQuery();
 			if(rs.next()) id = rs.getInt("idusuario");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -134,7 +132,7 @@ public class BaseDatos {
 	 */
 	public static void aniadirPartida(double puntuacion, String nombreUsuario) {
 		try {
-			s = conexion.prepareStatement("insert into partida ( idusuario, puntuacion, fecha ) values (?, ?, ?,)");
+			PreparedStatement s = conexion.prepareStatement("insert into partida ( idusuario, puntuacion, fecha ) values (?, ?, ?,)");
 			s.setInt(1, obtenerIdUsuario(nombreUsuario));
 			s.setDouble(2, puntuacion);
 			s.setFloat(3, System.currentTimeMillis());
@@ -145,9 +143,9 @@ public class BaseDatos {
 	}
 	public static NaveJugador obtenerNave(Usuario usu) {
 		try {
-			s = conexion.prepareStatement("select * from nave where idusuario = ?");
+			PreparedStatement s = conexion.prepareStatement("select * from nave where idusuario = ?");
 			s.setInt(1, obtenerIdUsuario(usu.getNombreUsuario()));
-			rs = s.executeQuery();
+			ResultSet rs = s.executeQuery();
 			return new NaveJugador(rs.getInt("vida"),rs.getDouble("velocidadX"),rs.getDouble("velocidadY"),rs.getDouble("velocidadAtaque"),rs.getDouble("danyoAtaque"),rs.getDouble("ataqueCargado"));
 		} catch (SQLException e) {
 			e.printStackTrace();
