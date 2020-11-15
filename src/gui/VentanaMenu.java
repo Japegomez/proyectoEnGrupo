@@ -81,15 +81,6 @@ public class VentanaMenu extends JFrame {
 			}
 		});
 		
-		addWindowListener(new WindowAdapter() {
-			
-
-			@Override
-			public void windowClosed(WindowEvent e) {
-				BaseDatos.cerrarConexion();
-			}
-		
-		});
 	}
 	
 }

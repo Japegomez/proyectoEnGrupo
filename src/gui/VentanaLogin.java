@@ -74,7 +74,9 @@ public class VentanaLogin extends JFrame{
 					}
 					else {
 						if(BaseDatos.compruebaContrasenya(nombreAsegurado, contraAsegurada)) {
-							Usuario usu = new Usuario(nombreAsegurado, contraAsegurada);
+							Usuario usu = new Usuario(nombreAsegurado, contraAsegurada);						
+							usu.setNave(BaseDatos.obtenerNave(usu));
+//							usu.setPart(BaseDatos.setPartidas(usu));
 							VentanaMenu vMenu = new VentanaMenu("menu", usu);
 							vMenu.setVisible(true);
 							VentanaLogin.this.dispose();
@@ -100,9 +102,10 @@ public class VentanaLogin extends JFrame{
 				contraAsegurada = tfContrasenya.getText().replaceAll( "'", "''");
 				if(!nombreAsegurado.isEmpty() && !contraAsegurada.isEmpty()) {
 					if(BaseDatos.compruebaUsuario(nombreAsegurado)) {
-						BaseDatos.registrarUsuario(nombreAsegurado, contraAsegurada);
 						VentanaLogin.this.dispose();
 						Usuario usu = new Usuario(nombreAsegurado, contraAsegurada);
+						BaseDatos.registrarUsuario(usu);
+						BaseDatos.registrarNave(usu);
 						VentanaMenu vMenu = new VentanaMenu("menu", usu);
 						vMenu.setVisible(true);
 					}

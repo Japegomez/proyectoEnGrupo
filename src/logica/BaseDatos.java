@@ -2,6 +2,7 @@ package logica;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,7 +14,7 @@ import javax.swing.JOptionPane;
 
 public class BaseDatos {
 	private static Connection conexion;
-	private static Statement s;
+	private static PreparedStatement s;
 	private static ResultSet rs;
 	
 	/**Abre la conexion con la base de datos
@@ -46,15 +47,33 @@ public class BaseDatos {
 	 * @param usuario nombre del usuario
 	 * @param contrasenya contrasenya del usuario
 	 */
-	public static void registrarUsuario(String usuario, String contrasenya) {
+	public static void registrarUsuario(Usuario usu) {
+//		String com = "insert into usuario ( nombre, contrasenya, nivel ) values ('" + usu.getNombreUsuario() +"','" + usu.getContrasenya() + "','" + usu.getNivel() + "')";
 		try {
-		s = conexion.createStatement();
-		String com = "insert into usuario ( nombre, contrasenya, nivel ) values ('" + usuario +"','" + contrasenya + "','0')";
-			s.executeUpdate( com );
+			s = conexion.prepareStatement("insert into usuario ( nombre, contrasenya, nivel ) values (?, ?, ?)");
+			s.setString(1, usu.getNombreUsuario());
+			s.setString(2, usu.getContrasenya());
+			s.setInt(3, usu.getNivel());
+			s.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	public static void registrarNave(Usuario usu) {
+		try {
+			s = conexion.prepareStatement("insert into nave ( idusuario, velocidadAtaque, danyoAtaque, ataqueCargado, vida, velocidadX, velocidadY) values (?, ?, ?, ?, ?, ?, ?)");
+			s.setInt(1, obtenerIdUsuario(usu.getNombreUsuario()));
+			s.setDouble(2, usu.getNave().getVelocidadAtaque());
+			s.setDouble(3, usu.getNave().getDanyoAtaque());
+			s.setDouble(4, usu.getNave().getAtaqueCargado());
+			s.setInt(5, usu.getNave().getVida());
+			s.setDouble(6, usu.getNave().getVelocidadX());
+			s.setDouble(7, usu.getNave().getVelocidadY());
+			s.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	/**Comprueba si el usuario existe en la base de datos
 	 * @param nombreUsuario nombre del usuario que se desea comprobar
@@ -62,9 +81,9 @@ public class BaseDatos {
 	 */
 	public static boolean compruebaUsuario(String nombreUsuario) {
 		try  {
-			s = conexion.createStatement();
-			String com = "SELECT * FROM usuario where nombre = '" + nombreUsuario + "'";
-			rs = s.executeQuery( com );
+			s = conexion.prepareStatement("SELECT * FROM usuario where nombre = ?");
+			s.setString(1, nombreUsuario);
+			rs = s.executeQuery();
 			if(rs.next()) return false;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,36 +98,31 @@ public class BaseDatos {
 	 * @return true si se corresponde, false si no.
 	 */
 	public static boolean compruebaContrasenya(String nombreUsuario, String contrasenya) {
-		boolean exists = false;
 		try  {
-			s = conexion.createStatement();
-			String com = "select * from usuario where nombre ='" + nombreUsuario + "' and contrasenya = '" +contrasenya+ "'";
-			rs = s.executeQuery( com );
+			s = conexion.prepareStatement("select * from usuario where nombre = ? and contrasenya = ?");
+			s.setString(1, nombreUsuario);
+			s.setString(2, contrasenya);
+			rs = s.executeQuery();
 
-			while(rs.next()) {
-				String user = rs.getString("nombre");
-				if (user != null) {
-					exists = true;
-					return exists;
-				}
-			}
+			if(rs.next()) return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return exists;
+		return false;
 		
 	}
 	
 	/**Devuelve la Id del usuario
 	 * @param nombreUsuario Nombre del usuario cuyo Id se desea obtener
-	 * @return
+	 * @return ID del usuario, -1 si no ha conseguido encontrar al usuario
 	 */
-	public static String obtenerIdUsuario(String nombreUsuario) {
-		String id= "";
-		String com = "select * from usuario where nombre ='" + nombreUsuario + "'";
+	public static int obtenerIdUsuario(String nombreUsuario) {
+		int id = -1;
 		try {
-			rs = s.executeQuery(com);
-			if(rs.next()) id = rs.getString("idusuario");
+			s = conexion.prepareStatement("select * from usuario where nombre = ?");
+			s.setString(1, nombreUsuario);
+			rs = s.executeQuery();
+			if(rs.next()) id = rs.getInt("idusuario");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -121,11 +135,28 @@ public class BaseDatos {
 	 */
 	public static void aniadirPartida(int puntuacion, String nombreUsuario) {
 		try {
-			s = conexion.createStatement();
-			String com = "insert into partida ( idusuario, puntuacion ) values ('" +obtenerIdUsuario(nombreUsuario)+"','" + puntuacion + "')";
-				s.executeUpdate( com );
-			} catch (SQLException e) {
+			s = conexion.prepareStatement("insert into partida ( idusuario, puntuacion, fecha ) values (?, ?, ?,)");
+			s.setInt(1, obtenerIdUsuario(nombreUsuario));
+			s.setInt(2, puntuacion);
+			s.setFloat(3, System.currentTimeMillis());
+				s.executeUpdate();
+		} catch (SQLException e) {
 				e.printStackTrace();
-			}
+		}
+	}
+	public static NaveJugador obtenerNave(Usuario usu) {
+		try {
+			s = conexion.prepareStatement("select * from nave where idusuario = ?");
+			s.setInt(1, obtenerIdUsuario(usu.getNombreUsuario()));
+			rs = s.executeQuery();
+			return new NaveJugador(rs.getInt("vida"),rs.getDouble("velocidadX"),rs.getDouble("velocidadY"),rs.getDouble("velocidadAtaque"),rs.getDouble("danyoAtaque"),rs.getDouble("ataqueCargado"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public static ArrayList<Partida> setPartidas(Usuario usu) {
+		
+		return null;
 	}
 }

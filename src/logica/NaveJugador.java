@@ -1,9 +1,6 @@
 package logica;
 
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.util.ArrayList;
-
 import gui.JLabelNave;
 
 /**
@@ -19,7 +16,6 @@ public class NaveJugador extends ObjetoJuego {
 	private double velocidadAtaque;//tiempo que tarda la nave en atacar (en milisegundos)
 	private double danyoAtaque;//danyo que hace cada disparo de la nave
 	private double ataqueCargado;//tiempo que tarda la nave en recuperar su ataque cargado
-	private int vidaNave; //vida de la nave
 	private JLabelNave lNave;//JLabel de la nave
 	
 	/**
@@ -65,20 +61,6 @@ public class NaveJugador extends ObjetoJuego {
 	}
 
 	/**
-	 * @return Vida de la nave
-	 */
-	public int getVidaNave() {
-		return vidaNave;
-	}
-
-	/**Modifica la vida de la nave
-	 * @param vidaNave
-	 */
-	public void setVidaNave(int vidaNave) {
-		this.vidaNave = vidaNave;
-	}
-
-	/**
 	 * @return JLabelNave
 	 */
 	public JLabelNave getlNave() {
@@ -109,7 +91,7 @@ public class NaveJugador extends ObjetoJuego {
 		lNave.setLocation((int)this.getPosX(),(int) posY);
 	}
 	
-	/**Crea una nave
+	/**Crea una nave con valores por defecto
 	 * 
 	 */
 	public NaveJugador() {
@@ -122,17 +104,20 @@ public class NaveJugador extends ObjetoJuego {
 		setPosY(this.getPosY());
 	}
 	
+	public NaveJugador(int vida, double velocidadX, double velocidadY, double velocidadAtaque,
+			double danyoAtaque, double ataqueCargado) {
+		super(0.0, 0.0, vida, velocidadX, velocidadY);
+		this.velocidadAtaque = velocidadAtaque;
+		this.danyoAtaque = danyoAtaque;
+		this.ataqueCargado = ataqueCargado;
+		lNave = new JLabelNave();
+	}
 
-	
 	/**Crea un rectangulo alrededor de la nave
 	 * @return Un rectangulo alredeor de la nave
 	 */
 	public Rectangle getBounds() {
 		return new Rectangle((int) posX,(int) posY, lNave.getWidth(),lNave.getHeight() );
 	}
-	
-
-
-	
-	
+		
 }
