@@ -2,7 +2,7 @@ package logica;
 import gui.VentanaJuego;
 
 public class Partida {
-	private int puntuacion; //puntuacion que se obtiene al finalizar la partida
+	private double puntuacion; //puntuacion que se obtiene al finalizar la partida
 
 	/**Crea una partida
 	 * 
@@ -15,16 +15,15 @@ public class Partida {
 	/**
 	 * @return puntuacion de la partida
 	 */
-	public int getPuntuacion() {
+	public double getPuntuacion() {
 		return puntuacion;
 	}
 
 	/**Modifica la puntuacion de la partida
 	 * @param puntuacion
 	 */
-	public void setPuntuacion(int puntuacion) {
+	public void setPuntuacion(double puntuacion) {
 		this.puntuacion = puntuacion;
 	}
-	
 	
 }

@@ -130,14 +130,14 @@ public class BaseDatos {
 		return id;
 	}
 	/**Aniade una partida a la base de datos
-	 * @param puntuacion puntuacion de la partida
+	 * @param d puntuacion de la partida
 	 * @param nombreUsuario nombre del usuario que ha jugado la partida
 	 */
-	public static void aniadirPartida(int puntuacion, String nombreUsuario) {
+	public static void aniadirPartida(double puntuacion, String nombreUsuario) {
 		try {
 			s = conexion.prepareStatement("insert into partida ( idusuario, puntuacion, fecha ) values (?, ?, ?,)");
 			s.setInt(1, obtenerIdUsuario(nombreUsuario));
-			s.setInt(2, puntuacion);
+			s.setDouble(2, puntuacion);
 			s.setFloat(3, System.currentTimeMillis());
 				s.executeUpdate();
 		} catch (SQLException e) {
