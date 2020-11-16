@@ -59,12 +59,15 @@ public class VentanaJuego extends JFrame {
 		creaMeteorito();
 		creaMeteorito();
 		
+		cro = new Cronometro();
+		
 		
 		new Thread(){
 			@Override
 			public void run() {
 				boolean funciona = true;
 				while(funciona) {
+					
 					for (MeteoritoEnemigo o:arrayMeteoritosEnPantalla) {
 						
 						if (!arrayMeteoritosEliminados.contains(o)) {
@@ -89,8 +92,11 @@ public class VentanaJuego extends JFrame {
 					
 					choqueConMeteorito();
 					DisparoChoqueMeteorito();
+					
+					
 					if (estaMuerto()) {
 						funciona = false;
+						cro.pausarCrono();
 						gameOver();
 					}
 				}
@@ -163,8 +169,7 @@ public class VentanaJuego extends JFrame {
 					}			
 				}
 			 });
-			
-			
+
 		
 		this.addKeyListener(new KeyAdapter() {
 			@Override
@@ -213,29 +218,7 @@ public class VentanaJuego extends JFrame {
 		 });
 	}
 	
-	public Usuario getUs() {
-		return us;
-	}
-
-	public void setUs(Usuario us) {
-		this.us = us;
-	}
-
-	public NaveJugador getNave() {
-		return nave;
-	}
-
-	public void setNave(NaveJugador nave) {
-		this.nave = nave;
-	}
-
-	public Cronometro getCro() {
-		return cro;
-	}
-
-	public void setCro(Cronometro cro) {
-		this.cro = cro;
-	}
+	
 
 	/**Crea una nave  y la posiciona en relacion al panel de juego
 	 * 
@@ -278,6 +261,7 @@ public class VentanaJuego extends JFrame {
 	public void gameOver() {
 		this.dispose();
 		JOptionPane.showMessageDialog(this, "Game Over","Game Over",JOptionPane.YES_NO_OPTION);
+		
 	}
 	
 	/**Comprueba que el meteorito no se superpone sobre otro meteorito en pantalla
@@ -405,6 +389,31 @@ public class VentanaJuego extends JFrame {
 
 	//faltaria anyadir los creditos obtenidos por el tiempo
 	}
+	
+	public Usuario getUs() {
+		return us;
 	}
+
+	public void setUs(Usuario us) {
+		this.us = us;
+	}
+
+	public NaveJugador getNave() {
+		return nave;
+	}
+
+	public void setNave(NaveJugador nave) {
+		this.nave = nave;
+	}
+
+	public Cronometro getCro() {
+		return cro;
+	}
+
+	public void setCro(Cronometro cro) {
+		this.cro = cro;
+	}
+	
+}
 	
 

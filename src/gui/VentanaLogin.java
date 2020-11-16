@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 
 import logica.BaseDatos;
+import logica.Cronometro;
 import logica.Usuario;
 
 public class VentanaLogin extends JFrame{
@@ -97,6 +98,7 @@ public class VentanaLogin extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				nombreAsegurado =  tfNombreUsuario.getText().replaceAll( "'", "''" );
 				contraAsegurada = tfContrasenya.getText().replaceAll( "'", "''");
 				if(!nombreAsegurado.isEmpty() && !contraAsegurada.isEmpty()) {
