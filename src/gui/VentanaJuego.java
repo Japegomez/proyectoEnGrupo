@@ -23,6 +23,7 @@ public class VentanaJuego extends JFrame {
 	private Usuario us; //usuario de la partida
 	private NaveJugador nave; //nave del usuario
 	private Partida part; //partida
+	private int vidaNavePartida;
 	
 	public ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>();
 	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEliminados = new ArrayList<>();
@@ -49,6 +50,10 @@ public class VentanaJuego extends JFrame {
 		pPrincipal = new PanelFondo();
 		pPrincipal.setLayout( null );
 		add(pPrincipal);
+		cro = new Cronometro();
+		//pPrincipal.add(cro);
+		
+
 		
 		
 		try { Thread.sleep(20); } catch (InterruptedException e) {
@@ -59,8 +64,8 @@ public class VentanaJuego extends JFrame {
 		creaMeteorito();
 		creaMeteorito();
 		
-		cro = new Cronometro();
 		
+		vidaNavePartida = nave.getVida();
 		
 		new Thread(){
 			@Override
@@ -296,7 +301,8 @@ public class VentanaJuego extends JFrame {
 				if (me.getBounds().intersects(nave.getBounds())) {
 					aEliminarObjetos(me);
 					aEliminar.add(me);
-					nave.setVida(nave.getVida()- (int)me.getDanyoAJugador());
+					//nave.setVida(nave.getVida()- (int)me.getDanyoAJugador());
+					vidaNavePartida = vidaNavePartida - (int) me.getDanyoAJugador();
 					System.out.println("Ha chocado !!");
 					System.out.println(nave.getVida());
 				}
@@ -306,6 +312,7 @@ public class VentanaJuego extends JFrame {
 			arrayMeteoritosEliminados.add(me);
 			arrayMeteoritosEnPantalla.remove(me);
 		}
+		
 	}
 	
 
@@ -359,7 +366,7 @@ public class VentanaJuego extends JFrame {
 	 */
 	public boolean estaMuerto() {
 		if(nave == null) return false;
-		if(nave.getVida()<=0) {
+		if(vidaNavePartida<=0) {
 			puntosTiempo();
 			return true;
 		}
