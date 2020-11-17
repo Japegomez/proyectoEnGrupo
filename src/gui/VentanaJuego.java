@@ -250,7 +250,7 @@ public class VentanaJuego extends JFrame {
 	 */
 	public void gameOver() {
 		this.dispose();
-		JOptionPane.showMessageDialog(this, "Game Over" + "Puntuacion : " + part.getPuntuacion(),"Game Over",JOptionPane.YES_NO_OPTION);
+		JOptionPane.showMessageDialog(this, "Game Over" +"\n" + "Puntuacion : " + part.getPuntuacion() +"\n " +"Tiempo: " + cro.getMinutos() +" : "+ cro.getSegundos(),"Game Over",JOptionPane.YES_NO_OPTION);
 		
 	}
 	
@@ -286,7 +286,6 @@ public class VentanaJuego extends JFrame {
 					aEliminarObjetos(me);
 					aEliminar.add(me);
 					nave.setVida(nave.getVida()- (int)me.getDanyoAJugador());
-					puntosPartida();
 					System.out.println("Ha chocado !!");
 					System.out.println(nave.getVida());
 				}
@@ -321,10 +320,13 @@ public class VentanaJuego extends JFrame {
 					}
 				}
 			}
+			
 		}
 		for (MeteoritoEnemigo me : aEliminarMeteortitos) {
 			arrayMeteoritosEliminados.add(me);
 			arrayMeteoritosEnPantalla.remove(me);
+			puntosMeteoritos();
+			System.out.println("                                  "+part.getPuntuacion());
 		}
 		for(Disparo dis : aEliminarDisparo) {
 			arrayDisparo.remove(dis);
@@ -347,6 +349,7 @@ public class VentanaJuego extends JFrame {
 	public boolean estaMuerto() {
 		if(nave == null) return false;
 		if(nave.getVida()<=0) {
+			puntosTiempo();
 			return true;
 		}
 		return false;
@@ -362,23 +365,28 @@ public class VentanaJuego extends JFrame {
 		//for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
 		//	meteoritoEnemigo.paint(g2d);
 		}
-	public void puntosPartida() {
-		double puntuacion = 0;
+	public void puntosTiempo() {
+		double puntuacion = part.getPuntuacion();
+		puntuacion+= (60*cro.getMinutos())+cro.getSegundos();
+		part.setPuntuacion(puntuacion);
+	}
+
+	public void puntosMeteoritos() {
+		double puntuacion = part.getPuntuacion();
 		for (MeteoritoEnemigo meteorito: arrayMeteoritosEliminados) {
 			puntuacion += meteorito.getVALOR_PUNTUACION();
 		}
 		part.setPuntuacion(puntuacion);
-		//faltaria anyadir la puntuacion por el tiempo
 	}
-
+	
 	public void creditosPartida() {
 		int creditos = 0;
 		for (MeteoritoEnemigo meteorito: arrayMeteoritosEliminados) {
 			creditos+=10;
 		}
 		us.setCreditos(us.getCreditos()+creditos);
+		
 
-	//faltaria anyadir los creditos obtenidos por el tiempo
 	}
 	
 	public Usuario getUs() {
