@@ -12,6 +12,4 @@ public class Main {
 		VentanaLogin vLogin = new VentanaLogin("Login");
 		vLogin.setVisible(true);
 	}
-	
-	//javi es un subnormal de atar
 }

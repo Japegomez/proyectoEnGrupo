@@ -132,7 +132,7 @@ public class BaseDatos {
 	 */
 	public static void aniadirPartida(double puntuacion, String nombreUsuario) {
 		try {
-			PreparedStatement s = conexion.prepareStatement("insert into partida ( idusuario, puntuacion, fecha ) values (?, ?, ?,)");
+			PreparedStatement s = conexion.prepareStatement("insert into partida ( idusuario, puntuacion, fecha ) values (?, ?, ?)");
 			s.setInt(1, obtenerIdUsuario(nombreUsuario));
 			s.setDouble(2, puntuacion);
 			s.setFloat(3, System.currentTimeMillis());
