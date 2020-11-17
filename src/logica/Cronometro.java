@@ -51,7 +51,7 @@ public class Cronometro extends JLabel{
 		setCronometroActivo(false);
 	}
 	
-	public String getTiempo(String s) {
+	public String getTiempo(String s) {	
 		return s;
 	}
 	
