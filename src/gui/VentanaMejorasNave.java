@@ -4,6 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -13,42 +17,66 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import logica.Usuario;
+
 
 public class VentanaMejorasNave extends JFrame {
-	private JButton mejVelocidad;
-	private JButton mejDanio;
-	private JButton mejUlti;
-	private JButton mejVida;
-	private JPanel pMejoras;
 	private JButton bVolver;
-	private JLabel lCreditos;
 	private JTextField tfCreditosDisponibles;
-	private JPanel pCreditos;
+	private JTextField tfVelocidad;
+	private JTextField tfDanio;
+	private JTextField tfUlti;
+	private JTextField tfVida;
+	private JButton bVelocidad;
+	private JButton bDanio;
+	private JButton bUlti;
+	private JButton bVida;
+	private boolean funciona;
 	
 	/**Crea una ventana para poder mejorar la nave del usuario
 	 * @param vMenu VentanaMenu de la que precede
 	 */
-	public VentanaMejorasNave(VentanaMenu vMenu) {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	public VentanaMejorasNave(VentanaMenu vMenu, Usuario usu) {
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		
-		pMejoras = new JPanel();
-		pMejoras.setLayout(new GridLayout(2, 2));
-		mejVelocidad = new JButton("mejorar velocidad");
-		mejDanio = new JButton("mejorar danio");
-		mejUlti = new JButton("mejorar el tiempo para obtener la ulti");
-		mejVida = new JButton("mejorar vida");
-		lCreditos = new JLabel("Creditos disponibles: ");
+
+		JLabel lCreditos = new JLabel("creditos disponibles: ");
 		tfCreditosDisponibles = new JTextField(15);
-		tfCreditosDisponibles.setEditable(false);
-		bVolver = new JButton("Volver");
-		pCreditos = new JPanel();
+		JLabel lMejoraVe = new JLabel("velocidad actual: ");
+		tfVelocidad = new JTextField(3);
+		bVelocidad = new JButton("Mejorar velocidad");
+		JLabel lMejoraD =  new JLabel("danio actual: ");
+		tfDanio = new JTextField(3);
+		bDanio = new JButton("mejorar danio");
+		JLabel lMejoraU =  new JLabel("cooldown ulti actual: ");
+		tfUlti = new JTextField(3);
+		bUlti = new JButton("mejorar cooldown ulti");
+		JLabel lMejoraVi =  new JLabel("vida actual: ");
+		tfVida = new JTextField(3);
+		bVida = new JButton("mejorar vida");
 		
-		pMejoras.add(mejVelocidad);
-		pMejoras.add(mejDanio);
-		pMejoras.add(mejUlti);
-		pMejoras.add(mejVida);
+		
+		
+		bVolver = new JButton("Volver");
+
+
+		JPanel pMejoras = new JPanel();
+		pMejoras.setLayout(new GridLayout(4, 3));
+		JPanel pCreditos = new JPanel();
+		
+		pMejoras.add(lMejoraVe);
+		pMejoras.add(tfVelocidad);
+		pMejoras.add(bVelocidad);
+		pMejoras.add(lMejoraD);
+		pMejoras.add(tfDanio);
+		pMejoras.add(bDanio);
+		pMejoras.add(lMejoraU);
+		pMejoras.add(tfUlti);
+		pMejoras.add(bUlti);
+		pMejoras.add(lMejoraVi);
+		pMejoras.add(tfVida);
+		pMejoras.add(bVida);
 		
 		pCreditos.add(lCreditos);
 		pCreditos.add(tfCreditosDisponibles);
@@ -58,7 +86,18 @@ public class VentanaMejorasNave extends JFrame {
 		this.add(bVolver, BorderLayout.SOUTH);
 		
 		this.pack();
-		
+		new Thread() {
+			@Override
+				public void run() {
+				while (funciona) {
+					tfCreditosDisponibles.setText("" + usu.getCreditos());
+					try {
+						Thread.sleep(20);
+					} catch (Exception e) {
+					}
+				}
+
+		}}.start();
 		bVolver.addActionListener(new ActionListener() {
 			
 			@Override
@@ -66,6 +105,19 @@ public class VentanaMejorasNave extends JFrame {
 				VentanaMejorasNave.this.dispose();
 				vMenu.setVisible(true);
 				
+			}
+		});
+		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				funciona = true;
+			}
+	
+			@Override
+			public void windowClosed(WindowEvent e) {
+				funciona = false;
 			}
 		});
 	}

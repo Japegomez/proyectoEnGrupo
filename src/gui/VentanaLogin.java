@@ -66,20 +66,19 @@ public class VentanaLogin extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nombreAsegurado =  tfNombreUsuario.getText().replaceAll( "'", "''" );
-				contraAsegurada = tfContrasenya.getText().replaceAll( "'", "''");
-				if(!nombreAsegurado.isEmpty() && !contraAsegurada.isEmpty()) {
-					if(BaseDatos.compruebaUsuario(nombreAsegurado)) {
+				if(!tfNombreUsuario.getText().isEmpty() && !tfContrasenya.getText().isEmpty()) {
+					if(BaseDatos.compruebaUsuario(tfNombreUsuario.getText())) {
 						JOptionPane.showMessageDialog(VentanaLogin.this, "El usuario " + tfNombreUsuario.getText() + " no existe en la base de datos, primero debe registrarse.");
 					}
 					else {
-						if(BaseDatos.compruebaContrasenya(nombreAsegurado, contraAsegurada)) {
-							Usuario usu = new Usuario(nombreAsegurado, contraAsegurada);						
+						if(BaseDatos.compruebaContrasenya(tfNombreUsuario.getText(), tfContrasenya.getText())) {
+							Usuario usu = new Usuario(tfNombreUsuario.getText(), tfContrasenya.getText());
+							usu.setCreditos(BaseDatos.obtenerCreditos(usu));
 							usu.setNave(BaseDatos.obtenerNave(usu));
 //							usu.setPart(BaseDatos.setPartidas(usu));
-							VentanaMenu vMenu = new VentanaMenu("menu", usu);
+							VentanaMenu vMenu = new VentanaMenu("menu", usu, VentanaLogin.this);
 							vMenu.setVisible(true);
-							VentanaLogin.this.dispose();
+							VentanaLogin.this.setVisible(false);
 						}
 						else {
 							JOptionPane.showMessageDialog(VentanaLogin.this, "contraseña incorrecta");
@@ -98,16 +97,13 @@ public class VentanaLogin extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				nombreAsegurado =  tfNombreUsuario.getText().replaceAll( "'", "''" );
-				contraAsegurada = tfContrasenya.getText().replaceAll( "'", "''");
-				if(!nombreAsegurado.isEmpty() && !contraAsegurada.isEmpty()) {
-					if(BaseDatos.compruebaUsuario(nombreAsegurado)) {
-						VentanaLogin.this.dispose();
-						Usuario usu = new Usuario(nombreAsegurado, contraAsegurada);
+				if(!tfNombreUsuario.getText().isEmpty() && !tfContrasenya.getText().isEmpty()) {
+					if(BaseDatos.compruebaUsuario(tfNombreUsuario.getText())) {
+						VentanaLogin.this.setVisible(false);
+						Usuario usu = new Usuario(tfNombreUsuario.getText(), tfContrasenya.getText());
 						BaseDatos.registrarUsuario(usu);
 						BaseDatos.registrarNave(usu);
-						VentanaMenu vMenu = new VentanaMenu("menu", usu);
+						VentanaMenu vMenu = new VentanaMenu("menu", usu, VentanaLogin.this);
 						vMenu.setVisible(true);
 					}
 					else {

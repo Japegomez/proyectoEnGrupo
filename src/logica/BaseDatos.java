@@ -47,10 +47,11 @@ public class BaseDatos {
 	 */
 	public static void registrarUsuario(Usuario usu) {
 		try {
-			PreparedStatement s = conexion.prepareStatement("insert into usuario ( nombre, contrasenya, nivel ) values (?, ?, ?)");
+			PreparedStatement s = conexion.prepareStatement("insert into usuario ( nombre, contrasenya, nivel, creditos ) values (?, ?, ?, ?)");
 			s.setString(1, usu.getNombreUsuario());
 			s.setString(2, usu.getContrasenya());
 			s.setInt(3, usu.getNivel());
+			s.setDouble(4,  usu.getCreditos());
 			s.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -136,7 +137,7 @@ public class BaseDatos {
 			s.setInt(1, obtenerIdUsuario(nombreUsuario));
 			s.setDouble(2, puntuacion);
 			s.setFloat(3, System.currentTimeMillis());
-				s.executeUpdate();
+			s.executeUpdate();
 		} catch (SQLException e) {
 				e.printStackTrace();
 		}
@@ -155,5 +156,31 @@ public class BaseDatos {
 	public static ArrayList<Partida> setPartidas(Usuario usu) {
 		
 		return null;
+	}
+	public static int obtenerCreditos(Usuario usu) {
+		
+			try {
+				PreparedStatement s = conexion.prepareStatement("select creditos from usuario where idusuario = ?");
+				s.setInt(1, obtenerIdUsuario(usu.getNombreUsuario()));
+				ResultSet rs = s.executeQuery();
+				return rs.getInt("creditos");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		return 0;
+	}
+
+	public static void actualizarCreditosUsuario(Usuario usu, double creditos) {
+		try {
+			PreparedStatement s = conexion.prepareStatement("update usuario set creditos = ? where idusuario = ?");
+			s.setDouble(1, creditos);
+			s.setInt(2, obtenerIdUsuario(usu.getNombreUsuario()));
+			s.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 }

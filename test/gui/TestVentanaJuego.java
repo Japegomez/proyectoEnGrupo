@@ -16,7 +16,7 @@ class TestVentanaJuego {
 	@BeforeEach
 	void setUp() throws Exception {
 		Usuario usu = new Usuario("javi", "usu");
-		v1 = new VentanaJuego(usu, new VentanaMenu("menu", usu));
+		v1 = new VentanaJuego(usu, new VentanaMenu("menu", usu, new VentanaLogin("login")));
 		ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>();
 		MeteoritoEnemigo m1 = new MeteoritoEnemigo(); //PosX = 150
 		arrayMeteoritosEnPantalla.add(m1);
@@ -33,9 +33,9 @@ class TestVentanaJuego {
 	
 	@Test
 	void testEstaMuerto() {
-		v1.getNave().setVida(-50);
+		v1.setVidaNavePartida(-50);
 		assertEquals(true, v1.estaMuerto());
-		v1.getNave().setVida(50);
+		v1.setVidaNavePartida(50);
 		assertEquals(false, v1.estaMuerto());
 		v1.setNave(null);
 		assertEquals(false, v1.estaMuerto());

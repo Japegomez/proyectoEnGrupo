@@ -17,6 +17,7 @@ public class VentanaMenu extends JFrame {
 	JButton bJugar;
 	JButton bMejorarNave;
 	JButton bClasificacion;
+	JButton bCerrarSesion;
 	JTextArea tUsuario;
 	String nombreUsuario;
 	VentanaJuego vJuego;
@@ -27,9 +28,9 @@ public class VentanaMenu extends JFrame {
 	 * @param titulo titulo de la ventana
 	 * @param usu usuario que ha iniciado sesion
 	 */
-	public VentanaMenu(String titulo, Usuario usu) {
+	public VentanaMenu(String titulo, Usuario usu, VentanaLogin v1) {
 		super(titulo);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new GridLayout(4, 1));
 		setSize(200, 200);
@@ -40,13 +41,24 @@ public class VentanaMenu extends JFrame {
 		bJugar = new JButton("Jugar");
 		bMejorarNave = new JButton("Mejorar Nave");
 		bClasificacion = new JButton("Clasificacion");
+		bCerrarSesion = new JButton("Cerrar Sesion");
 		
 		this.add(tUsuario);
 		this.add(bJugar);
 		this.add(bMejorarNave);
 		this.add(bClasificacion);
+		this.add(bCerrarSesion);
 		
 		this.pack();
+		
+		bCerrarSesion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaMenu.this.dispose();
+				v1.setVisible(true);
+			}
+		});
 		
 		bJugar.addActionListener(new ActionListener() {
 			
@@ -75,12 +87,12 @@ public class VentanaMenu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaMenu.this.setVisible(false);
-				vMej = new VentanaMejorasNave(VentanaMenu.this);
+				vMej = new VentanaMejorasNave(VentanaMenu.this, usu);
 				vMej.setVisible(true);
 				
 			}
 		});
-		
+
 	}
 	
 }

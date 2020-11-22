@@ -9,7 +9,7 @@ public class Usuario {
 	
 	public int nivel;//nivel del jugador
 	public ArrayList<Partida> part;//Lista de partidas del jugador
-	public int creditos; //creditos del jugador 
+	public double creditos; //creditos del jugador 
 
 	/**Crea un usuario
 	 * @param usuario String del nombre del usuario
@@ -27,14 +27,14 @@ public class Usuario {
 	/**Metodo para obtener los creditos del usuario
 	 * @return creditos disponibles para el usuario
 	 */
-	public int getCreditos() {
+	public double getCreditos() {
 		return creditos;
 	}
 
 	/**Metodo para alterar los creditos que tiene el usuario
 	 * @param creditos valor de creditos que se obtiene
 	 */
-	public void setCreditos(int creditos) {
+	public void setCreditos(double creditos) {
 		this.creditos = creditos;
 	}
 
