@@ -10,16 +10,15 @@ public class Cronometro extends JLabel{
 	private boolean cronometroActivo; // si esta jugando es igual a true, su muere igual a false
 	
 	public Cronometro() {
-		JLabel tiempo = new JLabel( "00:00:000" );
-		this.add(tiempo);
+		super( "00:00:000" );
 		
 		cronometroActivo = true;
 		new Thread() {
 			public void run() {
 				try {
 					while( cronometroActivo ){
-			           Thread.sleep( 4 );
-			           milesimas += 4;
+			           Thread.sleep( 1 );
+			           milesimas += 1;
 			           	if( milesimas == 1000 ){
 			                 milesimas = 0;
 			                 segundos += 1;
@@ -28,16 +27,13 @@ public class Cronometro extends JLabel{
 			                        minutos++;
 			                    }
 			                }
-			                tiempo.setText( minutos + ":" + segundos + ":" + milesimas ); 
-			                System.out.println(minutos + ":" + segundos + ":" + milesimas);
+			                Cronometro.this.setText( minutos + ":" + segundos + ":" + milesimas ); 
 			            }
 					
 			        }catch(Exception e){}
 			        //Cuando se reincie se coloca nuevamente en 00:00:000
 					getTiempo(minutos + ":" + segundos + ":" + milesimas);
-					System.out.println(minutos + ":" + segundos + ":" + milesimas);
-			        tiempo.setText( "00:00:000" );
-			        
+			        Cronometro.this.setText( "00:00:000" );
 				}
 		}.start();
 		
@@ -101,5 +97,12 @@ public class Cronometro extends JLabel{
 		this.milesimas = milesimas;
 	}
 	
+	public static void main(String[] args) {
+		Cronometro c = new Cronometro();
 
+		JFrame jp = new JFrame("prueba cronometro");
+		jp.add(c);
+		jp.setVisible(true);
+		jp.pack();
+	}
 }

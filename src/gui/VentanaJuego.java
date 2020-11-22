@@ -50,12 +50,7 @@ public class VentanaJuego extends JFrame {
 		pPrincipal = new PanelFondo();
 		pPrincipal.setLayout( null );
 		add(pPrincipal);
-		cro = new Cronometro();
-		//pPrincipal.add(cro);
-		
 
-		
-		
 		try { Thread.sleep(20); } catch (InterruptedException e) {
 			System.err.println(e);
 		}
@@ -82,7 +77,7 @@ public class VentanaJuego extends JFrame {
 						if(o.getPosY()>pPrincipal.getHeight()) {
 							arrayMeteoritosEliminados.add(o);
 						}
-						try { Thread.sleep(20); } catch (InterruptedException e) {
+						try { Thread.sleep(200); } catch (InterruptedException e) {
 							System.err.println(e);
 						}
 					}
@@ -423,14 +418,14 @@ public class VentanaJuego extends JFrame {
 		this.nave = nave;
 	}
 
-	public Cronometro getCro() {
-		return cro;
+	public void creaCronometro() {
+		cro = new Cronometro();
+		System.out.println(pPrincipal.getHeight() - cro.getPreferredSize().getHeight());
+		cro.setBounds(0, (int)(pPrincipal.getHeight() - cro.getPreferredSize().getHeight()-100), 100, 100); // FIXME cambiar "-100"
+		cro.setForeground(Color.white);
+		cro.setBackground(Color.white);
+		pPrincipal.add(cro);
 	}
-
-	public void setCro(Cronometro cro) {
-		this.cro = cro;
-	}
-	
 }
 	
 

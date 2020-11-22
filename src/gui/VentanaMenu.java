@@ -56,6 +56,7 @@ public class VentanaMenu extends JFrame {
 				vJuego = new VentanaJuego(usu,VentanaMenu.this);
 				vJuego.setVisible(true);
 				vJuego.creaNave();
+				vJuego.creaCronometro();
 			}
 		});
 		
