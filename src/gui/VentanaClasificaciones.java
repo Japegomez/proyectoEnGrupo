@@ -11,15 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * @author japen
- *
- */
-/**
- * @author japen
- *
- */
-/**
- * @author japen
+ * @author SpaceDefense
  *
  */
 public class VentanaClasificaciones extends JFrame{

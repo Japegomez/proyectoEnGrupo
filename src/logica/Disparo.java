@@ -3,7 +3,6 @@ package logica;
 import java.awt.Rectangle;
 
 import gui.JLabelDisparo;
-import gui.JLabelMeteorito;
 
 public class Disparo extends ObjetoJuego{
 	

@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
 import logica.BaseDatos;
 import logica.Disparo;
@@ -15,7 +13,6 @@ import logica.ObjetoJuego;
 import logica.Partida;
 import logica.Usuario;
 import logica.Cronometro;
-import logica.*;
 
 public class VentanaJuego extends JFrame {
 
@@ -53,12 +50,7 @@ public class VentanaJuego extends JFrame {
 		pPrincipal = new PanelFondo();
 		pPrincipal.setLayout( null );
 		add(pPrincipal);
-		cro = new Cronometro();
-		//pPrincipal.add(cro);
-		
 
-		
-		
 		try { Thread.sleep(20); } catch (InterruptedException e) {
 			System.err.println(e);
 		}
@@ -86,7 +78,7 @@ public class VentanaJuego extends JFrame {
 							arrayMeteoritosEvitados.add(o);
 							arrayMeteoritosEliminados.add(o);
 						}
-						try { Thread.sleep(20); } catch (InterruptedException e) {
+						try { Thread.sleep(200); } catch (InterruptedException e) {
 							System.err.println(e);
 						}
 					}
@@ -400,8 +392,6 @@ public class VentanaJuego extends JFrame {
 	 */
 	public void creditosPartida() {
 		us.setCreditos(us.getCreditos()+ part.getPuntuacion());
-		
-
 	}
 	
 	public Usuario getUs() {
@@ -420,13 +410,15 @@ public class VentanaJuego extends JFrame {
 		this.nave = nave;
 	}
 
-	public Cronometro getCro() {
-		return cro;
+	public void creaCronometro() {
+		cro = new Cronometro();
+		System.out.println(pPrincipal.getHeight() - cro.getPreferredSize().getHeight());
+		cro.setBounds(0, (int)(pPrincipal.getHeight() - cro.getPreferredSize().getHeight()-100), 100, 100); // FIXME cambiar "-100"
+		cro.setForeground(Color.white);
+		cro.setBackground(Color.white);
+		pPrincipal.add(cro);
 	}
 
-	public void setCro(Cronometro cro) {
-		this.cro = cro;
-	}
 
 	public int getVidaNavePartida() {
 		return vidaNavePartida;
@@ -437,7 +429,6 @@ public class VentanaJuego extends JFrame {
 	public void setVidaNavePartida(int vidaNavePartida) {
 		this.vidaNavePartida = vidaNavePartida;
 	}
-	
 }
 	
 

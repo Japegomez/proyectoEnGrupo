@@ -1,19 +1,11 @@
 package logica;
 
-import java.awt.Graphics2D;
-
-import javax.swing.JFrame;
-
 import java.awt.Rectangle;
 
 import gui.JLabelMeteorito;
 
 /** Clase de los enemigos que son Meteoritos
- * @author jonlc
- *
- */
-/**
- * @author juxam
+ * @author SpaceDefense
  *
  */
 public class MeteoritoEnemigo extends ObjetoJuego{
@@ -45,7 +37,7 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 		return danyoAJugador;
 	}
 
-	/** Metodo para cambiar el atributo danyoAJugador
+	/**Metodo para cambiar el atributo danyoAJugador
 	 * @param danyoAJugador nuevo valor que se desea introducir
 	 */
 	public void setDanyoAJugador(double danyoAJugador) {
@@ -53,7 +45,7 @@ public class MeteoritoEnemigo extends ObjetoJuego{
 	}
 	
 	/**
-	 *Modifica la posicion en el eje x del meteorito y del jlabelMeteorito 
+	 * Modifica la posicion en el eje x del meteorito y del jlabelMeteorito 
 	 */
 	@Override
 	public void setPosX(double posX) {
