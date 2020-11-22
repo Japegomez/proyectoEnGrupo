@@ -4,11 +4,7 @@ import java.awt.Rectangle;
 import gui.JLabelNave;
 
 /**
- * @author japen
- *
- */
-/**
- * @author japen
+ * @author SpaceDefense
  *
  */
 public class NaveJugador extends ObjetoJuego {

@@ -1,7 +1,7 @@
 package logica;
 
 /**
- * @author juxam
+ * @author SpaceDefense
  *
  */
 abstract public class ObjetoJuego {
