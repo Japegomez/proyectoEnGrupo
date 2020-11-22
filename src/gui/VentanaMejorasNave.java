@@ -29,7 +29,7 @@ public class VentanaMejorasNave extends JFrame {
 	private JButton bDanio;
 	private JButton bUlti;
 	private JButton bVida;
-	private boolean funciona;
+	private Thread actualizaCreditosDisponibles;
 	
 	/**Crea una ventana para poder mejorar la nave del usuario
 	 * @param vMenu VentanaMenu de la que precede
@@ -41,6 +41,7 @@ public class VentanaMejorasNave extends JFrame {
 
 		JLabel lCreditos = new JLabel("creditos disponibles: ");
 		tfCreditosDisponibles = new JTextField(15);
+		tfCreditosDisponibles.setEditable(false);
 		JLabel lMejoraVe = new JLabel("velocidad actual: ");
 		tfVelocidad = new JTextField(3);
 		bVelocidad = new JButton("Mejorar velocidad");
@@ -84,18 +85,18 @@ public class VentanaMejorasNave extends JFrame {
 		this.add(bVolver, BorderLayout.SOUTH);
 		
 		this.pack();
-		new Thread() {
+		actualizaCreditosDisponibles = new Thread() {
 			@Override
 				public void run() {
-				while (funciona) {
-					tfCreditosDisponibles.setText("" + usu.getCreditos());
+					tfCreditosDisponibles.setText("" + usu.getCreditos()); 
+					tfVelocidad.setText("" + usu.getNave().getVelocidadAtaque());
 					try {
 						Thread.sleep(20);
 					} catch (Exception e) {
 					}
-				}
+				
 
-		}}.start();
+		}};
 		bVolver.addActionListener(new ActionListener() {
 			
 			@Override
@@ -110,12 +111,12 @@ public class VentanaMejorasNave extends JFrame {
 			
 			@Override
 			public void windowOpened(WindowEvent e) {
-				funciona = true;
+				actualizaCreditosDisponibles.start();
 			}
 	
 			@Override
 			public void windowClosed(WindowEvent e) {
-				funciona = false;
+				actualizaCreditosDisponibles.interrupt();
 			}
 		});
 	}
