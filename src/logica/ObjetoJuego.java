@@ -6,11 +6,11 @@ package logica;
  */
 abstract public class ObjetoJuego {
 	
-	protected double posX;//posicion del objeto respecto al eje x (en pixels)
-	protected double posY;//posicion del objeto respecto al eje y (en pixels)
-	protected int vida;//vida del objeto
-	protected double velocidadX;//velocidad en el eje x 
-	protected double velocidadY;//velocidad en el eje y
+	protected double posX; //posicion del objeto respecto al eje x (en pixels)
+	protected double posY; //posicion del objeto respecto al eje y (en pixels)
+	protected int vida; //vida del objeto
+	protected double velocidadX; //velocidad en el eje x 
+	protected double velocidadY; //velocidad en el eje y
 
 
 	/**
