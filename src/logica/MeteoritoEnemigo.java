@@ -1,9 +1,5 @@
 package logica;
 
-import java.awt.Graphics2D;
-
-import javax.swing.JFrame;
-
 import java.awt.Rectangle;
 
 import gui.JLabelMeteorito;

@@ -1,7 +1,5 @@
 package logica;
 
-import javax.swing.JFrame;
-
 /**
  * @author juxam
  *

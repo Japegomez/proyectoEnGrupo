@@ -8,7 +8,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 
 import logica.BaseDatos;
-import logica.Cronometro;
+
 import logica.Usuario;
 
 public class VentanaLogin extends JFrame{

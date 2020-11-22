@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
 import logica.BaseDatos;
 import logica.Disparo;
@@ -15,7 +13,6 @@ import logica.ObjetoJuego;
 import logica.Partida;
 import logica.Usuario;
 import logica.Cronometro;
-import logica.*;
 
 public class VentanaJuego extends JFrame {
 
@@ -394,7 +391,7 @@ public class VentanaJuego extends JFrame {
 	
 	public void creditosPartida() {
 		int creditos = 0;
-		for (MeteoritoEnemigo meteorito: arrayMeteoritosEliminados) {
+		for (int i = 0; i < arrayMeteoritosEliminados.size(); i++) {
 			creditos+=10;
 		}
 		us.setCreditos(us.getCreditos()+creditos);
