@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.sun.tools.sjavac.server.SysInfo;
 
 import logica.Usuario;
 
@@ -106,6 +105,9 @@ public class VentanaMejorasNave extends JFrame {
 					usu.getNave().setVelocidadAtaque(usu.getNave().getVelocidadAtaque()-1);
 					tfCadencia.setText("" + usu.getNave().getVelocidadAtaque());
 					tfCreditosDisponibles.setText("" + usu.getCreditos()); 
+				}
+				if(usu.getNave().getVelocidadAtaque()==1) {
+					bVelocidad.setEnabled(false);
 				}
 			}
 		});
