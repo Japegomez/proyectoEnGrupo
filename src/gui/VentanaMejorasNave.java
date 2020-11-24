@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.sun.tools.sjavac.server.SysInfo;
 
 import logica.Usuario;
 
