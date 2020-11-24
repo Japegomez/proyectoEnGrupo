@@ -15,13 +15,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.sun.tools.sjavac.server.SysInfo;
+
 import logica.Usuario;
 
 
 public class VentanaMejorasNave extends JFrame {
 	private JButton bVolver;
 	private JTextField tfCreditosDisponibles;
-	private JTextField tfVelocidad;
+	private JTextField tfCadencia;
 	private JTextField tfDanio;
 	private JTextField tfUlti;
 	private JTextField tfVida;
@@ -42,17 +44,21 @@ public class VentanaMejorasNave extends JFrame {
 		JLabel lCreditos = new JLabel("creditos disponibles: ");
 		tfCreditosDisponibles = new JTextField(15);
 		tfCreditosDisponibles.setEditable(false);
-		JLabel lMejoraVe = new JLabel("velocidad actual: ");
-		tfVelocidad = new JTextField(3);
-		bVelocidad = new JButton("Mejorar velocidad");
+		JLabel lMejoraVe = new JLabel("cadencia actual: ");
+		tfCadencia = new JTextField(3);
+		tfCadencia.setEditable(false);
+		bVelocidad = new JButton("Mejorar cadencia");
 		JLabel lMejoraD =  new JLabel("danio actual: ");
 		tfDanio = new JTextField(3);
+		tfDanio.setEditable(false);
 		bDanio = new JButton("mejorar danio");
 		JLabel lMejoraU =  new JLabel("cooldown ulti actual: ");
 		tfUlti = new JTextField(3);
+		tfUlti.setEditable(false);
 		bUlti = new JButton("mejorar cooldown ulti");
 		JLabel lMejoraVi =  new JLabel("vida actual: ");
 		tfVida = new JTextField(3);
+		tfVida.setEditable(false);
 		bVida = new JButton("mejorar vida");
 		
 		
@@ -65,7 +71,7 @@ public class VentanaMejorasNave extends JFrame {
 		JPanel pCreditos = new JPanel();
 		
 		pMejoras.add(lMejoraVe);
-		pMejoras.add(tfVelocidad);
+		pMejoras.add(tfCadencia);
 		pMejoras.add(bVelocidad);
 		pMejoras.add(lMejoraD);
 		pMejoras.add(tfDanio);
@@ -85,18 +91,22 @@ public class VentanaMejorasNave extends JFrame {
 		this.add(bVolver, BorderLayout.SOUTH);
 		
 		this.pack();
-		actualizaCreditosDisponibles = new Thread() {
-			@Override
-				public void run() {
-					tfCreditosDisponibles.setText("" + usu.getCreditos()); 
-					tfVelocidad.setText("" + usu.getNave().getVelocidadAtaque());
-					try {
-						Thread.sleep(20);
-					} catch (Exception e) {
-					}
-				
 
-		}};
+//
+//					tfCadencia.setText("" + usu.getNave().getVelocidadAtaque());
+//					tfDanio.setText("" + usu.getNave().getDanyoAtaque());
+//					tfUlti.setText("" + usu.getNave().getAtaqueCargado());
+//					tfVida.setText("" + usu.getNave().getVida());
+
+		bVelocidad.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(usu.getNave().getVelocidadAtaque()>1) usu.getNave().setVelocidadAtaque(usu.getNave().getVelocidadAtaque()-1);
+				tfCadencia.setText("" + usu.getNave().getVelocidadAtaque());
+				tfCreditosDisponibles.setText("" + usu.getCreditos()); 
+			}
+		});
 		bVolver.addActionListener(new ActionListener() {
 			
 			@Override
@@ -111,12 +121,12 @@ public class VentanaMejorasNave extends JFrame {
 			
 			@Override
 			public void windowOpened(WindowEvent e) {
-				actualizaCreditosDisponibles.start();
+//				actualizaCreditosDisponibles.start();
 			}
 	
 			@Override
 			public void windowClosed(WindowEvent e) {
-				actualizaCreditosDisponibles.interrupt();
+//				actualizaCreditosDisponibles.interrupt();
 			}
 		});
 	}

@@ -175,7 +175,12 @@ public class BaseDatos {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
+	
+	public static void buscarTop1() {
+		//SELECT idusuario from partida ordered by puntuacion desc;
+		//devuelve instancia de la clase Top con atributo nombre  y puntuacion maxima
+	}
+		
+	
 }
