@@ -102,9 +102,11 @@ public class VentanaMejorasNave extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(usu.getNave().getVelocidadAtaque()>1) usu.getNave().setVelocidadAtaque(usu.getNave().getVelocidadAtaque()-1);
-				tfCadencia.setText("" + usu.getNave().getVelocidadAtaque());
-				tfCreditosDisponibles.setText("" + usu.getCreditos()); 
+				if(usu.getNave().getVelocidadAtaque()>1) {
+					usu.getNave().setVelocidadAtaque(usu.getNave().getVelocidadAtaque()-1);
+					tfCadencia.setText("" + usu.getNave().getVelocidadAtaque());
+					tfCreditosDisponibles.setText("" + usu.getCreditos()); 
+				}
 			}
 		});
 		bVolver.addActionListener(new ActionListener() {
@@ -121,7 +123,11 @@ public class VentanaMejorasNave extends JFrame {
 			
 			@Override
 			public void windowOpened(WindowEvent e) {
-//				actualizaCreditosDisponibles.start();
+				tfCreditosDisponibles.setText("" + usu.getCreditos());
+				tfCadencia.setText(""+ usu.getNave().getVelocidadAtaque());
+				tfDanio.setText(""+ usu.getNave().getDanyoAtaque());
+				tfUlti.setText(""+ usu.getNave().getAtaqueCargado());
+				tfVida.setText(""+ usu.getNave().getVida());
 			}
 	
 			@Override
