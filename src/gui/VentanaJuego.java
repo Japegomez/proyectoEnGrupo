@@ -78,7 +78,7 @@ public class VentanaJuego extends JFrame {
 							arrayMeteoritosEvitados.add(o);
 							arrayMeteoritosEliminados.add(o);
 						}
-						try { Thread.sleep(200); } catch (InterruptedException e) {
+						try { Thread.sleep(20); } catch (InterruptedException e) {
 							System.err.println(e);
 						}
 					}
