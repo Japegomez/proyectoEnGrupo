@@ -2,6 +2,8 @@ package logica;
 
 import javax.swing.*;
 
+// hola
+
 public class Cronometro extends JLabel{
 	private int hora; // horas de duracion de la partida
 	private int minutos; // minutos de duracion de la partida
