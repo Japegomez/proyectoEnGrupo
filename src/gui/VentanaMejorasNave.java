@@ -131,11 +131,7 @@ public class VentanaMejorasNave extends JFrame {
 				tfUlti.setText(""+ usu.getNave().getAtaqueCargado());
 				tfVida.setText(""+ usu.getNave().getVida());
 			}
-	
-			@Override
-			public void windowClosed(WindowEvent e) {
-//				actualizaCreditosDisponibles.interrupt();
-			}
+
 		});
 	}
 }

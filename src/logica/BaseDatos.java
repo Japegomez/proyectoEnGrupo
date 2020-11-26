@@ -178,6 +178,7 @@ public class BaseDatos {
 	}
 	
 	public static void buscarTop1() {
+		//TODO
 		//SELECT idusuario from partida ordered by puntuacion desc;
 		//devuelve instancia de la clase Top con atributo nombre  y puntuacion maxima
 	}

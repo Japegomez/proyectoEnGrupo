@@ -107,17 +107,11 @@ public class VentanaJuego extends JFrame {
 			}}.start();
 			
 			addWindowListener(new WindowAdapter() {
-			
-				@Override
-				public void windowOpened(WindowEvent e) {
-					BaseDatos.abrirConexion("baseDatos.bd");
-					
-				}
+
 				@Override
 				public void windowClosed(WindowEvent e) {
 					BaseDatos.aniadirPartida(VentanaJuego.this.part.getPuntuacion(), usuario.getNombreUsuario());
 					v1.setVisible(true);
-					BaseDatos.cerrarConexion();
 				}
 			});
 			this.addKeyListener(new KeyAdapter() {
