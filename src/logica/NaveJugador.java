@@ -94,7 +94,7 @@ public class NaveJugador extends ObjetoJuego {
 		super(0.0,0.0,10,10,150.0);
 		this.velocidadAtaque = 5;
 		this.danyoAtaque = 5;
-		this.ataqueCargado = 5;
+		this.ataqueCargado = 20;
 		lNave = new JLabelNave();
 		setPosX(this.getPosX());
 		setPosY(this.getPosY());

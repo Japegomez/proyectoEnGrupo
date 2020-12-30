@@ -12,10 +12,11 @@ import java.awt.event.WindowListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
+import logica.BaseDatos;
 import logica.Usuario;
 
 
@@ -91,23 +92,83 @@ public class VentanaMejorasNave extends JFrame {
 		
 		this.pack();
 
-//
-//					tfCadencia.setText("" + usu.getNave().getVelocidadAtaque());
-//					tfDanio.setText("" + usu.getNave().getDanyoAtaque());
-//					tfUlti.setText("" + usu.getNave().getAtaqueCargado());
-//					tfVida.setText("" + usu.getNave().getVida());
-
 		bVelocidad.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(usu.getNave().getVelocidadAtaque()>1) {
-					usu.getNave().setVelocidadAtaque(usu.getNave().getVelocidadAtaque()-1);
-					tfCadencia.setText("" + usu.getNave().getVelocidadAtaque());
-					tfCreditosDisponibles.setText("" + usu.getCreditos()); 
+				if(usu.getCreditos()>=50) {
+					if(usu.getNave().getVelocidadAtaque()>1) {
+						usu.getNave().setVelocidadAtaque(usu.getNave().getVelocidadAtaque()-0.5);
+						tfCadencia.setText("" + usu.getNave().getVelocidadAtaque());
+						usu.quitarCreditos();
+						tfCreditosDisponibles.setText("" + usu.getCreditos()); 
+					}
+					if(usu.getNave().getVelocidadAtaque()==1) {
+						bVelocidad.setEnabled(false);
+					}
 				}
-				if(usu.getNave().getVelocidadAtaque()==1) {
-					bVelocidad.setEnabled(false);
+				else {
+					JOptionPane.showMessageDialog(VentanaMejorasNave.this, "creditos insuficientes");
+				}
+			}
+		});
+		bDanio.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(usu.getCreditos()>=50) {
+					if(usu.getNave().getDanyoAtaque()<10) {
+						usu.getNave().setDanyoAtaque(usu.getNave().getDanyoAtaque()+0.5);
+						tfDanio.setText("" + usu.getNave().getDanyoAtaque());
+						usu.quitarCreditos();
+						tfCreditosDisponibles.setText("" + usu.getCreditos()); 
+					}
+					if(usu.getNave().getDanyoAtaque()==10) {
+						bDanio.setEnabled(false);
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(VentanaMejorasNave.this, "creditos insuficientes");
+				}
+			}
+		});
+		bUlti.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(usu.getCreditos()>=50) {
+					if(usu.getNave().getAtaqueCargado()>10) {
+						usu.getNave().setAtaqueCargado(usu.getNave().getAtaqueCargado()-0.5);
+						tfUlti.setText("" + usu.getNave().getAtaqueCargado());
+						usu.quitarCreditos();
+						tfCreditosDisponibles.setText("" + usu.getCreditos()); 
+					}
+					if(usu.getNave().getAtaqueCargado()==10) {
+						bUlti.setEnabled(false);
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(VentanaMejorasNave.this, "creditos insuficientes");
+				}
+			}
+		});
+		bVida.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(usu.getCreditos()>=50) {
+					if(usu.getNave().getVida()<20) {
+						usu.getNave().setVida(usu.getNave().getVida()+1);
+						tfVida.setText("" + usu.getNave().getVida());
+						usu.quitarCreditos();
+						tfCreditosDisponibles.setText("" + usu.getCreditos()); 
+					}
+					if(usu.getNave().getVida()==20) {
+						bVida.setEnabled(false);
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(VentanaMejorasNave.this, "creditos insuficientes");
 				}
 			}
 		});
@@ -130,8 +191,25 @@ public class VentanaMejorasNave extends JFrame {
 				tfDanio.setText(""+ usu.getNave().getDanyoAtaque());
 				tfUlti.setText(""+ usu.getNave().getAtaqueCargado());
 				tfVida.setText(""+ usu.getNave().getVida());
+				if(usu.getNave().getVelocidadAtaque()==1) {
+					bVelocidad.setEnabled(false);
+				}
+				if(usu.getNave().getDanyoAtaque()==10) {
+					bDanio.setEnabled(false);
+				}
+				if(usu.getNave().getAtaqueCargado()==10) {
+					bUlti.setEnabled(false);
+				}
+				if(usu.getNave().getVida()==20) {
+					bVida.setEnabled(false);
+				}
 			}
-
+		
+			@Override
+			public void windowClosed(WindowEvent e) {
+				BaseDatos.setNave(usu);
+				BaseDatos.setCreditosUsuario(usu);
+			}
 		});
 	}
 }

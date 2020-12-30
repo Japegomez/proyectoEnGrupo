@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.table.DefaultTableModel;
+
 public class BaseDatos {
 	private static Connection conexion;
 	
@@ -148,6 +150,21 @@ public class BaseDatos {
 		}
 		return null;
 	}
+	
+	public static void setNave(Usuario usu) {
+		try {
+			PreparedStatement s = conexion.prepareStatement("update nave set vida = ?, velocidadAtaque = ?, danyoAtaque = ?, ataqueCargado = ? where idusuario = ?");
+			s.setInt(1, usu.getNave().getVida());
+			s.setDouble(2, usu.getNave().getVelocidadAtaque());
+			s.setDouble(3, usu.getNave().getDanyoAtaque());
+			s.setDouble(4, usu.getNave().getAtaqueCargado());
+			s.setInt(5, obtenerIdUsuario(usu.getNombreUsuario()));
+			s.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	public static ArrayList<Partida> setPartidas(Usuario usu) {
 		
 		return null;
@@ -166,22 +183,39 @@ public class BaseDatos {
 		return 0;
 	}
 
-	public static void actualizarCreditosUsuario(Usuario usu, double creditos) {
+	public static void setCreditosUsuario(Usuario usu) {
 		try {
 			PreparedStatement s = conexion.prepareStatement("update usuario set creditos = ? where idusuario = ?");
-			s.setDouble(1, creditos);
+			s.setDouble(1, usu.getCreditos());
 			s.setInt(2, obtenerIdUsuario(usu.getNombreUsuario()));
 			s.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void buscarTop1() {
-		//TODO
-		//SELECT idusuario from partida ordered by puntuacion desc;
-		//devuelve instancia de la clase Top con atributo nombre  y puntuacion maxima
+	public static void rellenarTabla(DefaultTableModel modelo) {
+
+		try {
+			PreparedStatement s = conexion.prepareStatement("select nombre, puntuacion from partida p,usuario u where p.idusuario = u.idusuario order by puntuacion desc");
+			ResultSet rs = s.executeQuery();
+			for (int i = 1; i < 4; i++) 
+			{
+				if (rs.next()){
+					Object [] fila = new Object[3];
+					fila[0] = i;
+					for (int j=1;j<3;j++)
+						fila[j] = rs.getObject(j);
+					modelo.addRow(fila);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
 	}
+	
+
 		
 	
 }

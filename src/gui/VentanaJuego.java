@@ -249,7 +249,7 @@ public class VentanaJuego extends JFrame {
 		puntosTiempo();
 		puntosMeteoritos();
 		creditosPartida();
-		BaseDatos.actualizarCreditosUsuario(us, us.getCreditos());
+		BaseDatos.setCreditosUsuario(us);
 		this.dispose();
 		JOptionPane.showMessageDialog(this, "Game Over" +"\n" + "Puntuacion : " + part.getPuntuacion() +"\n " +"Tiempo: " + cro.getMinutos() +" : "+ cro.getSegundos() + "\n"+ "creditos obtenidos: " + part.getPuntuacion(),"Game Over",JOptionPane.YES_NO_OPTION);
 	}

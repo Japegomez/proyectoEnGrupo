@@ -38,6 +38,12 @@ public class Usuario {
 		this.creditos = creditos;
 	}
 
+	/**Le quita al usuario los creditos equivalentes al coste de una mejora
+	 * 
+	 */
+	public void quitarCreditos() {
+		this.creditos = this.creditos - 20;
+	}
 	/**
 	 * @return NaveJugador
 	 */
