@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 public class BaseDatos {
@@ -213,6 +214,30 @@ public class BaseDatos {
 		}
 
 
+	}
+	public static ArrayList<Partida> getPartidos(Usuario usu) {
+		ArrayList<Partida> aPartidas = new ArrayList<>();
+		try {
+			PreparedStatement s = conexion.prepareStatement("select puntuacion, fecha from partida where idusuario = ?");
+			s.setInt(1, obtenerIdUsuario(usu.getNombreUsuario()));
+			ResultSet rs =  s.executeQuery();
+			while (rs.next()) {
+				aPartidas.add(new Partida(rs.getInt("puntuacion"),rs.getLong("fecha")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return aPartidas;
+	}
+	public static void borrarPartida(Partida p) {
+		try {
+			PreparedStatement s = conexion.prepareStatement("delete from partida where fecha = ?");
+			s.setLong(1, p.getFecha());
+			s.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 

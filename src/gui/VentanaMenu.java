@@ -12,10 +12,12 @@ public class VentanaMenu extends JFrame {
 	JButton bJugar;
 	JButton bMejorarNave;
 	JButton bClasificacion;
+	JButton bBorrarPartidas;
 	JButton bCerrarSesion;
 	JTextArea tUsuario;
 	String nombreUsuario;
 	VentanaJuego vJuego;
+	VentanaBorrarPartida vBorrarP;
 	VentanaClasificaciones vClasi;
 	VentanaMejorasNave vMej;
 	
@@ -36,16 +38,27 @@ public class VentanaMenu extends JFrame {
 		bJugar = new JButton("Jugar");
 		bMejorarNave = new JButton("Mejorar Nave");
 		bClasificacion = new JButton("Clasificacion");
+		bBorrarPartidas = new JButton("Borrar partidas");
 		bCerrarSesion = new JButton("Cerrar Sesion");
 		
 		this.add(tUsuario);
 		this.add(bJugar);
 		this.add(bMejorarNave);
 		this.add(bClasificacion);
+		this.add(bBorrarPartidas);
 		this.add(bCerrarSesion);
 		
 		this.pack();
 		
+		bBorrarPartidas.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaMenu.this.setVisible(false);
+				vBorrarP = new VentanaBorrarPartida(VentanaMenu.this, usu);
+				vBorrarP.setVisible(true);
+			}
+		});
 		bCerrarSesion.addActionListener(new ActionListener() {
 			
 			@Override

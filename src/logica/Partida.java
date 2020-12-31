@@ -1,15 +1,23 @@
 package logica;
+import java.util.Date;
+
 import gui.VentanaJuego;
 
-public class Partida {
+public class Partida implements Comparable<Partida>{
 	private double puntuacion; //puntuacion que se obtiene al finalizar la partida
-
+	private long fecha;
 	/**Crea una partida
 	 * 
 	 */
 	public Partida() {
-		super();
+		this.fecha = System.currentTimeMillis();
 		this.puntuacion = 0;
+	}
+
+	public Partida(double puntuacion, long fecha) {
+		super();
+		this.puntuacion = puntuacion;
+		this.fecha = fecha;
 	}
 
 	/**
@@ -24,6 +32,36 @@ public class Partida {
 	 */
 	public void setPuntuacion(double puntuacion) {
 		this.puntuacion = puntuacion;
+	}
+
+	
+	public long getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(long fecha) {
+		this.fecha = fecha;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+			if (!(obj instanceof Partida)) return false;
+			return fecha == ((Partida)obj).fecha; 
+		
+	}
+	@Override
+	public int hashCode() {
+		return ((Long)fecha).hashCode();
+	}
+
+	@Override
+	public int compareTo(Partida o) {
+		return ((Long)fecha).compareTo(o.fecha);
+	}
+	
+	@Override
+	public String toString() {
+		return "puntuacion: " + this.puntuacion + "/ fecha: " + new Date(this.fecha).toString();
 	}
 	
 }
