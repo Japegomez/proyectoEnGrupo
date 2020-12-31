@@ -42,7 +42,7 @@ public class VentanaBorrarPartida extends JFrame{
 		super("Borrando Partida...");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setSize(400, 200);
+		setSize(700, 200);
 		
 		
 		JPanel pCentral = new JPanel();

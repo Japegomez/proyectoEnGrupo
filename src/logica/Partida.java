@@ -56,12 +56,12 @@ public class Partida implements Comparable<Partida>{
 
 	@Override
 	public int compareTo(Partida o) {
-		return ((Long)fecha).compareTo(o.fecha);
+		return ((Double)puntuacion).compareTo(o.puntuacion);
 	}
 	
 	@Override
 	public String toString() {
-		return "puntuacion: " + this.puntuacion + "/ fecha: " + new Date(this.fecha).toString();
+		return "puntuacion: " + this.puntuacion + " / fecha: " + new Date(this.fecha).toString();
 	}
 	
 }
