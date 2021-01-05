@@ -7,9 +7,9 @@ import gui.JLabelDisparo;
 public class Disparo extends ObjetoJuego{
 	
 	private int danyo; //Danyo del disparo de la nave
-	private int velocidad; // Velocidad del disparo
 	private JLabelDisparo lDisparo; // JLabel del disparo
-	
+	private int velocidad; //velocidad a la que se mueve el disparo
+	private long time;
 
 
 	/**Crea un disparo
@@ -26,6 +26,7 @@ public class Disparo extends ObjetoJuego{
 		lDisparo = new JLabelDisparo();
 		setPosX(this.getPosX());
 		setPosY(this.getPosY());
+		setTime(System.currentTimeMillis());
 	}
 
 	/**Devuelve el danyo que hace un disparo cuando da con un meteorito (int)
@@ -71,7 +72,10 @@ public class Disparo extends ObjetoJuego{
 	 */
 	@Override 
 	public void mover(double tiempo) {
-		this.setPosY((posY - (velocidadY *tiempo)));
+		double posFinal = posY - (velocidadY * tiempo);
+		for (double i = posY; i > posFinal; i--) {
+			this.setPosY(i);
+		}
 	}
 	/**Crea un rectangulo alrededor del meteorito
 	 * @return Un rectangulo alrededor del meteorito
@@ -79,5 +83,13 @@ public class Disparo extends ObjetoJuego{
 	public Rectangle getBounds() {
 		return new Rectangle((int)posX,(int)posY,(int)lDisparo.getHeight(),(int)lDisparo.getWidth());
 		
+	}
+
+	public long getTime() {
+		return time;
+	}
+
+	public void setTime(long time) {
+		this.time = time;
 	}
 }

@@ -6,6 +6,7 @@ import gui.VentanaJuego;
 public class Partida implements Comparable<Partida>{
 	private double puntuacion; //puntuacion que se obtiene al finalizar la partida
 	private long fecha;
+
 	/**Crea una partida
 	 * 
 	 */
@@ -34,15 +35,23 @@ public class Partida implements Comparable<Partida>{
 		this.puntuacion = puntuacion;
 	}
 
-	
+	/**
+	 * @return Fecha de la partida.
+	 */
 	public long getFecha() {
 		return fecha;
 	}
 
+	/**Modifica la fecha de la partida
+	 * @param fecha
+	 */
 	public void setFecha(long fecha) {
 		this.fecha = fecha;
 	}
 
+	/** Dos partidas son iguales si las fechas de las partidas coinciden.
+	 * @param obj
+	 */
 	@Override
 	public boolean equals(Object obj) {
 			if (!(obj instanceof Partida)) return false;
@@ -54,6 +63,7 @@ public class Partida implements Comparable<Partida>{
 		return ((Long)fecha).hashCode();
 	}
 
+	
 	@Override
 	public int compareTo(Partida o) {
 		return ((Double)puntuacion).compareTo(o.puntuacion);

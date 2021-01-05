@@ -17,8 +17,9 @@ class TestVentanaJuego {
 	void setUp() throws Exception {
 		Usuario usu = new Usuario("javi", "usu");
 		v1 = new VentanaJuego(usu, new VentanaMenu("menu", usu, new VentanaLogin("login")));
+		v1.creaCronometro();
 		ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>();
-		MeteoritoEnemigo m1 = new MeteoritoEnemigo(); //PosX = 150
+		MeteoritoEnemigo m1 = new MeteoritoEnemigo(v1.cro.getSegundos()); //PosX = 150
 		arrayMeteoritosEnPantalla.add(m1);
 		v1.arrayMeteoritosEnPantalla = arrayMeteoritosEnPantalla;
 
@@ -26,9 +27,9 @@ class TestVentanaJuego {
 	}
 
 	@Test
-	void testCheckeaXMeteorito() {
-		MeteoritoEnemigo m2 = new MeteoritoEnemigo(); //PosX = 150
-		assertEquals(false, v1.checkeaXMeteorito(m2.getPosX()));
+	void testMeteoritoCorrecto() {
+		MeteoritoEnemigo m2 = new MeteoritoEnemigo(v1.cro.getSegundos()); //PosX = 150
+		assertEquals(false, v1.nuevoMeteoritoCorrecto(m2.getPosX()));
 	}
 	
 	@Test

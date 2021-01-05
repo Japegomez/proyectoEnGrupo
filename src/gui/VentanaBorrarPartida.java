@@ -24,6 +24,11 @@ import logica.Usuario;
 
 public class VentanaBorrarPartida extends JFrame{
 	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private JLabel lBorrar;
 	
 	private JButton bConfirmar;

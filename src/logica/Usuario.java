@@ -51,14 +51,22 @@ public class Usuario {
 		return nave;
 	}
 
+	/**Modifica la nave del usuario.
+	 * @param nave Nueva nave.
+	 */
 	public void setNave(NaveJugador nave) {
 		this.nave = nave;
 	}
-
+	/**
+	 * @return ArrayList de partidas del usuario.
+	 */
 	public ArrayList<Partida> getPart() {
 		return part;
 	}
 
+	/**Modicia el ArrayList de partidas.
+	 * @param part Nuevo ArrayList de partidas.
+	 */
 	public void setPart(ArrayList<Partida> part) {
 		this.part = part;
 	}

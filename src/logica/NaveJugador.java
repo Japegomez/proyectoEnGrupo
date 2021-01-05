@@ -75,16 +75,34 @@ public class NaveJugador extends ObjetoJuego {
 	 */
 	@Override
 	public void setPosX(double posX) {
+		double diferencia = this.getPosX() - posX;
+		if (diferencia > 0) {
+			for (double i = this.getPosX(); i > posX; i--) {
+				lNave.setLocation((int) i, (int) this.getPosY());
+			}
+		} else if (diferencia < 0) {
+			for (double i = this.getPosX(); i < posX; i++) {
+				lNave.setLocation((int) i, (int) this.getPosY());
+			}
+		}
 		this.posX = posX;
-		lNave.setLocation((int) posX, (int) this.getPosY());
 	}
 	/**Modifica la posicion en el eje y de la nave y del JLabelNave 
 	 *
 	 */
 	@Override
 	public void setPosY(double posY) {
+		double diferencia = this.getPosY() - posY;
+		if (diferencia > 0) {
+			for (double i = this.getPosY(); i > posY; i--) {
+				lNave.setLocation((int) this.getPosX(), (int) i);
+			}
+		} else if (diferencia < 0) {
+			for (double i = this.getPosY(); i < posY; i++) {
+				lNave.setLocation((int) this.getPosX(), (int) i);
+			}
+		}
 		this.posY = posY;
-		lNave.setLocation((int)this.getPosX(),(int) posY);
 	}
 	
 	/**Crea una nave con valores por defecto
@@ -92,7 +110,7 @@ public class NaveJugador extends ObjetoJuego {
 	 */
 	public NaveJugador() {
 		super(0.0,0.0,10,10,150.0);
-		this.velocidadAtaque = 5;
+		this.velocidadAtaque = 1000;
 		this.danyoAtaque = 5;
 		this.ataqueCargado = 20;
 		lNave = new JLabelNave();
