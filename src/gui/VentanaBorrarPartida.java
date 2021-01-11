@@ -111,7 +111,7 @@ public class VentanaBorrarPartida extends JFrame{
 	}
 
 	private void initCombo(Usuario usu) {
-		ArrayList<Partida> aPartidas = BaseDatos.getPartidos(usu);		
+		ArrayList<Partida> aPartidas = BaseDatos.getPartidas(usu);		
 		Collections.sort(aPartidas);
 		mObjetosAEliminar.addAll(aPartidas);
 		

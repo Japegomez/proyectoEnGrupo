@@ -164,10 +164,7 @@ public class BaseDatos {
 		}
 		
 	}
-	public static ArrayList<Partida> setPartidas(Usuario usu) {
-		
-		return null;
-	}
+
 	public static int obtenerCreditos(Usuario usu) {
 		
 			try {
@@ -213,7 +210,7 @@ public class BaseDatos {
 
 
 	}
-	public static ArrayList<Partida> getPartidos(Usuario usu) {
+	public static ArrayList<Partida> getPartidas(Usuario usu) {
 		ArrayList<Partida> aPartidas = new ArrayList<>();
 		try {
 			PreparedStatement s = conexion.prepareStatement("select puntuacion, fecha from partida where idusuario = ?");
