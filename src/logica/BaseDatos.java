@@ -17,7 +17,7 @@ public class BaseDatos {
 	 * @param nombre nombre de la base de datos con la que se desea conectar
 	 * @return true si se ha conectado, false si ha habido un error.
 	 */
-	public static boolean abrirConexion( String nombre ) {
+	public static boolean initBD( String nombre ) {
 		try {
 			System.out.println( "Conexión abierta" );
 			Class.forName("org.sqlite.JDBC");  // Carga la clase de BD para sqlite
@@ -58,14 +58,13 @@ public class BaseDatos {
 	
 	public static void registrarNave(Usuario usu) {
 		try {
-			PreparedStatement s = conexion.prepareStatement("insert into nave ( idusuario, velocidadAtaque, danyoAtaque, ataqueCargado, vida, velocidadX, velocidadY) values (?, ?, ?, ?, ?, ?, ?)");
+			PreparedStatement s = conexion.prepareStatement("insert into nave ( idusuario, velocidadAtaque, danyoAtaque, vida, velocidadX, velocidadY) values (?, ?, ?, ?, ?, ?)");
 			s.setInt(1, obtenerIdUsuario(usu.getNombreUsuario()));
 			s.setDouble(2, usu.getNave().getVelocidadAtaque());
 			s.setDouble(3, usu.getNave().getDanyoAtaque());
-			s.setDouble(4, usu.getNave().getAtaqueCargado());
-			s.setInt(5, usu.getNave().getVida());
-			s.setDouble(6, usu.getNave().getVelocidadX());
-			s.setDouble(7, usu.getNave().getVelocidadY());
+			s.setInt(4, usu.getNave().getVida());
+			s.setDouble(5, usu.getNave().getVelocidadX());
+			s.setDouble(6, usu.getNave().getVelocidadY());
 			s.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -154,12 +153,11 @@ public class BaseDatos {
 	
 	public static void setNave(Usuario usu) {
 		try {
-			PreparedStatement s = conexion.prepareStatement("update nave set vida = ?, velocidadAtaque = ?, danyoAtaque = ?, ataqueCargado = ? where idusuario = ?");
+			PreparedStatement s = conexion.prepareStatement("update nave set vida = ?, velocidadAtaque = ?, danyoAtaque = ? where idusuario = ?");
 			s.setInt(1, usu.getNave().getVida());
 			s.setDouble(2, usu.getNave().getVelocidadAtaque());
 			s.setDouble(3, usu.getNave().getDanyoAtaque());
-			s.setDouble(4, usu.getNave().getAtaqueCargado());
-			s.setInt(5, obtenerIdUsuario(usu.getNombreUsuario()));
+			s.setInt(4, obtenerIdUsuario(usu.getNombreUsuario()));
 			s.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

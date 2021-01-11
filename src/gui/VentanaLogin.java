@@ -120,7 +120,7 @@ public class VentanaLogin extends JFrame{
 			
 			@Override
 			public void windowOpened(WindowEvent e) {
-				BaseDatos.abrirConexion("baseDatos.bd");
+				BaseDatos.initBD("baseDatos.bd");
 				
 			}
 		

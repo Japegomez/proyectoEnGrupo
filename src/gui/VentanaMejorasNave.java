@@ -29,7 +29,6 @@ public class VentanaMejorasNave extends JFrame {
 	private JTextField tfVida;
 	private JButton bVelocidad;
 	private JButton bDanio;
-	private JButton bUlti;
 	private JButton bVida;
 	private Thread actualizaCreditosDisponibles;
 	
@@ -52,10 +51,6 @@ public class VentanaMejorasNave extends JFrame {
 		tfDanio = new JTextField(3);
 		tfDanio.setEditable(false);
 		bDanio = new JButton("mejorar danio");
-		JLabel lMejoraU =  new JLabel("cooldown ulti actual: ");
-		tfUlti = new JTextField(3);
-		tfUlti.setEditable(false);
-		bUlti = new JButton("mejorar cooldown ulti");
 		JLabel lMejoraVi =  new JLabel("vida actual: ");
 		tfVida = new JTextField(3);
 		tfVida.setEditable(false);
@@ -76,9 +71,7 @@ public class VentanaMejorasNave extends JFrame {
 		pMejoras.add(lMejoraD);
 		pMejoras.add(tfDanio);
 		pMejoras.add(bDanio);
-		pMejoras.add(lMejoraU);
 		pMejoras.add(tfUlti);
-		pMejoras.add(bUlti);
 		pMejoras.add(lMejoraVi);
 		pMejoras.add(tfVida);
 		pMejoras.add(bVida);
@@ -132,26 +125,6 @@ public class VentanaMejorasNave extends JFrame {
 				}
 			}
 		});
-		bUlti.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(usu.getCreditos()>=50) {
-					if(usu.getNave().getAtaqueCargado()>10) {
-						usu.getNave().setAtaqueCargado(usu.getNave().getAtaqueCargado()-0.5);
-						tfUlti.setText("" + usu.getNave().getAtaqueCargado());
-						usu.quitarCreditos();
-						tfCreditosDisponibles.setText("" + usu.getCreditos()); 
-					}
-					if(usu.getNave().getAtaqueCargado()==10) {
-						bUlti.setEnabled(false);
-					}
-				}
-				else {
-					JOptionPane.showMessageDialog(VentanaMejorasNave.this, "creditos insuficientes");
-				}
-			}
-		});
 		bVida.addActionListener(new ActionListener() {
 
 			@Override
@@ -189,16 +162,12 @@ public class VentanaMejorasNave extends JFrame {
 				tfCreditosDisponibles.setText("" + usu.getCreditos());
 				tfCadencia.setText(""+ usu.getNave().getVelocidadAtaque());
 				tfDanio.setText(""+ usu.getNave().getDanyoAtaque());
-				tfUlti.setText(""+ usu.getNave().getAtaqueCargado());
 				tfVida.setText(""+ usu.getNave().getVida());
 				if(usu.getNave().getVelocidadAtaque()==1) {
 					bVelocidad.setEnabled(false);
 				}
 				if(usu.getNave().getDanyoAtaque()==10) {
 					bDanio.setEnabled(false);
-				}
-				if(usu.getNave().getAtaqueCargado()==10) {
-					bUlti.setEnabled(false);
 				}
 				if(usu.getNave().getVida()==20) {
 					bVida.setEnabled(false);

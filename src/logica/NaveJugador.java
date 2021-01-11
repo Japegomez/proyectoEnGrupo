@@ -11,7 +11,6 @@ public class NaveJugador extends ObjetoJuego {
 	
 	private double velocidadAtaque;//tiempo que tarda la nave en atacar (en milisegundos)
 	private double danyoAtaque;//danyo que hace cada disparo de la nave
-	private double ataqueCargado;//tiempo que tarda la nave en recuperar su ataque cargado
 	private JLabelNave lNave;//JLabel de la nave
 	
 	/**
@@ -41,21 +40,7 @@ public class NaveJugador extends ObjetoJuego {
 	public void setDanyoAtaque(double danyoAtaque) {
 		this.danyoAtaque = danyoAtaque;
 	}
-
-	/**
-	 * @return devuelve el tiempo que tarda en cargarse el ataque cargado (en milisegundos)
-	 */
-	public double getAtaqueCargado() {
-		return ataqueCargado;
-	}
-
-	/**Modifica el tiempo que tarda en cargarse el ataque cargado
-	 * @param ataqueCargado nuevo tiempo
-	 */
-	public void setAtaqueCargado(double ataqueCargado) {
-		this.ataqueCargado = ataqueCargado;
-	}
-
+	
 	/**
 	 * @return JLabelNave
 	 */
@@ -112,7 +97,6 @@ public class NaveJugador extends ObjetoJuego {
 		super(0.0,0.0,10,10,150.0);
 		this.velocidadAtaque = 1000;
 		this.danyoAtaque = 5;
-		this.ataqueCargado = 20;
 		lNave = new JLabelNave();
 		setPosX(this.getPosX());
 		setPosY(this.getPosY());
@@ -123,7 +107,6 @@ public class NaveJugador extends ObjetoJuego {
 		super(0.0, 0.0, vida, velocidadX, velocidadY);
 		this.velocidadAtaque = velocidadAtaque;
 		this.danyoAtaque = danyoAtaque;
-		this.ataqueCargado = ataqueCargado;
 		lNave = new JLabelNave();
 	}
 

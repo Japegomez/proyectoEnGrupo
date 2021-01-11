@@ -13,7 +13,7 @@ class TestBaseDatos {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		BaseDatos.abrirConexion("baseDatos.bd");
+		BaseDatos.initBD("baseDatos.bd");
 		BaseDatos.registrarUsuario(new Usuario("jon","hola"));
 	}
 	
