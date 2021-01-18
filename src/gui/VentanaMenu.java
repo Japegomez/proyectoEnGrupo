@@ -77,6 +77,7 @@ public class VentanaMenu extends JFrame {
 				vJuego.setVisible(true);
 				vJuego.creaNave();
 				vJuego.creaCronometro();
+				vJuego.crearPbVida();
 			}
 		});
 		

@@ -22,7 +22,7 @@ public class Disparo extends ObjetoJuego{
 	 */
 	public Disparo(double posX, double posY, int vida, double velocidadX, double velocidadY) {
 		super(posX, posY, vida, velocidadX, velocidadY);
-		this.danyo = 5;
+		this.danyo = 50;
 		lDisparo = new JLabelDisparo();
 		setPosX(this.getPosX());
 		setPosY(this.getPosY());

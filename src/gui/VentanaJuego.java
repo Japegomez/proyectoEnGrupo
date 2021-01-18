@@ -26,10 +26,12 @@ public class VentanaJuego extends JFrame {
 	private int maxMeteoritosEnPantalla = 6;
 	public ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>();
 	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEliminados = new ArrayList<>();
-	// private ArrayList<MeteoritoEnemigo> arrayMeteoritosEvitados = new ArrayList<>();
+	// private ArrayList<MeteoritoEnemigo> arrayMeteoritosEvitados = new
+	// ArrayList<>();
 	private ArrayList<MeteoritoEnemigo> arrayMeteoritosDisparados = new ArrayList<>();
 	private ArrayList<Disparo> arrayDisparo = new ArrayList<>();
 	public Cronometro cro;
+	public JProgressBar pbVida;
 
 	/**
 	 * Constructor de la ventanaJuego
@@ -42,12 +44,13 @@ public class VentanaJuego extends JFrame {
 		super("jugando...");
 		us = usuario;
 		nave = us.getNave();
-		vidaNavePartida = nave.getVida();
+
 		part = new Partida();
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setLocation(400, 150);
 		setSize(500, 500);
 		setResizable(false);
+		vidaNavePartida = nave.getVida();
 
 		pPrincipal = new PanelFondo();
 		pPrincipal.setLayout(null);
@@ -63,7 +66,7 @@ public class VentanaJuego extends JFrame {
 			@Override
 			public void run() {
 				boolean funciona = true;
-				
+
 				while (funciona) {
 
 					if (cro != null) {
@@ -75,31 +78,29 @@ public class VentanaJuego extends JFrame {
 							if (segundosPasados <= 10) {
 								// existe uno anterior
 								if (segundosPartidaLanzado + 3 <= segundosPasados) {
-									System.out.println(
-											"Creando meteorito en rango 1 (<=10). Segundos pasados: " + segundosPasados);
-									creaMeteorito();
+									System.out.println("Creando meteorito en rango 1 (<=10). Segundos pasados: "
+											+ segundosPasados);
+									creaMeteorito(10, 150);
 								}
 
 							} else if (segundosPasados <= 20) {
 								if (segundosPartidaLanzado + 2 <= segundosPasados) {
 									System.out.println("Creando meteorito en rango 2 (<=20). Segundos pasados: "
 											+ segundosPasados);
-									creaMeteorito();
-									
-
+									creaMeteorito(20, 200);
 								}
 							} else {
 								if (segundosPartidaLanzado + 1 <= segundosPasados) {
 									System.out.println("Creando meteorito en rango 3 (>=20). Segundos pasados: "
 											+ segundosPasados);
-									creaMeteorito();
+									creaMeteorito(50, 300);
 								}
 							}
 
 						} else {
 							// no existen meteoritos
 							System.out.println("Creando primer meteorito. Segundos pasados: " + segundosPasados);
-							creaMeteorito();
+							creaMeteorito(10, 150);
 						}
 					}
 					ArrayList<MeteoritoEnemigo> aEliminar = new ArrayList<>();
@@ -134,13 +135,12 @@ public class VentanaJuego extends JFrame {
 					choqueConMeteorito();
 					DisparoChoqueMeteorito();
 
-				
 					if (estaMuerto()) {
 						funciona = false;
 						cro.pausarCrono();
 						gameOver();
 					}
-					
+
 				}
 
 				repaint();
@@ -268,7 +268,7 @@ public class VentanaJuego extends JFrame {
 	 * pantalla)
 	 * 
 	 */
-	public void creaMeteorito() {
+	public void creaMeteorito(int DanyoMeteorito, int vidaMeteorito) {
 		System.out.println(arrayMeteoritosEnPantalla.size());
 		if (arrayMeteoritosEnPantalla.size() + 1 >= maxMeteoritosEnPantalla) {
 			System.out.println("Intentando crear meteorito intentando superar el limite de " + maxMeteoritosEnPantalla);
@@ -281,7 +281,8 @@ public class VentanaJuego extends JFrame {
 		}
 		me1.setPosX(x);
 		me1.setPosY(-(me1.getlMeteorito().getHeight()));
-		me1.setDanyoAJugador(10);
+		me1.setDanyoAJugador(DanyoMeteorito);
+		me1.setVida(vidaMeteorito);
 		pPrincipal.add(me1.getlMeteorito());
 		arrayMeteoritosEnPantalla.add(me1);
 	}
@@ -311,20 +312,22 @@ public class VentanaJuego extends JFrame {
 	 */
 	public boolean nuevoMeteoritoCorrecto(double x) {
 		for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
-				double miPosX = meteoritoEnemigo.getPosX();
-				double miPosY = meteoritoEnemigo.getPosY();
+			double miPosX = meteoritoEnemigo.getPosX();
+			double miPosY = meteoritoEnemigo.getPosY();
 
-				double mfPosX = miPosX + meteoritoEnemigo.getlMeteorito().getWidth();
-				double mfPosY = miPosY + meteoritoEnemigo.getlMeteorito().getHeight();
+			double mfPosX = miPosX + meteoritoEnemigo.getlMeteorito().getWidth();
+			double mfPosY = miPosY + meteoritoEnemigo.getlMeteorito().getHeight();
 
-				double principioNuevo = x;
-				double finalNuevo = x + meteoritoEnemigo.getlMeteorito().getWidth(); // teniendo en cuenta que el width de todos los meteoritos es igual
-				
-				if (!(!(miPosX < principioNuevo && principioNuevo < mfPosX) && !(miPosX < finalNuevo  && finalNuevo < mfPosX))) {
-					if (!(miPosY > meteoritoEnemigo.getlMeteorito().getHeight())) {
-						return false;
-					}
+			double principioNuevo = x;
+			double finalNuevo = x + meteoritoEnemigo.getlMeteorito().getWidth(); // teniendo en cuenta que el width de
+																					// todos los meteoritos es igual
+
+			if (!(!(miPosX < principioNuevo && principioNuevo < mfPosX)
+					&& !(miPosX < finalNuevo && finalNuevo < mfPosX))) {
+				if (!(miPosY > meteoritoEnemigo.getlMeteorito().getHeight())) {
+					return false;
 				}
+			}
 		}
 		return true;
 	}
@@ -341,7 +344,11 @@ public class VentanaJuego extends JFrame {
 			if (!arrayMeteoritosEliminados.contains(me)) {
 				if (me.getBounds().intersects(nave.getBounds())) {
 					aEliminar.add(me);
+					System.out.println("vida del nave antes: " + vidaNavePartida + " -- " + "danio del meteorito: " + me.getDanyoAJugador());
 					vidaNavePartida = vidaNavePartida - (int) me.getDanyoAJugador();
+					int porcentajeVida = 100 * vidaNavePartida / nave.getVida();
+					System.out.println("Porcentaje de la vida: " + porcentajeVida);
+					pbVida.setValue(porcentajeVida);
 					System.out.println("Ha chocado !!");
 					System.out.println(vidaNavePartida);
 				}
@@ -356,7 +363,7 @@ public class VentanaJuego extends JFrame {
 	}
 
 	/**
-	 * Comprueba si un disparo y la nave han chocado
+	 * Comprueba si un disparo y la nave han chocado.
 	 * 
 	 */
 	public void DisparoChoqueMeteorito() {
@@ -367,10 +374,17 @@ public class VentanaJuego extends JFrame {
 				for (MeteoritoEnemigo me : arrayMeteoritosEnPantalla) {
 					if (!arrayMeteoritosEliminados.contains(me)) {
 						if (me.getBounds().intersects(dis.getBounds())) {
-							me.setDanyoAJugador(0);
-							aEliminarMeteortitos.add(me);
-							aEliminarDisparo.add(dis);
-							System.out.println("Han chocado !!");
+							if (me.getVida() - dis.getDanyo() <= 0) {
+								me.setDanyoAJugador(0);
+								aEliminarMeteortitos.add(me);
+								aEliminarDisparo.add(dis);
+								System.out.println("Han chocado !!");
+							} else {
+								me.setVida(me.getVida() - dis.getDanyo());
+								System.out.println("Vida del meteorito tras el choque " + me.getVida());
+								aEliminarDisparo.add(dis);
+							}
+
 						}
 					}
 				}
@@ -451,6 +465,55 @@ public class VentanaJuego extends JFrame {
 		us.setCreditos(us.getCreditos() + part.getPuntuacion());
 	}
 
+	/**
+	 * Crea el JProgessBar con el porcentaje de la vida de la nave en la partida.
+	 * 
+	 */
+	public void crearPbVida() {
+		pbVida = new JProgressBar();
+		pbVida.setValue(100);
+		pbVida.setBounds(0, (int) (pPrincipal.getHeight() - pbVida.getPreferredSize().getHeight() - 80), 50, 25);
+		pPrincipal.add(pbVida);
+
+	}
+	/**
+	 * Crea el Cronometro de la partida en minitos,segundos,milisegundos.
+	 * 
+	 */
+	public void creaCronometro() {
+		cro = new Cronometro();
+		// System.out.println(pPrincipal.getHeight() -
+		// cro.getPreferredSize().getHeight());
+		cro.setBounds(0, (int) (pPrincipal.getHeight() - cro.getPreferredSize().getHeight() - 100), 100, 100);
+		cro.setForeground(Color.white);
+		cro.setBackground(Color.white);
+		pPrincipal.add(cro);
+	}
+
+	private double getRandom(double lowerBound, double upperBound) {
+		Random random = new Random();
+		double randomValue = lowerBound + (upperBound - lowerBound) * random.nextDouble();
+		return randomValue;
+	}
+
+	public int getVidaNavePartida() {
+		return vidaNavePartida;
+	}
+
+	public void setVidaNavePartida(int vidaNavePartida) {
+		this.vidaNavePartida = vidaNavePartida;
+	}
+
+	
+
+	public JProgressBar getPbVida() {
+		return pbVida;
+	}
+
+	public void setPbVida(JProgressBar pbVida) {
+		this.pbVida = pbVida;
+	}
+
 	public Usuario getUs() {
 		return us;
 	}
@@ -465,30 +528,5 @@ public class VentanaJuego extends JFrame {
 
 	public void setNave(NaveJugador nave) {
 		this.nave = nave;
-	}
-
-	public void creaCronometro() {
-		cro = new Cronometro();
-		System.out.println(pPrincipal.getHeight() - cro.getPreferredSize().getHeight());
-		cro.setBounds(0, (int) (pPrincipal.getHeight() - cro.getPreferredSize().getHeight() - 100), 100, 100); // FIXME
-																												// cambiar
-																												// "-100"
-		cro.setForeground(Color.white);
-		cro.setBackground(Color.white);
-		pPrincipal.add(cro);
-	}
-
-	public int getVidaNavePartida() {
-		return vidaNavePartida;
-	}
-
-	public void setVidaNavePartida(int vidaNavePartida) {
-		this.vidaNavePartida = vidaNavePartida;
-	}
-
-	private double getRandom(double lowerBound, double upperBound) {
-		Random random = new Random();
-		double randomValue = lowerBound + (upperBound - lowerBound) * random.nextDouble();
-		return randomValue;
 	}
 }
