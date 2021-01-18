@@ -121,7 +121,7 @@ public class VentanaLogin extends JFrame{
 			@Override
 			public void windowOpened(WindowEvent e) {
 				BaseDatos.initBD("baseDatos.bd");
-				
+				BaseDatos.crearTablas();
 			}
 		
 			

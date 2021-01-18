@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -17,15 +19,18 @@ public class BaseDatos {
 	 * @param nombre nombre de la base de datos con la que se desea conectar
 	 * @return true si se ha conectado, false si ha habido un error.
 	 */
-	public static boolean initBD( String nombre ) {
+	public static void initBD( String nombre ) {
 		try {
-			System.out.println( "Conexión abierta" );
-			Class.forName("org.sqlite.JDBC");  // Carga la clase de BD para sqlite
-			conexion = DriverManager.getConnection("jdbc:sqlite:" + nombre );
-			return true;
-		} catch(Exception e) {
-			e.printStackTrace();
-			return false;
+			if (conexion==null) {
+				Class.forName("org.sqlite.JDBC"); 
+				conexion = DriverManager.getConnection("jdbc:sqlite:" + nombre );
+				Main.logger.log(Level.INFO, "Conexion a la base de datos abierta");
+			}
+			else {
+				Main.logger.log(Level.INFO, "Ya existe una conexión abierta");
+			}
+		} catch(ClassNotFoundException | SQLException e) {
+			Main.logger.log( Level.SEVERE, "Error al abrir la conexión de la base de datos " + e );
 		}
 	}
 	/**Cierra la conexion con la base de datos
@@ -34,9 +39,10 @@ public class BaseDatos {
 	public static void cerrarConexion() {
 		try {
 			conexion.close();
-			System.out.println( "Conexión cerrada" );
+			conexion = null;
+			Main.logger.log(Level.INFO, "Conexion a la base de datos cerrada");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Main.logger.log( Level.SEVERE, "Error al cerrar la conexión de la base de datos " + e );
 		}
 	}
 	/**Registra un nuevo usuario en la base de datos
@@ -232,6 +238,29 @@ public class BaseDatos {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+	}
+	public static void crearTablas() {
+		try {
+			Statement stat = conexion.createStatement();
+			stat.setQueryTimeout(30);
+			String sql = "CREATE TABLE if not exists nave ( idusuario INTEGER NOT NULL, velocidadAtaque DOUBLE, danyoAtaque DOUBLE,"
+					+ "idnave INTEGER, vida INTEGER, velocidadX DOUBLE, velocidadY DOUBLE);";
+			stat.executeUpdate(sql);
+			Main.logger.log( Level.INFO, "BD creación de tabla\t" + sql);
+			sql = "CREATE TABLE if not exists partida (idusuario INTEGER NOT NULL, idpartida INTEGER PRIMARY KEY AUTOINCREMENT, "
+					+ "puntuacion INTEGER, fecha INTEGER);";
+			stat.executeUpdate(sql);
+			Main.logger.log( Level.INFO, "BD creación de tabla\t" + sql);
+			sql = "CREATE TABLE usuario (nombre TEXT, contrasenya TEXT, nivel INTEGER, "
+					+ "idusuario INTEGER PRIMARY KEY AUTOINCREMENT, creditos INTEGER);";
+
+			stat.executeUpdate(sql);
+			Main.logger.log( Level.INFO, "BD creación de tabla\t" + sql);
+		} catch (SQLException e) {
+			Main.logger.log( Level.SEVERE, "Error al crear las tablas de la base de datos", e );
+		}
+		
 		
 	}
 	
