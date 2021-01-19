@@ -66,7 +66,9 @@ public class Partida implements Comparable<Partida> {
 
 	}
 
-	
+	/**
+	 * @return Devuelve un valor hash dependiendo de la fecha.
+	 */
 	@Override
 	public int hashCode() {
 		return ((Long) fecha).hashCode();
@@ -75,6 +77,7 @@ public class Partida implements Comparable<Partida> {
 	/**
 	 * Compara las partidas segun su puntuacion.
 	 * @param o Partida a comparar
+	 * @return Int de la comparacion.
 	 */
 	@Override
 	public int compareTo(Partida o) {

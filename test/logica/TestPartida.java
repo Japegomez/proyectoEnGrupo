@@ -16,11 +16,16 @@ public class TestPartida {
         assertEquals(false,p1.equals(p2));
         assertEquals(true,p1.equals(p3));
     }
-
+    @Test
     public void testToString(){
         Partida p4 = new Partida(23423,644234);
         Partida p5 = new Partida(2341234,834643);
-        System.out.println(p4.toString());
-        System.out.println(p5.toString());
+
+        String s1 = "puntuacion: 23423.0 / fecha: Thu Jan 01 01:10:44 CET 1970";
+        String s2 = "puntuacion: 2341234.0 / fecha: Thu Jan 01 01:13:54 CET 1970";
+        
+        assertEquals(s1,p4.toString());
+        assertEquals(s2,p5.toString());
+        
     }
 }

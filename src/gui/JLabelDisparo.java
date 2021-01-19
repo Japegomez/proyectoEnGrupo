@@ -6,26 +6,25 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import logica.Config;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class JLabelDisparo extends JLabel {
-	final private int ANCHO_DISP = 50;
-	final private int ALTO_DISP = 50;
-
+	private Config c = new Config();
 	/**
 	 * @return int Ancho del jlabel de la nave (en pixels)
 	 */
 	public int getAnchoDisparo() {
-		return ANCHO_DISP;
+		return Integer.parseInt(c.getProp("ANCHO_DISTP"));
 	}
 
 	/**
 	 * @return int Altura del jlabel de la nave (en pixels)
 	 */
 	public int getAltoDisparo() {
-		return ALTO_DISP;
+		return Integer.parseInt(c.getProp("ALTO_DISTP"));
 	}
 
 	/**
@@ -35,8 +34,8 @@ public class JLabelDisparo extends JLabel {
 		ImageIcon imageIcon = new ImageIcon("./resources/disparo.png");
 
 		this.setIcon(imageIcon);
-		setBounds(0, 0, ANCHO_DISP, ALTO_DISP);
-		setPreferredSize(new Dimension(ANCHO_DISP, ALTO_DISP));
+		setBounds(0, 0, getAnchoDisparo(), getAltoDisparo());
+		setPreferredSize(new Dimension(getAnchoDisparo(), getAltoDisparo()));
 
 	}
 
@@ -51,7 +50,7 @@ public class JLabelDisparo extends JLabel {
 		try {
 			final BufferedImage dimg = ImageIO.read(new File("./resources/disparo.png"));
 			((Graphics2D) g).rotate(Math.toRadians(180), dimg.getWidth() / 2, dimg.getHeight() / 2);
-			img = dimg.getScaledInstance(ANCHO_DISP, ALTO_DISP, 1);
+			img = dimg.getScaledInstance(getAnchoDisparo(), getAltoDisparo(), 1);
 			// super.paintComponent(g);
 		} catch (final IOException e) {
 			e.printStackTrace();
