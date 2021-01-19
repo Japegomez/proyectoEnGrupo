@@ -22,16 +22,20 @@ public class VentanaJuego extends JFrame {
 	private Usuario us; // usuario de la partida
 	private NaveJugador nave; // nave del usuario
 	private Partida part; // partida
-	private int vidaNavePartida;
-	private int maxMeteoritosEnPantalla = 6;
-	public ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>();
-	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEliminados = new ArrayList<>();
-	// private ArrayList<MeteoritoEnemigo> arrayMeteoritosEvitados = new
-	// ArrayList<>();
-	private ArrayList<MeteoritoEnemigo> arrayMeteoritosDisparados = new ArrayList<>();
-	private ArrayList<Disparo> arrayDisparo = new ArrayList<>();
-	public Cronometro cro;
-	public JProgressBar pbVida;
+	private int vidaNavePartida; // Vida de la nave en la partida.
+	private int maxMeteoritosEnPantalla = 6; // Número máximo de meteoritos en la pantalla de juego.
+	public ArrayList<MeteoritoEnemigo> arrayMeteoritosEnPantalla = new ArrayList<>(); // ArrayList de meteoritos que
+																						// estan en la pantalla.
+	private ArrayList<MeteoritoEnemigo> arrayMeteoritosEliminados = new ArrayList<>(); // ArrayList de meteoritos que
+																						// han sido eliminados por
+																						// salirse de la ventanan de
+																						// juego.
+	private ArrayList<MeteoritoEnemigo> arrayMeteoritosDisparados = new ArrayList<>(); // ArrayList de meterotios que
+																						// has sido eliminados por
+																						// disparo.
+	private ArrayList<Disparo> arrayDisparo = new ArrayList<>(); // ArrayList de disparos.
+	public Cronometro cro; // Cronometro de la partida.
+	public JProgressBar pbVida; // JProgessbar del porcentaje de vida de la nave.
 
 	/**
 	 * Constructor de la ventanaJuego
@@ -230,7 +234,6 @@ public class VentanaJuego extends JFrame {
 
 	/**
 	 * Crea una nave y la posiciona en relacion al panel de juego
-	 * 
 	 */
 	public void creaNave() {
 		nave = us.getNave();
@@ -243,8 +246,7 @@ public class VentanaJuego extends JFrame {
 
 	public void crearDisparo() {
 		Disparo ultimoDisparo = arrayDisparo.size() == 0 ? null : arrayDisparo.get(arrayDisparo.size() - 1);
-		Disparo nuevoDis = new Disparo(nave.getPosX() + nave.getlNave().getAnchoNave() / 2,
-				nave.getPosY() - nave.getlNave().getAltoNave() / 2, 1, 0, 5);
+		Disparo nuevoDis = new Disparo(nave.getPosX(), nave.getPosY() - nave.getlNave().getAltoNave() / 2, 1, 0, 5);
 		if (ultimoDisparo != null) {
 			// existe un disparo ultimo => comparar tiempos
 			long diff = nuevoDis.getTime() - ultimoDisparo.getTime();
@@ -264,9 +266,10 @@ public class VentanaJuego extends JFrame {
 	}
 
 	/**
-	 * Crea un meteorito y lo posiciona en relacion al panel de juego(fuera de la
+	 * Crea un meteorito y lo posiciona en relacion al panel de juego (fuera de la
 	 * pantalla)
-	 * 
+	 * @param DanyoMeteorito Danio de meteorito
+	 * @param vidaMeteorito Vida del meterorio
 	 */
 	public void creaMeteorito(int DanyoMeteorito, int vidaMeteorito) {
 		System.out.println(arrayMeteoritosEnPantalla.size());
@@ -289,7 +292,6 @@ public class VentanaJuego extends JFrame {
 
 	/**
 	 * Cierra la ventana y actualiza los creditos del jugador
-	 * 
 	 */
 	public void gameOver() {
 		cro.pausarCrono();
@@ -344,7 +346,8 @@ public class VentanaJuego extends JFrame {
 			if (!arrayMeteoritosEliminados.contains(me)) {
 				if (me.getBounds().intersects(nave.getBounds())) {
 					aEliminar.add(me);
-					System.out.println("vida del nave antes: " + vidaNavePartida + " -- " + "danio del meteorito: " + me.getDanyoAJugador());
+					System.out.println("vida del nave antes: " + vidaNavePartida + " -- " + "danio del meteorito: "
+							+ me.getDanyoAJugador());
 					vidaNavePartida = vidaNavePartida - (int) me.getDanyoAJugador();
 					int porcentajeVida = 100 * vidaNavePartida / nave.getVida();
 					System.out.println("Porcentaje de la vida: " + porcentajeVida);
@@ -437,17 +440,20 @@ public class VentanaJuego extends JFrame {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		// nave.paint(g2d);
-		// for (MeteoritoEnemigo meteoritoEnemigo : arrayMeteoritosEnPantalla) {
-		// meteoritoEnemigo.paint(g2d);
 	}
 
+	/**
+	 * Suma la puntuacion por el tiempo a la puntuacion de la partida.
+	 */
 	public void puntosTiempo() {
 		double puntuacion = part.getPuntuacion();
 		puntuacion += (60 * cro.getMinutos()) + cro.getSegundos();
 		part.setPuntuacion(puntuacion);
 	}
 
+	/**
+	 * Suma la puntuacion por matar a un meteorito a la puntuacion de la partida.
+	 */
 	public void puntosMeteoritos() {
 		double puntuacion = part.getPuntuacion();
 		for (MeteoritoEnemigo meteorito : arrayMeteoritosDisparados) {
@@ -458,7 +464,7 @@ public class VentanaJuego extends JFrame {
 
 	/**
 	 * Le otorga al jugador los creditos que le corresponden tras haber jugado la
-	 * partida
+	 * partida.
 	 * 
 	 */
 	public void creditosPartida() {
@@ -476,8 +482,9 @@ public class VentanaJuego extends JFrame {
 		pPrincipal.add(pbVida);
 
 	}
+
 	/**
-	 * Crea el Cronometro de la partida en minitos,segundos,milisegundos.
+	 * Crea el Cronometro de la partida en minutos,segundos,milisegundos.
 	 * 
 	 */
 	public void creaCronometro() {
@@ -496,36 +503,66 @@ public class VentanaJuego extends JFrame {
 		return randomValue;
 	}
 
+	/**
+	 * @return La vida de la nave en la partida.
+	 */
 	public int getVidaNavePartida() {
 		return vidaNavePartida;
 	}
 
+	/**
+	 * Modifica el vida de la nave en la partida.
+	 * 
+	 * @param vidaNavePartida Nueva vida de la nave en la partida.
+	 */
 	public void setVidaNavePartida(int vidaNavePartida) {
 		this.vidaNavePartida = vidaNavePartida;
 	}
 
-	
-
+	/**
+	 * @return El JProgressBar de la vida de la nave en la partida.
+	 */
 	public JProgressBar getPbVida() {
 		return pbVida;
 	}
 
+	/**
+	 * Modifica el JProgressBar de la vida de la nave en la partida.
+	 * 
+	 * @param pbVida Nueva JProgressBar de la vida de la nave en la partida.
+	 */
 	public void setPbVida(JProgressBar pbVida) {
 		this.pbVida = pbVida;
 	}
 
+	/**
+	 * @return El usuario.
+	 */
 	public Usuario getUs() {
 		return us;
 	}
 
+	/**
+	 * Modifica el usuario.
+	 * 
+	 * @param pbVida Nueva usuario.
+	 */
 	public void setUs(Usuario us) {
 		this.us = us;
 	}
 
+	/**
+	 * @return La nave del usuario.
+	 */
 	public NaveJugador getNave() {
 		return nave;
 	}
 
+	/**
+	 * Modifica la nave del usuario.
+	 * 
+	 * @param nave Nueva nave del usuario..
+	 */
 	public void setNave(NaveJugador nave) {
 		this.nave = nave;
 	}

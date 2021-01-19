@@ -119,18 +119,34 @@ public class MeteoritoEnemigo extends ObjetoJuego {
 		return VALOR_CREDITOS;
 	}
 
+	/** 
+	 * @return La hora de la salida del meteorito.
+	 */
 	public long getTime() {
 		return time;
 	}
 
+	/** 
+	 * Modifica la hora del meteorito.
+	 * 
+	 * @param time Nueva hora del meteorito.
+	 */
 	public void setTime(long time) {
 		this.time = time;
 	}
 
+	/**
+	 * @return Los segundos del meteorito en la partida.
+	 */
 	public int getCurrentSegundosPartida() {
 		return currentSegundosPartida;
 	}
 
+	/** 
+	 * Modifica Los segundos del meteorito en la partida.
+	 * 
+	 * @param currentSegundosPartida Nuevos segundos.
+	 */
 	public void setCurrentSegundosPartida(int currentSegundosPartida) {
 		this.currentSegundosPartida = currentSegundosPartida;
 	}

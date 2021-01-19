@@ -11,10 +11,11 @@ import logica.BaseDatos;
 
 import logica.Usuario;
 
+/**Clase de la ventana login para acceder al juego
+ * @author SpaceDefense
+ */
 public class VentanaLogin extends JFrame{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	private JLabel lNombreUsuario;
@@ -26,7 +27,7 @@ public class VentanaLogin extends JFrame{
 	private String nombreAsegurado;
 	private String contraAsegurada;
 	
-	/**Crea una ventana de login
+	/**Crea una ventana de login con sus listeners de los botones y la ventana
 	 * @param titulo titulo de la ventana
 	 */
 	public VentanaLogin(String titulo) {		
@@ -38,7 +39,6 @@ public class VentanaLogin extends JFrame{
 		JPanel pNombre = new JPanel();
 		JPanel pContrasenia = new JPanel();
 		JPanel pBotonera = new JPanel();
-		
 		
 		lNombreUsuario = new JLabel("Usuario");
 		tfNombreUsuario = new JTextField(15);
@@ -115,7 +115,6 @@ public class VentanaLogin extends JFrame{
 				}
 			}
 		});
-		
 		addWindowListener(new WindowAdapter() {
 			
 			@Override
@@ -123,7 +122,7 @@ public class VentanaLogin extends JFrame{
 				BaseDatos.initBD("baseDatos.bd");
 				
 			}
-		
+
 			
 			@Override
 			public void windowClosed(WindowEvent e) {

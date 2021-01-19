@@ -3,23 +3,16 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.TreeMap;
-
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
 
 import logica.BaseDatos;
 
-/**
+/**Clase para crear y actualizar la ventana de las clasificaciones
  * @author SpaceDefense
  *
  */
@@ -27,6 +20,9 @@ public class VentanaClasificaciones extends JFrame{
 	private DefaultTableModel modelo;
 	private JTable tabla;
 	
+/**Constructor de la ventana de clasificacion
+ * @param ventana principal donde se encontrara la ventana de las clasificaciones
+ */
 	public VentanaClasificaciones(VentanaMenu vMenu) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -45,6 +41,10 @@ public class VentanaClasificaciones extends JFrame{
 			}
 		});
 	}
+
+/**Clase para inicializar la tabla que aparecera en la ventana
+ * @author SpaceDefense
+ */
 	private void initTabla() {
 		modelo = new DefaultTableModel();
 		modelo.addColumn("puesto");

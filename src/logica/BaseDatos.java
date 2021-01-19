@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
+	/**Clase de la base de datos para crearla y administrarla 
+	 * @param vMenu VentanaMenu de la que precede
+	 */
 public class BaseDatos {
 	private static Connection conexion;
 	
@@ -41,7 +44,6 @@ public class BaseDatos {
 	}
 	/**Registra un nuevo usuario en la base de datos
 	 * @param usuario nombre del usuario
-	 * @param contrasenya contrasenya del usuario
 	 */
 	public static void registrarUsuario(Usuario usu) {
 		try {
@@ -55,7 +57,9 @@ public class BaseDatos {
 			e.printStackTrace();
 		}
 	}
-	
+	/**Registra una nueva nave en la base de datos
+	 * @param usuario nombre del usuario
+	 */
 	public static void registrarNave(Usuario usu) {
 		try {
 			PreparedStatement s = conexion.prepareStatement("insert into nave ( idusuario, velocidadAtaque, danyoAtaque, vida, velocidadX, velocidadY) values (?, ?, ?, ?, ?, ?)");
@@ -139,6 +143,10 @@ public class BaseDatos {
 				e.printStackTrace();
 		}
 	}
+	/**Obtiene la nave de la base de datos
+	 * @param usuario nombre del usuario
+	 * @return la nave del usuario introducido
+	 */
 	public static NaveJugador obtenerNave(Usuario usu) {
 		try {
 			PreparedStatement s = conexion.prepareStatement("select * from nave where idusuario = ?");
@@ -151,6 +159,9 @@ public class BaseDatos {
 		return null;
 	}
 	
+	/**Actualiza la nave 
+	 * @param usuario nombre del usuario
+	 */
 	public static void setNave(Usuario usu) {
 		try {
 			PreparedStatement s = conexion.prepareStatement("update nave set vida = ?, velocidadAtaque = ?, danyoAtaque = ? where idusuario = ?");
@@ -165,6 +176,10 @@ public class BaseDatos {
 		
 	}
 
+	/**Obtiene los creditos de la base de datos
+	 * @param usuario nombre del usuario
+	 * @return creditos del usuario introducido
+	 */
 	public static int obtenerCreditos(Usuario usu) {
 		
 			try {
@@ -179,6 +194,9 @@ public class BaseDatos {
 		return 0;
 	}
 
+	/**Actualiza los creditos en la base de datos
+	 * @param usuario nombre del usuario
+	 */
 	public static void setCreditosUsuario(Usuario usu) {
 		try {
 			PreparedStatement s = conexion.prepareStatement("update usuario set creditos = ? where idusuario = ?");
@@ -189,6 +207,9 @@ public class BaseDatos {
 			e.printStackTrace();
 		}
 	}
+	/**Registra un nuevo usuario en la base de datos
+	 * @param modelo 
+	 */
 	public static void rellenarTabla(DefaultTableModel modelo) {
 
 		try {

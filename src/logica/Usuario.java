@@ -4,46 +4,54 @@ import java.util.*;
 
 public class Usuario {
 	public NaveJugador nave;
-	public String nombreUsuario;//nombre que es usuario decida ponerse
-	public String contrasenya;//contraseña del usuario
-	
-	public int nivel;//nivel del jugador
-	public ArrayList<Partida> part;//Lista de partidas del jugador
-	public double creditos; //creditos del jugador 
+	public String nombreUsuario;// nombre que es usuario decida ponerse
+	public String contrasenya;// contraseña del usuario
 
-	/**Crea un usuario
-	 * @param usuario String del nombre del usuario
+	public int nivel;// nivel del jugador
+	public ArrayList<Partida> part;// Lista de partidas del jugador
+	public double creditos; // creditos del jugador
+
+	/**
+	 * Crea un usuario
+	 * 
+	 * @param usuario     String del nombre del usuario
 	 * @param contrasenya String de la contrasenya del usuario
 	 */
 	public Usuario(String usuario, String contrasenya) {
 		this.nave = new NaveJugador();
 		this.nombreUsuario = usuario;
 		this.contrasenya = contrasenya;
-		this.nivel= 0;
-		this.creditos=0;
+		this.nivel = 0;
+		this.creditos = 0;
 		this.part = new ArrayList<Partida>();
 	}
 
-	/**Metodo para obtener los creditos del usuario
+	/**
+	 * Metodo para obtener los creditos del usuario
+	 * 
 	 * @return creditos disponibles para el usuario
 	 */
 	public double getCreditos() {
 		return creditos;
 	}
 
-	/**Metodo para alterar los creditos que tiene el usuario
+	/**
+	 * Metodo para alterar los creditos que tiene el usuario
+	 * 
 	 * @param creditos valor de creditos que se obtiene
 	 */
 	public void setCreditos(double creditos) {
 		this.creditos = creditos;
 	}
 
-	/**Le quita al usuario los creditos equivalentes al coste de una mejora
+	/**
+	 * Le quita al usuario los creditos equivalentes al coste de una mejora
 	 * 
 	 */
 	public void quitarCreditos() {
 		this.creditos = this.creditos - 20;
 	}
+
 	/**
 	 * @return NaveJugador
 	 */
@@ -51,12 +59,15 @@ public class Usuario {
 		return nave;
 	}
 
-	/**Modifica la nave del usuario.
+	/**
+	 * Modifica la nave del usuario.
+	 * 
 	 * @param nave Nueva nave.
 	 */
 	public void setNave(NaveJugador nave) {
 		this.nave = nave;
 	}
+
 	/**
 	 * @return ArrayList de partidas del usuario.
 	 */
@@ -64,7 +75,9 @@ public class Usuario {
 		return part;
 	}
 
-	/**Modicia el ArrayList de partidas.
+	/**
+	 * Modicia el ArrayList de partidas.
+	 * 
 	 * @param part Nuevo ArrayList de partidas.
 	 */
 	public void setPart(ArrayList<Partida> part) {
@@ -72,28 +85,32 @@ public class Usuario {
 	}
 
 	/**
-	 * @return nombreUsuario String Nombre del usuario  
+	 * @return nombreUsuario String Nombre del usuario
 	 */
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
 
-	/**Modifica el nombre del usuario
-	 * @param nombreUsuario String Nuevo nombre del usuario 
+	/**
+	 * Modifica el nombre del usuario
+	 * 
+	 * @param nombreUsuario String Nuevo nombre del usuario
 	 */
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
 
 	/**
-	 * @return contrasenya  String Contrasenya del usuario
+	 * @return contrasenya String Contrasenya del usuario
 	 */
 	public String getContrasenya() {
 		return contrasenya;
 	}
 
-	/**Modifica la contrasenya del usuario
-	 * @param contrasenya String  Nueva contrasenya del usuario
+	/**
+	 * Modifica la contrasenya del usuario
+	 * 
+	 * @param contrasenya String Nueva contrasenya del usuario
 	 */
 	public void setContrasenya(String contrasenya) {
 		this.contrasenya = contrasenya;
@@ -106,12 +123,13 @@ public class Usuario {
 		return nivel;
 	}
 
-	/**Modifica el nivel del usuario
+	/**
+	 * Modifica el nivel del usuario
+	 * 
 	 * @param nivel Nuevo nivel del usuario
 	 */
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
-
 
 }

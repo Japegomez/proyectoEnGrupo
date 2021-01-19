@@ -19,7 +19,9 @@ import javax.swing.JTextField;
 import logica.BaseDatos;
 import logica.Usuario;
 
-
+	/**
+	 * Clase de la ventana de mejoras de la nave
+	 */
 public class VentanaMejorasNave extends JFrame {
 	private JButton bVolver;
 	private JTextField tfCreditosDisponibles;
@@ -30,7 +32,6 @@ public class VentanaMejorasNave extends JFrame {
 	private JButton bVelocidad;
 	private JButton bDanio;
 	private JButton bVida;
-	private Thread actualizaCreditosDisponibles;
 	
 	/**Crea una ventana para poder mejorar la nave del usuario
 	 * @param vMenu VentanaMenu de la que precede

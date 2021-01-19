@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import logica.Usuario;
-
+	/**Clase de la ventana del menu principal 
+	 */
 public class VentanaMenu extends JFrame {
 	JButton bJugar;
 	JButton bMejorarNave;
@@ -21,7 +22,7 @@ public class VentanaMenu extends JFrame {
 	VentanaClasificaciones vClasi;
 	VentanaMejorasNave vMej;
 	
-	/**Crea una ventana que muestra el menu
+	/**Crea una ventana que muestra el menu con sus listeners de los botones
 	 * @param titulo titulo de la ventana
 	 * @param usu usuario que ha iniciado sesion
 	 */

@@ -35,7 +35,7 @@ public class Cronometro extends JLabel {
 				} catch (Exception e) {
 				}
 				// Cuando se reincie se coloca nuevamente en 00:00:000
-				getTiempo(minutos + ":" + segundos + ":" + milesimas);
+				
 				Cronometro.this.setText("00:00:000");
 			}
 		}.start();
@@ -43,71 +43,90 @@ public class Cronometro extends JLabel {
 	}
 
 	/**
-	 * El cronometro para de seguir sumando
-	 * 
+	 * El cronometro para de seguir sumando.
 	 */
 	public void pausarCrono() {
 		setCronometroActivo(false);
 	}
 
-	public String getTiempo(String s) {
-		return s;
-	}
-
+	/**
+	 * @return Si el cronometro esta corriendo.
+	 */
 	public boolean isCronometroActivo() {
 		return cronometroActivo;
 	}
 
+	/**
+	 * Modifica el estado del cronometro.
+	 * 
+	 * @param  cronometroActivo Nuevo estado del cronometro.
+	 */
 	public void setCronometroActivo(boolean cronometroActivo) {
 		this.cronometroActivo = cronometroActivo;
 	}
 
+	/**
+	 * @return Las horas jugadas de la partida.
+	 */
 	public int getHora() {
 		return hora;
 	}
 
+	/**
+	 * Modifica la hora de la partida.
+	 * 
+	 * @param hora Nueva hora de la partida.
+	 */
 	public void setHora(int hora) {
 		this.hora = hora;
 	}
 
+	/**
+	 * @return Los minutos jugados de la partida.
+	 */
 	public int getMinutos() {
 		return minutos;
 	}
 
+	/**
+	 * Modifica los minutos de la partida.
+	 * 
+	 * @param minutos Nuevos minutos de la partida.
+	 */
 	public void setMinutos(int minutos) {
 		this.minutos = minutos;
 	}
 
+	/**
+	 * @return Los segundos jugados de la partida.
+	 */
 	public int getSegundos() {
 		return segundos;
 	}
 
+	/**
+	 * Modifica los segundos de la partida.
+	 * 
+	 * @param segundos Nuevos segundos de la partida.
+	 */
 	public void setSegundos(int segundos) {
 		this.segundos = segundos;
 	}
 
 	/**
-	 * @return Milesimas del cronometro de la partida.
+	 * @return Las milesimas jugadas de la partida.
 	 */
 	public int getMilesimas() {
 		return milesimas;
 	}
 
 	/**
-	 * Modifica las milesimas del cronometro
+	 * Modifica las milesimas de la partida.
 	 * 
-	 * @param milesimas
+	 * @param milesimas Nuevas milesimas de la partida.
 	 */
 	public void setMilesimas(int milesimas) {
 		this.milesimas = milesimas;
 	}
 
-	public static void main(String[] args) {
-		Cronometro c = new Cronometro();
-
-		JFrame jp = new JFrame("prueba cronometro");
-		jp.add(c);
-		jp.setVisible(true);
-		jp.pack();
-	}
 }
