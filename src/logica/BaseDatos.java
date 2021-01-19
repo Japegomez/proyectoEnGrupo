@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class BaseDatos {
@@ -30,7 +31,7 @@ public class BaseDatos {
 				Main.logger.log(Level.INFO, "Ya existe una conexión abierta");
 			}
 		} catch(ClassNotFoundException | SQLException e) {
-			Main.logger.log( Level.SEVERE, "Error al abrir la conexión de la base de datos " + e );
+			Main.logger.log( Level.SEVERE, "Error al abrir la conexión de la base de datos ", e );
 		}
 	}
 	/**Cierra la conexion con la base de datos
@@ -42,7 +43,7 @@ public class BaseDatos {
 			conexion = null;
 			Main.logger.log(Level.INFO, "Conexion a la base de datos cerrada");
 		} catch (SQLException e) {
-			Main.logger.log( Level.SEVERE, "Error al cerrar la conexión de la base de datos " + e );
+			Main.logger.log( Level.SEVERE, "Error al cerrar la conexión de la base de datos ", e );
 		}
 	}
 	/**Registra un nuevo usuario en la base de datos
@@ -57,8 +58,9 @@ public class BaseDatos {
 			s.setInt(3, usu.getNivel());
 			s.setDouble(4,  usu.getCreditos());
 			s.execute();
+			Main.logger.log(Level.INFO, "Se ha registrado al usuario: "+ usu);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Main.logger.log( Level.SEVERE, "Error al registar el usuario: " + usu, e );
 		}
 	}
 	
@@ -72,8 +74,9 @@ public class BaseDatos {
 			s.setDouble(5, usu.getNave().getVelocidadX());
 			s.setDouble(6, usu.getNave().getVelocidadY());
 			s.executeUpdate();
+			Main.logger.log(Level.INFO, "Se ha registrado la nave del usuario: "+ usu);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Main.logger.log( Level.SEVERE, "Error al registar la nave del usuario: " + usu, e );
 		}
 	}
 	/**Comprueba si el usuario existe en la base de datos
@@ -141,20 +144,23 @@ public class BaseDatos {
 			s.setDouble(2, puntuacion);
 			s.setFloat(3, System.currentTimeMillis());
 			s.executeUpdate();
-		} catch (SQLException e) {
-				e.printStackTrace();
+			Main.logger.log(Level.INFO, "Se ha guardado una partida del usuario " + nombreUsuario +  " que ha obtenido "
+					+ puntuacion + " puntos");
+		} catch (SQLException e) { 
+			Main.logger.log( Level.SEVERE, "Error al guardar partida", e );
 		}
 	}
 	public static NaveJugador obtenerNave(Usuario usu) {
+		NaveJugador nave = null;
 		try {
 			PreparedStatement s = conexion.prepareStatement("select * from nave where idusuario = ?");
 			s.setInt(1, obtenerIdUsuario(usu.getNombreUsuario()));
 			ResultSet rs = s.executeQuery();
-			return new NaveJugador(rs.getInt("vida"),rs.getDouble("velocidadX"),rs.getDouble("velocidadY"),rs.getDouble("velocidadAtaque"),rs.getDouble("danyoAtaque"),rs.getDouble("ataqueCargado"));
+			nave =  new NaveJugador(rs.getInt("vida"),rs.getDouble("velocidadX"),rs.getDouble("velocidadY"),rs.getDouble("velocidadAtaque"),rs.getDouble("danyoAtaque"));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Main.logger.log( Level.SEVERE, "Error al obtener la nave de: " + usu, e );
 		}
-		return null;
+		return nave;
 	}
 	
 	public static void setNave(Usuario usu) {
@@ -165,8 +171,10 @@ public class BaseDatos {
 			s.setDouble(3, usu.getNave().getDanyoAtaque());
 			s.setInt(4, obtenerIdUsuario(usu.getNombreUsuario()));
 			s.executeUpdate();
+			Main.logger.log(Level.INFO, "se ha actualizado la nave de " + usu);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Main.logger.log( Level.SEVERE, "Error al actualizar la nave de " + usu, e );
+			JOptionPane.showMessageDialog(null, "Error al actualizar la nave, intentelo otra vez", "ERROR", JOptionPane.ERROR);
 		}
 		
 	}
@@ -179,7 +187,6 @@ public class BaseDatos {
 				ResultSet rs = s.executeQuery();
 				return rs.getInt("creditos");
 			} catch (SQLException e) {
-				e.printStackTrace();
 			}
 			
 		return 0;
@@ -192,7 +199,6 @@ public class BaseDatos {
 			s.setInt(2, obtenerIdUsuario(usu.getNombreUsuario()));
 			s.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 	}
 	public static void rellenarTabla(DefaultTableModel modelo) {
@@ -210,8 +216,10 @@ public class BaseDatos {
 					modelo.addRow(fila);
 				}
 			}
+			Main.logger.log(Level.INFO, "tabla de puntuaciones rellenada");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Main.logger.log( Level.SEVERE, "Error al rellenar la tabla de puntuaciones", e );
+			JOptionPane.showMessageDialog(null, "Error al obtener las clasificaciones, intentelo mas tarde", "ERROR", JOptionPane.ERROR);
 		}
 
 
@@ -226,7 +234,7 @@ public class BaseDatos {
 				aPartidas.add(new Partida(rs.getInt("puntuacion"),rs.getLong("fecha")));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Main.logger.log( Level.SEVERE, "Error al obtener las partidas de " + usu, e );
 		}
 		return aPartidas;
 	}
@@ -235,8 +243,9 @@ public class BaseDatos {
 			PreparedStatement s = conexion.prepareStatement("delete from partida where fecha = ?");
 			s.setLong(1, p.getFecha());
 			s.executeUpdate();
+			Main.logger.log(Level.INFO, "partida borrada");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Main.logger.log( Level.SEVERE, "Error al borrar la partida: " + p, e );
 		}
 		
 	}
@@ -245,14 +254,14 @@ public class BaseDatos {
 			Statement stat = conexion.createStatement();
 			stat.setQueryTimeout(30);
 			String sql = "CREATE TABLE if not exists nave ( idusuario INTEGER NOT NULL, velocidadAtaque DOUBLE, danyoAtaque DOUBLE,"
-					+ "idnave INTEGER, vida INTEGER, velocidadX DOUBLE, velocidadY DOUBLE);";
+					+ "idnave INTEGER PRIMARY KEY AUTOINCREMENT, vida INTEGER, velocidadX DOUBLE, velocidadY DOUBLE);";
 			stat.executeUpdate(sql);
 			Main.logger.log( Level.INFO, "BD creación de tabla\t" + sql);
 			sql = "CREATE TABLE if not exists partida (idusuario INTEGER NOT NULL, idpartida INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "puntuacion INTEGER, fecha INTEGER);";
 			stat.executeUpdate(sql);
 			Main.logger.log( Level.INFO, "BD creación de tabla\t" + sql);
-			sql = "CREATE TABLE usuario (nombre TEXT, contrasenya TEXT, nivel INTEGER, "
+			sql = "CREATE TABLE if not exists usuario (nombre TEXT, contrasenya TEXT, nivel INTEGER, "
 					+ "idusuario INTEGER PRIMARY KEY AUTOINCREMENT, creditos INTEGER);";
 
 			stat.executeUpdate(sql);

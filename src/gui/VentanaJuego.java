@@ -4,11 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
 
 import javax.swing.*;
 
 import logica.BaseDatos;
 import logica.Disparo;
+import logica.Main;
 import logica.MeteoritoEnemigo;
 import logica.NaveJugador;
 import logica.ObjetoJuego;
@@ -98,8 +100,7 @@ public class VentanaJuego extends JFrame {
 							}
 
 						} else {
-							// no existen meteoritos
-							System.out.println("Creando primer meteorito. Segundos pasados: " + segundosPasados);
+							// no existen meteoritos --> se crea el primer meteorito
 							creaMeteorito(10, 150);
 						}
 					}
@@ -269,9 +270,7 @@ public class VentanaJuego extends JFrame {
 	 * 
 	 */
 	public void creaMeteorito(int DanyoMeteorito, int vidaMeteorito) {
-		System.out.println(arrayMeteoritosEnPantalla.size());
 		if (arrayMeteoritosEnPantalla.size() + 1 >= maxMeteoritosEnPantalla) {
-			System.out.println("Intentando crear meteorito intentando superar el limite de " + maxMeteoritosEnPantalla);
 			return;
 		}
 		MeteoritoEnemigo me1 = new MeteoritoEnemigo(cro.getSegundos());
@@ -344,13 +343,12 @@ public class VentanaJuego extends JFrame {
 			if (!arrayMeteoritosEliminados.contains(me)) {
 				if (me.getBounds().intersects(nave.getBounds())) {
 					aEliminar.add(me);
-					System.out.println("vida del nave antes: " + vidaNavePartida + " -- " + "danio del meteorito: " + me.getDanyoAJugador());
+					Main.getLogger().log(Level.FINER, "la nave ha chocado con un meteorito \n"
+							+ "vida de la nave antes: " + vidaNavePartida + " -- " + "danio del meteorito: " + me.getDanyoAJugador());
 					vidaNavePartida = vidaNavePartida - (int) me.getDanyoAJugador();
+					Main.getLogger().log(Level.FINER, "vida de la nave despues: " + vidaNavePartida);
 					int porcentajeVida = 100 * vidaNavePartida / nave.getVida();
-					System.out.println("Porcentaje de la vida: " + porcentajeVida);
 					pbVida.setValue(porcentajeVida);
-					System.out.println("Ha chocado !!");
-					System.out.println(vidaNavePartida);
 				}
 			}
 		}

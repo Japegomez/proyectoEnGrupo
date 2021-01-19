@@ -1,6 +1,8 @@
 package logica;
 
 import java.util.Date;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,12 +15,18 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			logger = Logger.getLogger("Logger");
+//			Handler h = new FileHandler("spacedefense.xml",true);
+//			logger.addHandler(h);
+			logger.setLevel(Level.FINEST);
+//			h.setLevel(Level.FINEST);
 		} catch (Exception e) { } 
 		logger.log(Level.INFO, "Inicio del programa: " + new Date());
 		try { 
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 		} catch (Exception e) { } 
-		VentanaLogin vLogin = new VentanaLogin("Login");
-		vLogin.setVisible(true);
+		VentanaLogin vLogin = new VentanaLogin("Login");		vLogin.setVisible(true);
+	}
+	public static Logger getLogger() {
+		return logger;
 	}
 }

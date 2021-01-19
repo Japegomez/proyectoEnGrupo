@@ -75,7 +75,6 @@ public class VentanaLogin extends JFrame{
 							Usuario usu = new Usuario(tfNombreUsuario.getText(), tfContrasenya.getText());
 							usu.setCreditos(BaseDatos.obtenerCreditos(usu));
 							usu.setNave(BaseDatos.obtenerNave(usu));
-//							usu.setPart(BaseDatos.setPartidas(usu));
 							VentanaMenu vMenu = new VentanaMenu("menu", usu, VentanaLogin.this);
 							vMenu.setVisible(true);
 							VentanaLogin.this.setVisible(false);

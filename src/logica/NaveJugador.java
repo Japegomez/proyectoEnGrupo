@@ -103,7 +103,7 @@ public class NaveJugador extends ObjetoJuego {
 	}
 	
 	public NaveJugador(int vida, double velocidadX, double velocidadY, double velocidadAtaque,
-			double danyoAtaque, double ataqueCargado) {
+			double danyoAtaque) {
 		super(0.0, 0.0, vida, velocidadX, velocidadY);
 		this.velocidadAtaque = velocidadAtaque;
 		this.danyoAtaque = danyoAtaque;
