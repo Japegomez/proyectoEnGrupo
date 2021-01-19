@@ -72,7 +72,6 @@ public class VentanaMejorasNave extends JFrame {
 		pMejoras.add(lMejoraD);
 		pMejoras.add(tfDanio);
 		pMejoras.add(bDanio);
-		pMejoras.add(tfUlti);
 		pMejoras.add(lMejoraVi);
 		pMejoras.add(tfVida);
 		pMejoras.add(bVida);

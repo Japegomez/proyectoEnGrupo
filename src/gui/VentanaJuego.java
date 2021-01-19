@@ -4,11 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
 
 import javax.swing.*;
 
 import logica.BaseDatos;
 import logica.Disparo;
+import logica.Main;
 import logica.MeteoritoEnemigo;
 import logica.NaveJugador;
 import logica.ObjetoJuego;
@@ -82,28 +84,28 @@ public class VentanaJuego extends JFrame {
 							if (segundosPasados <= 10) {
 								// existe uno anterior
 								if (segundosPartidaLanzado + 3 <= segundosPasados) {
-									System.out.println("Creando meteorito en rango 1 (<=10). Segundos pasados: "
+									Main.getLogger().log(Level.FINEST, "Creando meteorito en rango 1 (<=10). Segundos pasados: " + 
 											+ segundosPasados);
 									creaMeteorito(10, 150);
 								}
 
 							} else if (segundosPasados <= 20) {
 								if (segundosPartidaLanzado + 2 <= segundosPasados) {
-									System.out.println("Creando meteorito en rango 2 (<=20). Segundos pasados: "
+									Main.getLogger().log(Level.FINEST, "Creando meteorito en rango 2 (<=20). Segundos pasados: " + 
 											+ segundosPasados);
 									creaMeteorito(20, 200);
 								}
 							} else {
 								if (segundosPartidaLanzado + 1 <= segundosPasados) {
-									System.out.println("Creando meteorito en rango 3 (>=20). Segundos pasados: "
+									Main.getLogger().log(Level.FINEST, "Creando meteorito en rango 3 (>=20). Segundos pasados: " + 
 											+ segundosPasados);
 									creaMeteorito(50, 300);
 								}
 							}
 
 						} else {
-							// no existen meteoritos
-							System.out.println("Creando primer meteorito. Segundos pasados: " + segundosPasados);
+							// no existen meteoritos --> se crea el primer meteorito
+							Main.getLogger().log(Level.FINEST, "Creando primer meteorito");
 							creaMeteorito(10, 150);
 						}
 					}
@@ -272,9 +274,7 @@ public class VentanaJuego extends JFrame {
 	 * @param vidaMeteorito Vida del meterorio
 	 */
 	public void creaMeteorito(int DanyoMeteorito, int vidaMeteorito) {
-		System.out.println(arrayMeteoritosEnPantalla.size());
 		if (arrayMeteoritosEnPantalla.size() + 1 >= maxMeteoritosEnPantalla) {
-			System.out.println("Intentando crear meteorito intentando superar el limite de " + maxMeteoritosEnPantalla);
 			return;
 		}
 		MeteoritoEnemigo me1 = new MeteoritoEnemigo(cro.getSegundos());
@@ -346,14 +346,12 @@ public class VentanaJuego extends JFrame {
 			if (!arrayMeteoritosEliminados.contains(me)) {
 				if (me.getBounds().intersects(nave.getBounds())) {
 					aEliminar.add(me);
-					System.out.println("vida del nave antes: " + vidaNavePartida + " -- " + "danio del meteorito: "
-							+ me.getDanyoAJugador());
+					Main.getLogger().log(Level.FINER, "la nave ha chocado con un meteorito \n"
+							+ "vida de la nave antes: " + vidaNavePartida + " -- " + "danio del meteorito: " + me.getDanyoAJugador());
 					vidaNavePartida = vidaNavePartida - (int) me.getDanyoAJugador();
+					Main.getLogger().log(Level.FINER, "vida de la nave despues: " + vidaNavePartida);
 					int porcentajeVida = 100 * vidaNavePartida / nave.getVida();
-					System.out.println("Porcentaje de la vida: " + porcentajeVida);
 					pbVida.setValue(porcentajeVida);
-					System.out.println("Ha chocado !!");
-					System.out.println(vidaNavePartida);
 				}
 			}
 		}
@@ -381,10 +379,12 @@ public class VentanaJuego extends JFrame {
 								me.setDanyoAJugador(0);
 								aEliminarMeteortitos.add(me);
 								aEliminarDisparo.add(dis);
-								System.out.println("Han chocado !!");
+								Main.getLogger().log(Level.FINER, "un meteorito ha sido destruido");
+
 							} else {
 								me.setVida(me.getVida() - dis.getDanyo());
-								System.out.println("Vida del meteorito tras el choque " + me.getVida());
+								Main.getLogger().log(Level.FINER, "un meteorito ha sido impactado \n"
+										+ "Vida del meteorito tras el choque " + me.getVida());
 								aEliminarDisparo.add(dis);
 							}
 

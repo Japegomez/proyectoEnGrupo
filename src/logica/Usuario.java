@@ -132,4 +132,8 @@ public class Usuario {
 		this.nivel = nivel;
 	}
 
+	@Override
+	public String toString() {
+		return nombreUsuario;
+	}
 }

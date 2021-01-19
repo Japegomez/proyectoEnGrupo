@@ -4,11 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Handler;
 
 import javax.swing.*;
 
 import logica.BaseDatos;
-
+import logica.Main;
 import logica.Usuario;
 
 /**Clase de la ventana login para acceder al juego
@@ -75,7 +76,6 @@ public class VentanaLogin extends JFrame{
 							Usuario usu = new Usuario(tfNombreUsuario.getText(), tfContrasenya.getText());
 							usu.setCreditos(BaseDatos.obtenerCreditos(usu));
 							usu.setNave(BaseDatos.obtenerNave(usu));
-//							usu.setPart(BaseDatos.setPartidas(usu));
 							VentanaMenu vMenu = new VentanaMenu("menu", usu, VentanaLogin.this);
 							vMenu.setVisible(true);
 							VentanaLogin.this.setVisible(false);
@@ -120,15 +120,17 @@ public class VentanaLogin extends JFrame{
 			@Override
 			public void windowOpened(WindowEvent e) {
 				BaseDatos.initBD("baseDatos.bd");
-				
+				BaseDatos.crearTablas();
 			}
 
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
-				
 				BaseDatos.cerrarConexion();
-				
+				for (Handler h : Main.getLogger().getHandlers()) {
+					h.close();
+				}
+				System.exit(0);
 			}
 
 		});
