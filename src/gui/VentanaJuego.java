@@ -80,20 +80,20 @@ public class VentanaJuego extends JFrame {
 							if (segundosPasados <= 10) {
 								// existe uno anterior
 								if (segundosPartidaLanzado + 3 <= segundosPasados) {
-									System.out.println("Creando meteorito en rango 1 (<=10). Segundos pasados: "
+									Main.getLogger().log(Level.FINEST, "Creando meteorito en rango 1 (<=10). Segundos pasados: " + 
 											+ segundosPasados);
 									creaMeteorito(10, 150);
 								}
 
 							} else if (segundosPasados <= 20) {
 								if (segundosPartidaLanzado + 2 <= segundosPasados) {
-									System.out.println("Creando meteorito en rango 2 (<=20). Segundos pasados: "
+									Main.getLogger().log(Level.FINEST, "Creando meteorito en rango 2 (<=20). Segundos pasados: " + 
 											+ segundosPasados);
 									creaMeteorito(20, 200);
 								}
 							} else {
 								if (segundosPartidaLanzado + 1 <= segundosPasados) {
-									System.out.println("Creando meteorito en rango 3 (>=20). Segundos pasados: "
+									Main.getLogger().log(Level.FINEST, "Creando meteorito en rango 3 (>=20). Segundos pasados: " + 
 											+ segundosPasados);
 									creaMeteorito(50, 300);
 								}
@@ -101,6 +101,7 @@ public class VentanaJuego extends JFrame {
 
 						} else {
 							// no existen meteoritos --> se crea el primer meteorito
+							Main.getLogger().log(Level.FINEST, "Creando primer meteorito");
 							creaMeteorito(10, 150);
 						}
 					}
@@ -376,10 +377,12 @@ public class VentanaJuego extends JFrame {
 								me.setDanyoAJugador(0);
 								aEliminarMeteortitos.add(me);
 								aEliminarDisparo.add(dis);
-								System.out.println("Han chocado !!");
+								Main.getLogger().log(Level.FINER, "un meteorito ha sido destruido");
+
 							} else {
 								me.setVida(me.getVida() - dis.getDanyo());
-								System.out.println("Vida del meteorito tras el choque " + me.getVida());
+								Main.getLogger().log(Level.FINER, "un meteorito ha sido impactado \n"
+										+ "Vida del meteorito tras el choque " + me.getVida());
 								aEliminarDisparo.add(dis);
 							}
 

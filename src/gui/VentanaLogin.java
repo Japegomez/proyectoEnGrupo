@@ -4,11 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Handler;
 
 import javax.swing.*;
 
 import logica.BaseDatos;
-
+import logica.Main;
 import logica.Usuario;
 
 public class VentanaLogin extends JFrame{
@@ -126,9 +127,11 @@ public class VentanaLogin extends JFrame{
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
-				
 				BaseDatos.cerrarConexion();
-				
+				for (Handler h : Main.getLogger().getHandlers()) {
+					h.close();
+				}
+				System.exit(0);
 			}
 
 		});

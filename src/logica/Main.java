@@ -15,10 +15,11 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			logger = Logger.getLogger("Logger");
-//			Handler h = new FileHandler("spacedefense.xml",true);
-//			logger.addHandler(h);
+			Handler h = new FileHandler("spacedefense.xml",true);
+			logger.setUseParentHandlers(false);
+			logger.addHandler(h);
 			logger.setLevel(Level.FINEST);
-//			h.setLevel(Level.FINEST);
+			h.setLevel(Level.FINER);
 		} catch (Exception e) { } 
 		logger.log(Level.INFO, "Inicio del programa: " + new Date());
 		try { 
