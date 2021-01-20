@@ -54,11 +54,10 @@ public class BaseDatos {
 	 */
 	public static void registrarUsuario(Usuario usu) {
 		try {
-			PreparedStatement s = conexion.prepareStatement("insert into usuario ( nombre, contrasenya, nivel, creditos ) values (?, ?, ?, ?)");
+			PreparedStatement s = conexion.prepareStatement("insert into usuario ( nombre, contrasenya, creditos ) values (?, ?, ?)");
 			s.setString(1, usu.getNombreUsuario());
 			s.setString(2, usu.getContrasenya());
-			s.setInt(3, usu.getNivel());
-			s.setDouble(4,  usu.getCreditos());
+			s.setDouble(3,  usu.getCreditos());
 			s.execute();
 			Main.logger.log(Level.INFO, "Se ha registrado al usuario: "+ usu);
 		} catch (SQLException e) {
@@ -282,7 +281,7 @@ public class BaseDatos {
 					+ "puntuacion INTEGER, fecha INTEGER);";
 			stat.executeUpdate(sql);
 			Main.logger.log( Level.INFO, "BD creación de tabla\t" + sql);
-			sql = "CREATE TABLE if not exists usuario (nombre TEXT, contrasenya TEXT, nivel INTEGER, "
+			sql = "CREATE TABLE if not exists usuario (nombre TEXT, contrasenya TEXT, "
 					+ "idusuario INTEGER PRIMARY KEY AUTOINCREMENT, creditos INTEGER);";
 
 			stat.executeUpdate(sql);

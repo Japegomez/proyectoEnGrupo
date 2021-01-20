@@ -25,8 +25,6 @@ public class VentanaLogin extends JFrame{
 	private JTextField tfContrasenya;
 	private JButton bLogin;
 	private JButton bRegistro;
-	private String nombreAsegurado;
-	private String contraAsegurada;
 	
 	/**Crea una ventana de login con sus listeners de los botones y la ventana
 	 * @param titulo titulo de la ventana

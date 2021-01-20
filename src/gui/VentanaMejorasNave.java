@@ -44,7 +44,7 @@ public class VentanaMejorasNave extends JFrame {
 		JLabel lCreditos = new JLabel("creditos disponibles: ");
 		tfCreditosDisponibles = new JTextField(15);
 		tfCreditosDisponibles.setEditable(false);
-		JLabel lMejoraVe = new JLabel("cadencia actual: ");
+		JLabel lMejoraVe = new JLabel("cadencia actual: (segundos entre disparos) ");
 		tfCadencia = new JTextField(3);
 		tfCadencia.setEditable(false);
 		bVelocidad = new JButton("Mejorar cadencia");
@@ -91,8 +91,8 @@ public class VentanaMejorasNave extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(usu.getCreditos()>=50) {
 					if(usu.getNave().getVelocidadAtaque()>1) {
-						usu.getNave().setVelocidadAtaque(usu.getNave().getVelocidadAtaque()-0.5);
-						tfCadencia.setText("" + usu.getNave().getVelocidadAtaque());
+						usu.getNave().setVelocidadAtaque(usu.getNave().getVelocidadAtaque()-500);
+						tfCadencia.setText("" + usu.getNave().getVelocidadAtaque()/1000);
 						usu.quitarCreditos();
 						tfCreditosDisponibles.setText("" + usu.getCreditos()); 
 					}
@@ -160,7 +160,7 @@ public class VentanaMejorasNave extends JFrame {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				tfCreditosDisponibles.setText("" + usu.getCreditos());
-				tfCadencia.setText(""+ usu.getNave().getVelocidadAtaque());
+				tfCadencia.setText(""+ usu.getNave().getVelocidadAtaque()/1000);
 				tfDanio.setText(""+ usu.getNave().getDanyoAtaque());
 				tfVida.setText(""+ usu.getNave().getVida());
 				if(usu.getNave().getVelocidadAtaque()==1) {

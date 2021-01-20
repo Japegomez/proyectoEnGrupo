@@ -7,7 +7,6 @@ public class Usuario {
 	public String nombreUsuario;// nombre que es usuario decida ponerse
 	public String contrasenya;// contraseña del usuario
 
-	public int nivel;// nivel del jugador
 	public ArrayList<Partida> part;// Lista de partidas del jugador
 	public double creditos; // creditos del jugador
 
@@ -21,7 +20,6 @@ public class Usuario {
 		this.nave = new NaveJugador();
 		this.nombreUsuario = usuario;
 		this.contrasenya = contrasenya;
-		this.nivel = 0;
 		this.creditos = 0;
 		this.part = new ArrayList<Partida>();
 	}
@@ -116,21 +114,6 @@ public class Usuario {
 		this.contrasenya = contrasenya;
 	}
 
-	/**
-	 * @return nivel Nivel del usuario
-	 */
-	public int getNivel() {
-		return nivel;
-	}
-
-	/**
-	 * Modifica el nivel del usuario
-	 * 
-	 * @param nivel Nuevo nivel del usuario
-	 */
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
-	}
 
 	@Override
 	public String toString() {
