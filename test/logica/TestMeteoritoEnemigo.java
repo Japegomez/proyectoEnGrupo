@@ -17,9 +17,6 @@ public class TestMeteoritoEnemigo {
         m1.mover(10);
         m2.mover(340);
 
-        System.out.println(m1.getPosY());
-        System.out.println(m2.getPosY());
-
         assertEquals(200.0, m1.getPosY(),0);
         assertEquals(6900.0, m2.getPosY(),0);
     }

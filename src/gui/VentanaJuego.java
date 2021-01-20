@@ -258,8 +258,7 @@ public class VentanaJuego extends JFrame {
 				pPrincipal.add(nuevoDis.getlDisparo());
 				arrayDisparo.add(nuevoDis);
 			} else {
-				System.out.println("Tiempo de disparo excedido");
-				System.out.println("Han pasado " + diff + "/" + nave.getVelocidadAtaque());
+				Main.getLogger().log(Level.FINEST, "Tiempo de disparo excedido /nHan pasado" + diff + "/" + nave.getVelocidadAtaque());
 			}
 		} else {
 			// no existe ningun disparo
