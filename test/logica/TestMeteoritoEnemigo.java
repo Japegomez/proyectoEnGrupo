@@ -20,7 +20,7 @@ public class TestMeteoritoEnemigo {
         System.out.println(m1.getPosY());
         System.out.println(m2.getPosY());
 
-        assertEquals(190.0, m1.getPosY()); // aqui no sse por que me resta 10 me deberia de dar 200 prq velocidad 20 * tiempo 10 +pos inicial 0 = 200
-        assertEquals(6886.0, m2.getPosY());// aqui me resta 14
+        assertEquals(200.0, m1.getPosY(),0);
+        assertEquals(6900.0, m2.getPosY(),0);
     }
 } 

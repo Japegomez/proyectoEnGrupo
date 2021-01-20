@@ -88,9 +88,10 @@ public class MeteoritoEnemigo extends ObjetoJuego {
 	 */
 	@Override
 	public void mover(double tiempo) {
-		double posFinal = posY + (velocidadY * tiempo);
-		for (int i = 0; i < posFinal-posY; i++) {
-			this.setPosY(posY + i);
+		double posIni = posY;
+		double posFinal = posIni + (velocidadY * tiempo);
+		for (int i = 0; i <= posFinal-posIni; i++) {
+			this.setPosY(posIni + i);
 		}
 		
 	}
