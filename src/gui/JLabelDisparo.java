@@ -17,14 +17,14 @@ public class JLabelDisparo extends JLabel {
 	 * @return int Ancho del jlabel de la nave (en pixels)
 	 */
 	public int getAnchoDisparo() {
-		return Integer.parseInt(c.getProp("ANCHO_DISTP"));
+		return Integer.parseInt(c.getProp("ANCHO_DISP"));
 	}
 
 	/**
 	 * @return int Altura del jlabel de la nave (en pixels)
 	 */
 	public int getAltoDisparo() {
-		return Integer.parseInt(c.getProp("ALTO_DISTP"));
+		return Integer.parseInt(c.getProp("ALTO_DISP"));
 	}
 
 	/**

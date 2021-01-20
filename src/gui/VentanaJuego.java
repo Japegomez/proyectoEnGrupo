@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import javax.swing.*;
 
 import logica.BaseDatos;
+import logica.Config;
 import logica.Disparo;
 import logica.Main;
 import logica.MeteoritoEnemigo;
@@ -38,7 +39,7 @@ public class VentanaJuego extends JFrame {
 	private ArrayList<Disparo> arrayDisparo = new ArrayList<>(); // ArrayList de disparos.
 	public Cronometro cro; // Cronometro de la partida.
 	public JProgressBar pbVida; // JProgessbar del porcentaje de vida de la nave.
-
+	private Config c = new Config();
 	/**
 	 * Constructor de la ventanaJuego
 	 * 
@@ -54,7 +55,8 @@ public class VentanaJuego extends JFrame {
 		part = new Partida();
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setLocation(400, 150);
-		setSize(500, 500);
+		int size = Integer.parseInt(c.getProp("MEDIDA_VENT"));
+		setSize(size, size);
 		setResizable(false);
 		vidaNavePartida = nave.getVida();
 
