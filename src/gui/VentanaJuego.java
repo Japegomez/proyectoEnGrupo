@@ -177,7 +177,7 @@ public class VentanaJuego extends JFrame {
 					}
 
 				} else if (c == 40) {
-					if (nave.getPosY() < pPrincipal.getHeight()) {
+					if (nave.getPosY() < pPrincipal.getHeight() - (nave.getlNave().getAltoNave())) {
 						nave.setPosY(nave.getPosY() + nave.getVelocidadY());
 					} else {
 						nave.setPosY(nave.getPosY());
@@ -192,7 +192,7 @@ public class VentanaJuego extends JFrame {
 					crearDisparo();
 
 				} else if (c == 39) {
-					if (nave.getPosX() < pPrincipal.getWidth() - (nave.getlNave().getAnchoNave() / 2)) {
+					if (nave.getPosX() < pPrincipal.getWidth() - (nave.getlNave().getAnchoNave())) {
 						nave.setPosX(nave.getPosX() + nave.getVelocidadX());
 					} else {
 						nave.setPosX(nave.getPosX());
@@ -214,7 +214,7 @@ public class VentanaJuego extends JFrame {
 					}
 
 				} else if (c == 40) {
-					if (nave.getPosY() < pPrincipal.getHeight() - nave.getlNave().getHeight()) {
+					if (nave.getPosY() < pPrincipal.getHeight() - (nave.getlNave().getHeight()*2)) {
 						nave.setPosY(nave.getPosY() + nave.getVelocidadY());
 					} else {
 						nave.setPosY(nave.getPosY());
@@ -226,7 +226,7 @@ public class VentanaJuego extends JFrame {
 						nave.setPosX(nave.getPosX());
 					}
 				} else if (c == 39) {
-					if (nave.getPosX() < pPrincipal.getWidth() - (nave.getlNave().getAnchoNave())) {
+					if (nave.getPosX() < pPrincipal.getWidth() - ((nave.getlNave().getAnchoNave())*2)) {
 						nave.setPosX(nave.getPosX() + nave.getVelocidadX());
 					} else {
 						nave.setPosX(nave.getPosX());
@@ -248,6 +248,9 @@ public class VentanaJuego extends JFrame {
 		pPrincipal.add(nave.getlNave());
 	}
 
+	/**Metodo para crear disparos en el juego posicionandolos respecto a la posicion de la nave
+	 * 
+	 */
 	public void crearDisparo() {
 		Disparo ultimoDisparo = arrayDisparo.size() == 0 ? null : arrayDisparo.get(arrayDisparo.size() - 1);
 		Disparo nuevoDis = new Disparo(nave.getPosX(), nave.getPosY() - nave.getlNave().getAltoNave() / 2, 1, 0, 5);
@@ -498,6 +501,11 @@ public class VentanaJuego extends JFrame {
 		pPrincipal.add(cro);
 	}
 
+	/**Metodo para obtener un numero aleatorio entre dos
+	 * @param lowerBound valor minimo
+	 * @param upperBound valor maximo
+	 * @return valor aleatorio
+	 */
 	private double getRandom(double lowerBound, double upperBound) {
 		Random random = new Random();
 		double randomValue = lowerBound + (upperBound - lowerBound) * random.nextDouble();
