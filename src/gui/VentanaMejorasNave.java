@@ -110,13 +110,13 @@ public class VentanaMejorasNave extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(usu.getCreditos()>=50) {
-					if(usu.getNave().getDanyoAtaque()<10) {
-						usu.getNave().setDanyoAtaque(usu.getNave().getDanyoAtaque()+0.5);
+					if(usu.getNave().getDanyoAtaque()<100) {
+						usu.getNave().setDanyoAtaque(usu.getNave().getDanyoAtaque()+10);
 						tfDanio.setText("" + usu.getNave().getDanyoAtaque());
 						usu.quitarCreditos();
 						tfCreditosDisponibles.setText("" + usu.getCreditos()); 
 					}
-					if(usu.getNave().getDanyoAtaque()==10) {
+					if(usu.getNave().getDanyoAtaque()==100) {
 						bDanio.setEnabled(false);
 					}
 				}
@@ -130,13 +130,13 @@ public class VentanaMejorasNave extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(usu.getCreditos()>=50) {
-					if(usu.getNave().getVida()<20) {
-						usu.getNave().setVida(usu.getNave().getVida()+1);
+					if(usu.getNave().getVida()<100) {
+						usu.getNave().setVida(usu.getNave().getVida()+10);
 						tfVida.setText("" + usu.getNave().getVida());
 						usu.quitarCreditos();
 						tfCreditosDisponibles.setText("" + usu.getCreditos()); 
 					}
-					if(usu.getNave().getVida()==20) {
+					if(usu.getNave().getVida()==100) {
 						bVida.setEnabled(false);
 					}
 				}
@@ -166,10 +166,10 @@ public class VentanaMejorasNave extends JFrame {
 				if(usu.getNave().getVelocidadAtaque()==1) {
 					bVelocidad.setEnabled(false);
 				}
-				if(usu.getNave().getDanyoAtaque()==10) {
+				if(usu.getNave().getDanyoAtaque()==100) {
 					bDanio.setEnabled(false);
 				}
-				if(usu.getNave().getVida()==20) {
+				if(usu.getNave().getVida()==100) {
 					bVida.setEnabled(false);
 				}
 			}
